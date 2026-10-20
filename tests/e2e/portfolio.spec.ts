@@ -85,14 +85,15 @@ test('shows the public Instagram identity, local contact, and profile credits', 
     contact.getByRole('link', { name: 'Telepon +62 838-5465-3003' }),
   ).toHaveAttribute('href', 'tel:+6283854653003');
   const footer = page.getByRole('contentinfo');
-  const copyright = footer.getByRole('link', {
-    name: /^© \d{4} Zaustory · Pekanbaru, Riau$/,
-  });
-  await expect(copyright).toHaveAttribute(
+  await expect(footer.locator('.footer-copyright')).toHaveText(
+    /^© \d{4} Zaustory · Website by rakandev$/,
+  );
+  const credit = footer.getByRole('link', { name: 'rakandev', exact: true });
+  await expect(credit).toHaveAttribute(
     'href',
     'https://www.instagram.com/rakandevv/',
   );
-  await expect(copyright).toHaveAttribute('rel', 'noopener noreferrer');
+  await expect(credit).toHaveAttribute('rel', 'noopener noreferrer');
   await expect(footer.getByRole('link')).toHaveCount(2);
   await expect(footer.getByText('Credit by rakandev')).toHaveCount(0);
   await expect(footer.getByText('@zauustory')).toHaveCount(0);

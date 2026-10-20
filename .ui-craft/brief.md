@@ -39,7 +39,7 @@ Pengunjung mengenali lima kategori, membuka detail, dan menemukan Instagram mela
 - 2026-10-20: Tentang berada tepat setelah dua baris foto, sebelum album. Tambahkan potret fotografer dari sumber hero; ikon sementara sampai aset tersedia. Setiap section mendapat entrance saat masuk layar, sekali saja agar scroll berulang tetap tenang; reduced motion dan konten tanpa JavaScript tetap didukung.
 - 2026-10-20: Copy dan informasi mengikuti profil publik @zauustory: Pekanbaru/Riau, kredit @rzzwadzaky, media partner @langkaahsenja_, telepon. Gunakan bahasa kasual profesional, konkret, tanpa klaim harga/pengalaman baru atau kutipan caption yang tertutup login. Nomor telepon tidak otomatis menjadi WhatsApp. Brand tetap Zaustory; foto memakai ikon sampai tersedia aset berizin.
 
-- 2026-10-20: Kredit pengembang menyatu sebagai tautan pada baris copyright ke Instagram rakandev. Hapus tautan @zauustory dan teks Credit by rakandev yang terpisah agar footer ringkas; logo tetap menuju beranda.
+- 2026-10-20: Footer memakai "© [tahun berjalan] Zaustory · Website by rakandev". Hanya nama rakandev bertaut ke Instagram pengembang; copyright dan Website by berupa teks biasa. Tanpa tautan @zauustory atau kredit terpisah agar footer ringkas; logo tetap menuju beranda.
 
 # 7. Fold classes used
 

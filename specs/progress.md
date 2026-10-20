@@ -269,3 +269,9 @@ Bukti: [footer desktop](../docs/evidence/footer-credit-desktop.png) dan [footer 
 Pemilik memperjelas: cukup tautan pada baris copyright. Baris "© [tahun berjalan] Zaustory · Pekanbaru, Riau" kini menautkan https://www.instagram.com/rakandevv/. Tautan @zauustory dan teks "Credit by rakandev" yang terpisah dihapus; logo tetap menuju beranda. Koreksi disimpan di design brief. CSS grup tautan yang tidak terpakai dihapus; target interaktif copyright minimal 44px.
 
 Verifikasi aktual: lint dan build termasuk TypeScript lulus, 10 keluaran statis. Delapan E2E terarah lulus dalam 12.6 detik pada desktop/ponsel, termasuk URL copyright, ketiadaan dua teks lama, jumlah dua tautan footer (logo dan copyright), overflow 320/390/768/1440px, axe dan screenshot. Bukti footer desktop/ponsel pada tautan sebelumnya diperbarui dari suite produksi lokal yang lulus dan diperiksa visual. Unit serta suite E2E penuh tidak diulang untuk perubahan ini. Tidak ada dependensi atau deployment baru.
+
+## Redaksi final kredit footer, 2026-10-20
+
+Pemilik menyetujui "© 2026 Zaustory · Website by rakandev" dengan tautan hanya pada nama rakandev. Tahun tetap otomatis; copyright dan Website by menjadi teks biasa, nama pengembang menuju https://www.instagram.com/rakandevv/. Lokasi tidak lagi ditampilkan di footer. Design brief dan kontrak komponen mengikuti redaksi final ini.
+
+Verifikasi aktual: lint dan build termasuk TypeScript lulus (10 keluaran statis). Delapan E2E terarah lulus dalam 18.5 detik pada desktop/ponsel: teks final, tautan bernama tepat rakandev, URL/rel, hanya logo dan nama pengembang sebagai tautan footer, tanpa overflow 320/390/768/1440px, axe dan screenshot. Bukti footer desktop/ponsel diperbarui dari build produksi lokal tersebut dan diperiksa visual. Unit serta suite E2E penuh tidak diulang untuk perubahan presentasi ini. Tidak ada dependensi atau deployment baru.

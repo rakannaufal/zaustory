@@ -6,7 +6,7 @@ Arsip fotografi olahraga: latar navy/slate tanpa bidang putih, Barlow Condensed 
 
 ## Struktur
 
-Header navy dengan logo transparan terang; hero dua baris di kiri dan potret besar di kanan tanpa bingkai kartu. Indeks album memakai 12 kolom, ukuran/aspek/offset beragam. Pengalaman berupa baris lebar dengan tahun, nama, dan satu foto per pengalaman. Tentang menonjolkan judul dengan kolaborasi terpisah; kontak memakai judul besar dan CTA di bawahnya. Footer navy lebih dalam. Nama organisasi ditampilkan dengan konteks hubungan belum dikonfirmasi, tanpa logo/testimoni rekaan.
+Header navy dengan logo transparan terang; hero dua baris di kiri dan potret besar di kanan tanpa bingkai kartu. Urutan beranda: hero, strip foto, tentang, album, pengalaman, kontak. Tentang memakai potret 4:5 di kiri serta judul/profil di kanan, kolaborasi terpisah di bawahnya. Sumber potret sama dengan hero. Indeks album memakai 12 kolom, ukuran/aspek/offset beragam. Pengalaman berupa baris lebar dengan tahun, nama, dan satu foto per pengalaman. Kontak memakai judul besar dan CTA di bawahnya. Footer navy lebih dalam. Nama organisasi ditampilkan dengan konteks hubungan belum dikonfirmasi, tanpa logo/testimoni rekaan.
 
 Setelah hero, dua strip thumbnail selebar layar bergerak berlawanan arah. Sumber foto digabung dari seluruh album, diacak stabil agar HTML/hidrasi konsisten, dipilih maksimal 20 foto; koleksi kecil diulang untuk loop. Selama belum ada foto, ikon dari lima album menjadi pengganti. Strip bersifat dekoratif; navigasi tetap melalui indeks album.
 
@@ -18,7 +18,9 @@ Keputusan di ../.ui-craft/tokens.md; implementasi src/app/globals.css. Warna mer
 
 ## Responsif dan gerak
 
-320px ke atas; indeks album satu kolom ponsel, asimetris desktop. Potret berada setelah copy/CTA pada ponsel. Galeri tiga kolom desktop, dua kolom ponsel. Menu disclosure, Escape dan fokus kembali. Transisi 150-350ms; reduced motion menonaktifkan entrance dan smooth scroll.
+320px ke atas; indeks album satu kolom ponsel, asimetris desktop. Potret hero berada setelah copy/CTA pada ponsel; Tentang berurutan judul, potret, profil. Galeri tiga kolom desktop, dua kolom ponsel. Menu disclosure, Escape dan fokus kembali. Transisi 150-350ms; reduced motion menonaktifkan entrance dan smooth scroll.
+
+Setiap section setelah hero mendapat entrance sekali saat masuk viewport: opacity 0-1 dan translateY 20px-0 selama 350ms. Hero mempertahankan entrance awal. ScrollReveal memakai IntersectionObserver dan Web Animations API; konten server tidak disembunyikan. Tanpa JavaScript/API, konten tetap terlihat. Reduced motion atau fokus keyboard membatalkan entrance aktif.
 
 Strip foto memiliki tombol jeda/putar dan berhenti saat hover. Reduced motion atau JavaScript nonaktif menampilkan strip statis tanpa tombol animasi. Animasi hanya mengubah transform.
 

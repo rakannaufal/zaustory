@@ -14,6 +14,7 @@ Calon klien melalui ponsel atau desktop: beranda > kategori album > detail > fot
 - REQ-06: Build, pemeriksaan kode, tes, SEO dasar, dan panduan konten tersedia dengan bukti aktual.
 - REQ-07: Layout editorial asimetris; hero menyediakan potret transparan, setiap pengalaman satu foto, seluruh posisi foto kosong memakai ikon. Detail album menyediakan 20/10/10/10/30 slot tanpa mengubah jumlah tayang.
 - REQ-08: Teks kartu album berada dalam thumbnail tanpa jumlah foto; CTA berciri fotografi; dua strip foto gabungan seluruh album setelah hero bergerak berlawanan arah dengan jeda/reduced motion; favicon berlatar putih.
+- REQ-09: Tentang tepat setelah strip foto, menampilkan satu potret fotografer; setiap section mendapat entrance saat scrolling, tanpa menghilangkan konten pada reduced motion atau tanpa JavaScript.
 
 ## Prioritas
 

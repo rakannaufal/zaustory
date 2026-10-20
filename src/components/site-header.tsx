@@ -6,9 +6,9 @@ import { useEffect, useRef, useState } from 'react';
 import { BrandLogo } from '@/components/brand-logo';
 
 const navigation = [
+  { href: '/#tentang', label: 'Tentang' },
   { href: '/#album', label: 'Album' },
   { href: '/#pengalaman', label: 'Pengalaman' },
-  { href: '/#tentang', label: 'Tentang' },
   { href: '/#kontak', label: 'Kontak' },
 ];
 

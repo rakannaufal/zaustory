@@ -36,6 +36,7 @@ Pengunjung mengenali lima kategori, membuka detail, dan menemukan Instagram mela
 - 2026-10-20: Setelah hero terdapat dua baris foto campuran seluruh album, bergerak ke kiri dan kanan. Ikon sementara digantikan foto dari data album; kontrol jeda dan reduced motion tetap tersedia.
 - 2026-10-20: Favicon memakai logo hitam berlatar putih. Pengecualian ini tidak mengubah latar navy/slate halaman atau logo header/footer.
 - 2026-10-20: Hapus teks dan toolbar di atas strip foto agar thumbnail langsung menyambung setelah hero. Kontrol jeda berupa ikon overlay saat hover atau fokus keyboard, tanpa mengambil baris tersendiri.
+- 2026-10-20: Tentang berada tepat setelah dua baris foto, sebelum album. Tambahkan potret fotografer dari sumber hero; ikon sementara sampai aset tersedia. Setiap section mendapat entrance saat masuk layar, sekali saja agar scroll berulang tetap tenang; reduced motion dan konten tanpa JavaScript tetap didukung.
 
 # 7. Fold classes used
 

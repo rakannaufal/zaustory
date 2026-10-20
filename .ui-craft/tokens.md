@@ -22,11 +22,13 @@ Sumber implementasi: src/app/globals.css.
 - CTA fotografi bersudut tajam dengan dua sudut viewfinder, aperture pada CTA album/kontak navigasi, dan panah terpisah. CTA utama 60px; kontak navigasi 44px.
 - Dua lapis shadow hanya untuk menu dan dialog.
 - Indeks album memakai 12 kolom asimetris desktop, satu kolom ponsel. Galeri berupa contact sheet tiga kolom desktop, dua kolom ponsel. Slot bukan tombol dan tidak membuka dialog.
+- Tentang setelah strip memakai potret 4:5 kiri, judul/profil kanan pada desktop; judul, potret, profil berurutan pada ponsel. Potret memakai contain dan sumber yang sama dengan hero.
 
 ## Motion and layers
 
 - Hover 150ms; masuk 350ms; hanya opacity/transform/color.
 - Reduced motion meniadakan entrance dan smooth scroll.
+- Entrance section sekali saat masuk viewport: opacity 0-1, translateY 20px-0, 350ms dengan easing token. Web Animations API + IntersectionObserver; HTML selalu terlihat tanpa JavaScript/API. Preferensi reduced motion dan fokus keyboard membatalkan animasi aktif.
 - Strip foto memakai dua loop transform linear 56 detik dengan arah berlawanan; tombol jeda dan hover menghentikan gerak. Tanpa JavaScript atau dengan reduced motion, strip statis dan kontrol animasi disembunyikan.
 - Konten 0; header 20; dialog native top layer.
 - Fokus terlihat; target interaktif minimal 44px.

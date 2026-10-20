@@ -79,6 +79,95 @@ test('serves every planned photo slot with honest counts and unique titles', asy
   }
 });
 
+test('places the photographer profile directly after the photo rows', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await expect(page.locator('.photo-reel + #tentang + #album')).toHaveCount(1);
+  const about = page.getByRole('region', { name: /di balik setiap cerita\./i });
+  await expect(about.getByRole('img')).toHaveCount(1);
+  await expect(
+    about.getByRole('img', {
+      name: 'Potret fotografer Zaustory. Foto belum tersedia.',
+    }),
+  ).toBeVisible();
+  await expect(page.locator('.desktop-navigation a')).toHaveText([
+    'Tentang',
+    'Album',
+    'Pengalaman',
+    'Kontak',
+  ]);
+});
+
+test('reveals sections once and respects motion preferences and keyboard focus', async ({
+  page,
+}) => {
+  for (const id of ['tentang', 'album', 'pengalaman', 'kontak']) {
+    await page.goto('/');
+    const content = page.locator(`#${id} > [data-scroll-reveal]`);
+    const runningReveal = () =>
+      content.evaluate((element) =>
+        element
+          .getAnimations()
+          .some((animation) => animation.id === 'section-reveal'),
+      );
+
+    expect(await runningReveal()).toBe(false);
+    const bounds = await content.boundingBox();
+    expect(bounds).not.toBeNull();
+    // Scroll without waiting for the entrance transform to become stable.
+    await page.mouse.wheel(0, bounds!.y - 160);
+    await expect.poll(runningReveal).toBe(true);
+    await expect.poll(runningReveal).toBe(false);
+    await expect(content).toHaveCSS('opacity', '1');
+    await expect(content).toHaveCSS('transform', 'none');
+
+    await page.locator('.hero').scrollIntoViewIfNeeded();
+    await content.scrollIntoViewIfNeeded();
+    expect(await runningReveal()).toBe(false);
+  }
+
+  await page.goto('/');
+  const aboutContent = page.locator('#tentang > [data-scroll-reveal]');
+  const bounds = await aboutContent.boundingBox();
+  expect(bounds).not.toBeNull();
+  await page.mouse.wheel(0, bounds!.y - 160);
+  await expect
+    .poll(() =>
+      aboutContent.evaluate((element) => element.getAnimations().length),
+    )
+    .toBe(1);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect
+    .poll(() =>
+      aboutContent.evaluate((element) => element.getAnimations().length),
+    )
+    .toBe(0);
+  await expect(aboutContent).toHaveCSS('opacity', '1');
+  await expect(aboutContent).toHaveCSS('transform', 'none');
+
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  const albumContent = page.locator('#album > [data-scroll-reveal]');
+  const albumBounds = await albumContent.boundingBox();
+  expect(albumBounds).not.toBeNull();
+  await page.mouse.wheel(0, albumBounds!.y - 160);
+  await expect
+    .poll(() =>
+      albumContent.evaluate((element) => element.getAnimations().length),
+    )
+    .toBe(1);
+  const filter = page.getByRole('button', { name: 'Semua', exact: true });
+  await filter.focus();
+  await expect(filter).toBeFocused();
+  await expect
+    .poll(() =>
+      albumContent.evaluate((element) => element.getAnimations().length),
+    )
+    .toBe(0);
+  await expect(albumContent).toHaveCSS('opacity', '1');
+});
+
 test('moves photo rows in opposite directions and supports pause and reduced motion', async ({
   page,
 }) => {
@@ -167,6 +256,15 @@ test('provides a keyboard skip link and honors reduced motion', async ({
       .getByRole('heading', { level: 1 })
       .evaluate((element) => getComputedStyle(element).animationName),
   ).toBe('none');
+  for (const id of ['tentang', 'album', 'pengalaman', 'kontak']) {
+    const content = page.locator(`#${id} > [data-scroll-reveal]`);
+    await content.scrollIntoViewIfNeeded();
+    await expect(content).toHaveCSS('opacity', '1');
+    await expect(content).toHaveCSS('transform', 'none');
+    expect(
+      await content.evaluate((element) => element.getAnimations().length),
+    ).toBe(0);
+  }
 });
 
 test('has no horizontal overflow on small, medium, or large screens', async ({
@@ -235,6 +333,12 @@ test('renders album links and empty details without JavaScript', async ({
     await expect(
       page.getByRole('button', { name: 'Jeda animasi' }),
     ).toBeHidden();
+    await expect(page.locator('.photo-reel + #tentang')).toHaveCount(1);
+    await expect(page.locator('#tentang').getByRole('img')).toBeVisible();
+    await expect(page.locator('#tentang > .container')).toHaveCSS(
+      'opacity',
+      '1',
+    );
     await page.getByRole('link', { name: /Minsoc/ }).click();
     await expect(
       page.getByText('Foto belum tersedia', { exact: true }),

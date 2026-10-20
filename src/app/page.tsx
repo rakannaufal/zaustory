@@ -10,6 +10,7 @@ import { ContactLinks } from '@/components/contact-links';
 import { ImagePlaceholder } from '@/components/image-placeholder';
 import { PhotoImage } from '@/components/photo-image';
 import { PhotoReel } from '@/components/photo-reel';
+import { ScrollReveal } from '@/components/scroll-reveal';
 import { albums } from '@/content/albums';
 import { site } from '@/content/site';
 
@@ -86,11 +87,75 @@ export default function HomePage() {
       <PhotoReel albums={albums} />
 
       <section
+        id="tentang"
+        className="about-section section-space"
+        aria-labelledby="about-title"
+      >
+        <ScrollReveal className="container">
+          <div className="about-layout">
+            <h2 id="about-title">
+              Di balik
+              <br />
+              <span>setiap cerita.</span>
+            </h2>
+            <figure className="about-portrait">
+              <div className="about-portrait-image">
+                {site.photographerPortrait ? (
+                  <PhotoImage
+                    photo={site.photographerPortrait}
+                    sizes="(max-width: 760px) 100vw, 40vw"
+                    mode="contain"
+                  />
+                ) : (
+                  <ImagePlaceholder
+                    label="Potret fotografer Zaustory. Foto belum tersedia."
+                    caption="Potret fotografer"
+                    className="portrait-placeholder"
+                  />
+                )}
+              </div>
+              <figcaption>
+                <span>Di balik kamera</span>
+                <span>Zaustory</span>
+              </figcaption>
+            </figure>
+            <div className="about-copy">
+              <p className="about-lead">
+                Zaustory. Fotografi olahraga dan event.
+              </p>
+              <p>
+                Gerak di lapangan, pertemuan di sebuah acara, dan momen di
+                antaranya. Setiap cerita punya sudut pandangnya sendiri.
+              </p>
+              <div className="bio-note">
+                <span className="note-line" aria-hidden="true" />
+                <p>
+                  Cerita di balik kamera segera hadir. Profil lengkap Zaustory
+                  sedang dilengkapi.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="affiliations">
+            <div>
+              <h3>Koneksi &amp; kolaborasi</h3>
+              <p>Rincian hubungan dan periode kolaborasi sedang dilengkapi.</p>
+            </div>
+            <ul>
+              {site.affiliations.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <section
         id="album"
         className="album-section section-space"
         aria-labelledby="album-title"
       >
-        <div className="container">
+        <ScrollReveal className="container">
           <div className="section-heading album-heading">
             <h2 id="album-title">
               Lima sudut.
@@ -103,7 +168,7 @@ export default function HomePage() {
             </div>
           </div>
           <AlbumCollection albums={albums} />
-        </div>
+        </ScrollReveal>
       </section>
 
       <section
@@ -111,7 +176,7 @@ export default function HomePage() {
         className="experience-section section-space"
         aria-labelledby="experience-title"
       >
-        <div className="container">
+        <ScrollReveal className="container">
           <div className="section-heading experience-heading">
             <h2 id="experience-title">
               Pernah menjadi
@@ -154,50 +219,7 @@ export default function HomePage() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      <section
-        id="tentang"
-        className="about-section section-space"
-        aria-labelledby="about-title"
-      >
-        <div className="container">
-          <div className="about-layout">
-            <h2 id="about-title">
-              Di balik
-              <br />
-              <span>setiap cerita.</span>
-            </h2>
-            <div className="about-copy">
-              <p className="about-lead">
-                Zaustory. Fotografi olahraga dan event.
-              </p>
-              <p>
-                Gerak di lapangan, pertemuan di sebuah acara, dan momen di
-                antaranya. Setiap cerita punya sudut pandangnya sendiri.
-              </p>
-              <div className="bio-note">
-                <span className="note-line" aria-hidden="true" />
-                <p>
-                  Cerita di balik kamera segera hadir. Profil lengkap Zaustory
-                  sedang dilengkapi.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="affiliations">
-            <div>
-              <h3>Koneksi &amp; kolaborasi</h3>
-              <p>Rincian hubungan dan periode kolaborasi sedang dilengkapi.</p>
-            </div>
-            <ul>
-              {site.affiliations.map((name) => (
-                <li key={name}>{name}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section
@@ -205,7 +227,7 @@ export default function HomePage() {
         className="contact-section"
         aria-labelledby="contact-title"
       >
-        <div className="container">
+        <ScrollReveal className="container">
           <div className="contact-layout">
             <h2 id="contact-title">
               Cerita berikutnya,
@@ -221,7 +243,7 @@ export default function HomePage() {
             </p>
             <ContactLinks inverse />
           </div>
-        </div>
+        </ScrollReveal>
       </section>
     </main>
   );

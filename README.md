@@ -63,7 +63,7 @@ Fakta situs di `src/content/site.ts`; materi bio di halaman tentang masih menung
 
 ## Potret dan pengalaman
 
-Hero menyediakan potret fotografer transparan yang menyatu dengan bidang diagonal navy/slate. Isi `photographerPortrait` di `src/content/site.ts` dengan satu objek `Photo` (id, src, alt, width, height); simpan aset PNG/WebP/AVIF dengan alpha di `public/images/profile/`. Rasio vertikal dianjurkan. Tampilan memakai `contain`, tanpa menambah latar pada gambar.
+Hero menyediakan potret fotografer transparan yang menyatu dengan bidang diagonal navy/slate. Tentang berada tepat setelah dua baris foto bergerak dan menampilkan potret dari sumber yang sama, di samping profil pada desktop, di antara judul dan teks pada ponsel. Isi `photographerPortrait` di `src/content/site.ts` dengan satu objek `Photo` (id, src, alt, width, height); simpan aset PNG/WebP/AVIF dengan alpha di `public/images/profile/`. Rasio vertikal dianjurkan. Tampilan memakai `contain`, tanpa menambah latar pada gambar.
 
 Setiap entri `experiences` memiliki satu `photo` dengan format metadata yang sama; simpan di `public/images/experiences/`. Foto tampil dengan rasio 1.6 dan `cover`. Nilai `null` pada potret/pengalaman menampilkan ikon sementara. Belum ada foto asli di proyek.
 
@@ -72,6 +72,8 @@ Setiap entri `experiences` memiliki satu `photo` dengan format metadata yang sam
 Aset asli di `assets/logo/` dipertahankan. Header/footer memakai turunan transparan terang di `public/brand/`, dengan bentuk/alpha asli dan warna #E2E9F3 agar terbaca pada navy. Favicon dan Apple touch icon memakai logo hitam berlatar putih sesuai permintaan pemilik. Kartu Open Graph/Twitter memakai logo terang berlatar navy. Kartu berbagi aktif dengan `NEXT_PUBLIC_SITE_URL` valid; preview eksternal baru dapat diuji setelah deploy. Rincian varian/dimensi di `specs/assets.md`.
 
 Strip foto setelah hero menggabungkan foto dari seluruh album, mengacak urutan secara stabil, dan memilih maksimal 20 foto untuk dua baris. Koleksi kecil diulang untuk loop; ketika seluruh album kosong, ikon menjadi pengganti. Isi `photos` di `src/content/albums.ts` untuk menggantinya otomatis. Tombol jeda/putar tersedia; reduced motion dan mode tanpa JavaScript menampilkan strip statis.
+
+Setiap section setelah hero mendapat animasi masuk sekali ketika terlihat: opacity dan pergeseran vertikal 20px selama 350ms, tanpa dependensi animasi tambahan. Hero mempertahankan animasi awalnya. Reduced motion menonaktifkan gerak; perubahan preferensi dan fokus keyboard membatalkan animasi yang berjalan. Konten server tetap terlihat tanpa JavaScript atau IntersectionObserver.
 
 ## Pemeriksaan
 

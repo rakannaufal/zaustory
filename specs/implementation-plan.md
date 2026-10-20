@@ -54,3 +54,12 @@ Permintaan tambahan pemilik: teks di dalam thumbnail tanpa angka jumlah foto, CT
 - File: src/components/album-collection.tsx, photo-reel.tsx, site-header.tsx, contact-links.tsx, src/lib/photo-reel.ts, src/app/page.tsx, globals.css, public/brand/icon.png dan apple-touch-icon.png.
 - Verifikasi: TEST-08, regresi TEST-01 hingga TEST-07; lint/typecheck/unit/build/E2E/format, screenshot desktop/ponsel.
 - Risiko: belum ada foto asli. Batasi strip maksimal 20 foto per build agar DOM/gambar tetap ringan; fallback ikon, status jumlah detail tetap akurat. Animasi tidak berjalan tanpa JavaScript atau saat reduced motion.
+
+## Fase 7: Tentang dan animasi scroll
+
+Permintaan tambahan pemilik: Tentang tepat di bawah dua baris foto, satu potret fotografer pada Tentang, entrance pada setiap section saat scrolling.
+
+- T-7.01: Pindahkan Tentang sebelum album, potret dari sumber hero dengan fallback ikon, urutan navigasi sesuai halaman. ScrollReveal progresif memakai IntersectionObserver dan Web Animations API; entrance sekali, pembatalan untuk reduced motion/fokus, HTML selalu terlihat.
+- File: src/app/page.tsx, globals.css, src/components/scroll-reveal.tsx, photo-reel.tsx, site-header.tsx.
+- Verifikasi: TEST-09 dan regresi; lint/typecheck/unit/build/E2E/format, inspeksi browser desktop/ponsel dan screenshot produksi lokal.
+- Risiko: potret asli belum tersedia. Gerak tidak boleh menjadi syarat visibilitas atau mengganggu keyboard; tanpa JavaScript/API konten tetap terbaca. Tidak ada dependensi animasi tambahan.

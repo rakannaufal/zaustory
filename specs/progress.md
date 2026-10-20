@@ -196,3 +196,32 @@ Verifikasi aktual: build/TypeScript, lint dan format lulus. Enam E2E terarah lul
 Pemilik meminta proyek dimasukkan ke https://github.com/rakannaufal/zaustory. Remote diperiksa kosong sebelum commit pertama; target push main tanpa force. Kandidat commit berisi source, spesifikasi, aset, bukti dan workflow CI; node_modules, build, hasil tes sementara dan .env privat diabaikan. Pemindaian kandidat tidak menemukan pola kunci privat/token yang diperiksa. Dua trailing whitespace pada fixture AGENTS.md dibersihkan tanpa mengubah isi aturan.
 
 Verifikasi versi terakhir sebelum commit: npm run check keluar 0 (lint, TypeScript, 36 tes pada 4 file, 10 keluaran statis); npm run format:check keluar 0; seluruh 24 E2E desktop/ponsel lulus dalam 33.0 detik; npm audit --audit-level=high menemukan 0 kerentanan. Hasil ini adalah pemeriksaan lokal. Eksekusi CI GitHub dan deployment belum menjadi bukti pada saat catatan dibuat. Foto asli tetap belum tersedia.
+
+## Fase 7: Tentang dan animasi scroll, 2026-10-20, 21:49 WIB
+
+T-7.01 diterapkan untuk REQ-09/AC-09/TEST-09 sesuai permintaan pemilik:
+
+- Urutan beranda menjadi hero, dua baris foto, Tentang, album, pengalaman, kontak. Navigasi mengikuti urutan section.
+- Tentang menyediakan satu potret 4:5 di kiri profil pada desktop; ponsel berurutan judul, potret, profil. Sumber memakai photographerPortrait yang sama dengan hero, contain dan posisi bawah. Nilai masih null sehingga ikon sementara tampil, bukan foto rekaan.
+- ScrollReveal memberi entrance sekali saat section terlihat: opacity dan translateY 20px selama 350ms. Strip, Tentang, album, pengalaman dan kontak memakainya; hero mempertahankan entrance awal. Tidak ada dependensi baru.
+- HTML tidak disembunyikan sebelum observer. Tanpa JavaScript/API animasi, konten tetap terlihat. Reduced motion awal meniadakan entrance; perubahan preferensi atau fokus keyboard membatalkan entrance aktif.
+
+| Pemeriksaan             | Hasil aktual                                                                                                                                                                      |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| npm run check           | Exit 0 setelah perbaikan durasi produksi: lint, TypeScript, 36 tes pada 4 file, build dengan 10 keluaran statis                                                                   |
+| E2E animasi terarah     | 2/2 lulus, 7.9 detik; entrance keempat section, sekali saat terlihat, pembatalan reduced motion dan fokus pada kedua profil                                                       |
+| npm run test:e2e        | 28/28 lulus, 35.4 detik; Chromium desktop 1440x1000 dan ponsel 390x844                                                                                                            |
+| Regresi browser         | Urutan strip/Tentang/album, satu potret Tentang, 80 slot album, filter, jeda strip, menu, keyboard, offline, HTTP/SEO dan tanpa JavaScript lulus                                  |
+| Aksesibilitas/responsif | Axe tanpa pelanggaran pada beranda/detail/404; tidak ada overflow horizontal pada 320/390/768/1440px                                                                              |
+| Format/lint akhir       | npm run format:check dan npm run lint keluar 0                                                                                                                                    |
+| Inspeksi manual         | Browser 1280px dan 390px: potret, judul, profil dan kolaborasi terbaca; posisi Tentang sesuai. Override viewport dan tab pemeriksaan dibersihkan; preview port 3001 dipertahankan |
+
+Uji browser awal menemukan entrance terlalu singkat: minifier produksi mengubah token 350ms menjadi .35s, sedangkan parseFloat awal memperlakukannya sebagai 0.35ms. Probe browser membuktikan durasi aktual 0.35ms. Konversi satuan CSS s/ms diperbaiki; probe sementara dihapus. Pemeriksaan penuh dan uji animasi akhir di atas memakai build yang sudah diperbaiki.
+
+Bukti dari screenshot beranda penuh hasil suite produksi lokal yang lulus, dipotong tanpa mengubah isi UI agar dua strip dan Tentang terlihat bersama:
+
+- [Tentang desktop](../docs/evidence/about-desktop.png)
+- [Tentang ponsel](../docs/evidence/about-mobile.png)
+- [Beranda lengkap](../docs/evidence/home-full-desktop.png)
+
+Fase ini selesai pada lingkup UI lokal dengan placeholder. Potret dan seluruh foto asli tetap belum tersedia; bio final masih menunggu pemilik. Bukti ini tidak mencakup CI GitHub, deployment, perangkat fisik atau Safari/Firefox. Audit dependensi tidak diulang karena tidak ada perubahan dependensi; hasil audit sebelumnya dicatat pada persiapan GitHub.

@@ -63,3 +63,12 @@ Permintaan tambahan pemilik: Tentang tepat di bawah dua baris foto, satu potret 
 - File: src/app/page.tsx, globals.css, src/components/scroll-reveal.tsx, photo-reel.tsx, site-header.tsx.
 - Verifikasi: TEST-09 dan regresi; lint/typecheck/unit/build/E2E/format, inspeksi browser desktop/ponsel dan screenshot produksi lokal.
 - Risiko: potret asli belum tersedia. Gerak tidak boleh menjadi syarat visibilitas atau mengganggu keyboard; tanpa JavaScript/API konten tetap terbaca. Tidak ada dependensi animasi tambahan.
+
+## Fase 8: Copy dan informasi Instagram
+
+Permintaan pemilik: sesuaikan copy dengan https://www.instagram.com/zauustory/ dan masukkan informasi yang relevan.
+
+- T-8.01: Catat sumber publik; perbarui hero/Tentang/album/pengalaman/kontak dan metadata; koreksi handle; tautkan kredit fotografer, media partner, telepon, serta empat sorotan album.
+- File: src/content, src/app/page.tsx dan layout.tsx, globals.css, album/[slug]/page.tsx, components/contact-links.tsx, site-footer.tsx, photo-gallery.tsx; tes dan dokumentasi sumber.
+- Verifikasi: TEST-10, regresi rute/slot/animasi/aksesibilitas; lint/typecheck/unit/build/E2E/format; inspeksi desktop/ponsel; commit dan push sesuai aturan pemilik.
+- Risiko: detail unggahan meminta login. Tidak menyalin caption/foto yang belum tersedia, tidak menambah klaim hubungan klien, tidak mengaktifkan WhatsApp dari nomor telepon saja. Foto tetap ikon; bio panjang dan aset final menunggu pemilik.

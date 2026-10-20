@@ -26,7 +26,7 @@ describe('photo gallery', () => {
     ).not.toBeInTheDocument();
     expect(
       screen.getByRole('link', { name: 'Lihat Instagram' }),
-    ).toHaveAttribute('href', 'https://www.instagram.com/zaustory/');
+    ).toHaveAttribute('href', 'https://www.instagram.com/zauustory/');
   });
 
   it('shows every planned slot without making placeholders interactive', () => {

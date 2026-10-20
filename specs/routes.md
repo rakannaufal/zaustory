@@ -5,8 +5,8 @@
 | /                    | Identitas, album, pengalaman, tentang, kontak | Konten lokal, navigasi anchor                  |
 | /#album              | Filter Semua/Olahraga/Event                   | Tautan album tetap SSR                         |
 | /#pengalaman         | Tiga pengalaman brief                         | Tahun hanya bila diberikan                     |
-| /#tentang            | Cakupan dan status bio                        | Tanpa riwayat pribadi rekaan                   |
-| /#kontak             | Instagram, WhatsApp opsional                  | Tanpa nomor contoh                             |
+| /#tentang            | Profil publik, fotografer, media partner      | Tanpa riwayat pribadi rekaan                   |
+| /#kontak             | Instagram, telepon, WhatsApp opsional         | Nomor telepon publik bukan asumsi WhatsApp     |
 | /album/minsoc        | Rencana 20 foto                               | Kosong bila photos=[]                          |
 | /album/lapangan-bola | Rencana 10 foto                               | Sama                                           |
 | /album/basket        | Rencana 10 foto                               | Sama                                           |

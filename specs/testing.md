@@ -21,6 +21,7 @@
 - TEST-07: Slot potret hero, tiga foto pengalaman, jumlah slot setiap album, placeholder tidak membuka dialog; campuran foto nyata dan slot hanya menavigasi foto nyata. Slot tetap tersedia tanpa JavaScript. Inspeksi komposisi desktop/ponsel dilakukan lewat browser.
 - TEST-08: Unit pemilihan foto lintas album, fallback/duplikasi koleksi kecil, batas 20, urutan stabil, koleksi kosong. Browser mengukur dua arah gerak, jeda/putar, reduced motion, posisi teks kartu dan CTA pada desktop/ponsel. Periksa ikon favicon berlatar putih; strip tanpa JavaScript harus statis.
 - TEST-09: Urutan strip/tentang/album dan satu potret tentang. Browser membuktikan entrance saat section terlihat, tidak berulang setelah scroll kembali, pembatalan jika reduced motion diaktifkan, serta visibilitas tanpa JavaScript. Periksa potret dan susunan teks desktop/ponsel; fokus keyboard tidak boleh menunggu animasi.
+- TEST-10: Cocokkan sumber profil publik dan tautan. Browser memeriksa lokasi/metadata, kredit fotografer/media partner, Instagram dua u, tel publik, sorotan tiap album dan fallback padel; WhatsApp tetap tersembunyi tanpa konfigurasi. Periksa copy/kontak pada desktop/ponsel.
 
 ## Bukti
 

@@ -1,4 +1,4 @@
-import { ArrowUpRight, MessageCircle } from 'lucide-react';
+import { ArrowUpRight, MessageCircle, Phone } from 'lucide-react';
 import { site } from '@/content/site';
 import { publicConfig } from '@/lib/config';
 
@@ -16,6 +16,14 @@ export function ContactLinks({ inverse = false }: { inverse?: boolean }) {
         <span className="cta-direction" aria-hidden="true">
           <ArrowUpRight size={18} />
         </span>
+      </a>
+      <a
+        className={`text-link ${inverse ? 'text-link-inverse' : ''}`}
+        href={site.phone.href}
+        aria-label={`Telepon ${site.phone.display}`}
+      >
+        <Phone size={18} aria-hidden="true" />
+        {site.phone.display}
       </a>
       {publicConfig.whatsappUrl && (
         <a

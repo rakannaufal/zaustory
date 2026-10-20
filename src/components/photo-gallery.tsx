@@ -12,10 +12,12 @@ export function PhotoGallery({
   photos,
   albumName,
   plannedCount = photos.length,
+  instagramHighlight,
 }: {
   photos: readonly Photo[];
   albumName: string;
   plannedCount?: number;
+  instagramHighlight?: string;
 }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const close = useCallback(() => setSelectedIndex(null), []);
@@ -35,11 +37,13 @@ export function PhotoGallery({
           </div>
           <a
             className="text-link"
-            href={site.instagram}
+            href={instagramHighlight ?? site.instagram}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Lihat Instagram
+            {instagramHighlight
+              ? `Lihat sorotan ${albumName}`
+              : 'Lihat Instagram'}
             <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>

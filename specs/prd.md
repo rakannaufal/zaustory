@@ -2,7 +2,7 @@
 
 ## Pengguna dan alur utama
 
-Calon klien melalui ponsel atau desktop: beranda > kategori album > detail > foto diperbesar bila tersedia > kontak Instagram/WhatsApp terkonfigurasi.
+Calon klien melalui ponsel atau desktop: beranda > kategori album > detail > foto diperbesar bila tersedia > kontak Instagram/telepon/WhatsApp terkonfigurasi.
 
 ## MVP
 
@@ -15,6 +15,7 @@ Calon klien melalui ponsel atau desktop: beranda > kategori album > detail > fot
 - REQ-07: Layout editorial asimetris; hero menyediakan potret transparan, setiap pengalaman satu foto, seluruh posisi foto kosong memakai ikon. Detail album menyediakan 20/10/10/10/30 slot tanpa mengubah jumlah tayang.
 - REQ-08: Teks kartu album berada dalam thumbnail tanpa jumlah foto; CTA berciri fotografi; dua strip foto gabungan seluruh album setelah hero bergerak berlawanan arah dengan jeda/reduced motion; favicon berlatar putih.
 - REQ-09: Tentang tepat setelah strip foto, menampilkan satu potret fotografer; setiap section mendapat entrance saat scrolling, tanpa menghilangkan konten pada reduced motion atau tanpa JavaScript.
+- REQ-10: Copy mengadaptasi profil @zauustory dengan fakta terverifikasi: lokasi, identitas, kredit fotografer, media partner, telepon, dan tautan sorotan yang sesuai. Tidak mengarang caption atau menganggap nomor telepon sebagai WhatsApp.
 
 ## Prioritas
 

@@ -59,7 +59,9 @@ photos: [
 
 Ganti contoh dengan metadata foto sebenarnya. Slug/ID harus unik, alt tidak kosong, dimensi positif, path lokal raster; jumlah foto tidak melebihi rencana. Naikkan plannedCount secara sengaja bila rencana berubah. Sampul menggunakan foto pertama. Jumlah tayang otomatis dari panjang photos. Foto dapat diperbesar dengan klik/Enter, panah kiri/kanan, Escape, serta tombol tutup; kegagalan gambar diberi pesan.
 
-Fakta situs di `src/content/site.ts`; materi bio di halaman tentang masih menunggu pemilik. Afiliasi tidak diklaim sebagai klien aktif.
+Fakta situs di `src/content/site.ts`. Bio singkat berasal dari profil publik [@zauustory](https://www.instagram.com/zauustory/): Pekanbaru, Riau; fotografer @rzzwadzaky; media partner @langkaahsenja_; telepon +62 838-5465-3003. Telepon memakai tautan `tel:`, bukan asumsi WhatsApp. Sumber dan batas adaptasi di [docs/content-sources.md](docs/content-sources.md). Afiliasi tidak diklaim sebagai klien aktif.
+
+Album kosong Minsoc, lapangan bola, basket, dan event menautkan sorotan Instagram yang sesuai melalui `site.albumHighlights`. Padel menautkan profil umum. Foto/caption unggahan tidak diambil; aset web tetap diisi melalui manifest lokal.
 
 ## Potret dan pengalaman
 
@@ -93,6 +95,6 @@ E2E menjalankan server production port 3100, dua profil Chromium desktop/ponsel,
 
 ## Sebelum publikasi
 
-Masih diperlukan foto asli dan izin, bio dari Uwa, kontak telepon, konfirmasi hubungan organisasi, domain/hosting, pemeriksaan ulang memakai konten final. Kartu berbagi logo sudah tersedia. Belum ada deploy, tracking, CMS, login, database, booking, atau pembayaran. Rekomendasi hosting Next.js: Vercel; pemilihan paket/biaya menunggu pemilik.
+Masih diperlukan foto asli dan izin, bio panjang dari Uwa bila diinginkan, konfirmasi hubungan organisasi/WhatsApp, domain/hosting, pemeriksaan ulang memakai konten final. Bio singkat dan telepon publik sudah tersedia dari Instagram. Kartu berbagi logo sudah tersedia. Belum ada deploy, tracking, CMS, login, database, booking, atau pembayaran. Rekomendasi hosting Next.js: Vercel; pemilihan paket/biaya menunggu pemilik.
 
 Font Fontsource berlisensi SIL OFL; ikon Lucide ISC. Teks lisensi ada di `public/licenses/`. Foto tetap hak pemilik. Tidak menetapkan lisensi publik untuk kode/aset pemilik.

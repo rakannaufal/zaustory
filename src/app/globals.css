@@ -908,21 +908,23 @@ svg {
   color: var(--text-secondary);
   font-size: 15px;
 }
-.bio-note {
-  display: flex;
-  align-items: start;
-  gap: var(--space-4);
+.profile-facts {
   margin-top: var(--space-8);
+  border-top: 1px solid var(--border-default);
+  font-size: 14px;
+}
+.profile-facts > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-4);
+  padding-block: var(--space-2);
+  border-bottom: 1px solid var(--border-default);
+}
+.profile-facts dt {
   color: var(--text-secondary);
   font-size: 12px;
-}
-.note-line {
-  display: block;
-  width: 24px;
-  flex-shrink: 0;
-  height: 1px;
-  margin-top: 10px;
-  background: var(--text-secondary);
 }
 .affiliations {
   display: grid;

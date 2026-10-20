@@ -15,25 +15,20 @@ import { albums } from '@/content/albums';
 import { site } from '@/content/site';
 
 export default function HomePage() {
-  const plannedPhotos = albums.reduce(
-    (total, album) => total + album.plannedCount,
-    0,
-  );
-
   return (
     <main id="main" tabIndex={-1}>
       <section className="hero" aria-labelledby="hero-title">
         <div className="container hero-inner">
-          <p className="eyebrow hero-eyebrow">Fotografi olahraga &amp; event</p>
+          <p className="eyebrow hero-eyebrow">{site.location}</p>
           <h1 id="hero-title">
-            Momen berlalu.
+            Di lapangan.
             <br />
-            <span>Cerita tinggal.</span>
+            <span>Dalam ingatan.</span>
           </h1>
           <div className="hero-bottom">
             <p>
-              Dari energi di lapangan sampai cerita di luar pertandingan. Setiap
-              momen punya tempat di sini.
+              Fotografi olahraga dan event. Menangkap aksi pertandingan, suasana
+              acara, dan momen di antaranya.
             </p>
             <div className="hero-actions">
               <Link
@@ -78,7 +73,7 @@ export default function HomePage() {
             )}
             <figcaption>
               <span>Di balik lensa</span>
-              <span>Zaustory</span>
+              <span>{site.photographer.handle}</span>
             </figcaption>
           </figure>
         </div>
@@ -116,30 +111,52 @@ export default function HomePage() {
               </div>
               <figcaption>
                 <span>Di balik kamera</span>
-                <span>Zaustory</span>
+                <span>{site.photographer.handle}</span>
               </figcaption>
             </figure>
             <div className="about-copy">
-              <p className="about-lead">
-                Zaustory. Fotografi olahraga dan event.
-              </p>
+              <p className="about-lead">{site.profileName}</p>
               <p>
-                Gerak di lapangan, pertemuan di sebuah acara, dan momen di
-                antaranya. Setiap cerita punya sudut pandangnya sendiri.
+                Berbasis di {site.location}, Zaustory mendokumentasikan olahraga
+                dan event. Dari minisoccer, sepak bola, dan basket hingga momen
+                pertemuan dalam sebuah acara.
               </p>
-              <div className="bio-note">
-                <span className="note-line" aria-hidden="true" />
-                <p>
-                  Cerita di balik kamera segera hadir. Profil lengkap Zaustory
-                  sedang dilengkapi.
-                </p>
-              </div>
+              <dl className="profile-facts">
+                <div>
+                  <dt>Fotografer</dt>
+                  <dd>
+                    <a
+                      href={site.photographer.instagram}
+                      className="text-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {site.photographer.handle}
+                      <ArrowUpRight size={16} aria-hidden="true" />
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Media partner</dt>
+                  <dd>
+                    <a
+                      href={site.mediaPartner.instagram}
+                      className="text-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {site.mediaPartner.handle}
+                      <ArrowUpRight size={16} aria-hidden="true" />
+                    </a>
+                  </dd>
+                </div>
+              </dl>
             </div>
           </div>
           <div className="affiliations">
             <div>
               <h3>Koneksi &amp; kolaborasi</h3>
-              <p>Rincian hubungan dan periode kolaborasi sedang dilengkapi.</p>
+              <p>Beberapa nama dalam perjalanan Zaustory.</p>
             </div>
             <ul>
               {site.affiliations.map((name) => (
@@ -158,13 +175,19 @@ export default function HomePage() {
         <ScrollReveal className="container">
           <div className="section-heading album-heading">
             <h2 id="album-title">
-              Lima sudut.
+              Dari lapangan.
               <br />
-              <span>Banyak cerita.</span>
+              <span>Sampai acara.</span>
             </h2>
             <div className="album-intro">
-              <p>{plannedPhotos} foto direncanakan dalam lima album.</p>
-              <p>Foto sementara ditampilkan sebagai ikon gambar.</p>
+              <p>
+                Minisoccer, sepak bola, basket, padel, dan event. Pilih album
+                untuk menjelajahi setiap kategori.
+              </p>
+              <p>
+                Foto web sedang disiapkan. Sementara itu, lihat karya di
+                Instagram.
+              </p>
             </div>
           </div>
           <AlbumCollection albums={albums} />
@@ -184,7 +207,8 @@ export default function HomePage() {
               bagian cerita.
             </h2>
             <p>
-              Beberapa pengalaman Zaustory di olahraga, kampanye, dan event.
+              Pengalaman dokumentasi kampanye dan pertandingan, termasuk
+              Kampanye Walikota 2024 dan EPA PSPS 2025.
             </p>
           </div>
           <ol className="experience-list" aria-label="Pengalaman Zaustory">
@@ -230,16 +254,16 @@ export default function HomePage() {
         <ScrollReveal className="container">
           <div className="contact-layout">
             <h2 id="contact-title">
-              Cerita berikutnya,
+              Jadwalkan
               <br />
-              <span>punyamu.</span>
+              <span>pemotretanmu.</span>
             </h2>
             <ArrowUpRight className="contact-arrow" aria-hidden="true" />
           </div>
           <div className="contact-bottom">
             <p>
-              Ceritakan pertandingan, acara, atau ide pemotretanmu. Mulai
-              percakapan lewat Instagram.
+              Kirim tanggal, lokasi, dan kebutuhan dokumentasimu. Hubungi
+              Zaustory melalui Instagram atau telepon untuk membahas pemotretan.
             </p>
             <ContactLinks inverse />
           </div>

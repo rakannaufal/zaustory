@@ -37,6 +37,7 @@ Pengunjung mengenali lima kategori, membuka detail, dan menemukan Instagram mela
 - 2026-10-20: Favicon memakai logo hitam berlatar putih. Pengecualian ini tidak mengubah latar navy/slate halaman atau logo header/footer.
 - 2026-10-20: Hapus teks dan toolbar di atas strip foto agar thumbnail langsung menyambung setelah hero. Kontrol jeda berupa ikon overlay saat hover atau fokus keyboard, tanpa mengambil baris tersendiri.
 - 2026-10-20: Tentang berada tepat setelah dua baris foto, sebelum album. Tambahkan potret fotografer dari sumber hero; ikon sementara sampai aset tersedia. Setiap section mendapat entrance saat masuk layar, sekali saja agar scroll berulang tetap tenang; reduced motion dan konten tanpa JavaScript tetap didukung.
+- 2026-10-20: Copy dan informasi mengikuti profil publik @zauustory: Pekanbaru/Riau, kredit @rzzwadzaky, media partner @langkaahsenja_, telepon. Gunakan bahasa kasual profesional, konkret, tanpa klaim harga/pengalaman baru atau kutipan caption yang tertutup login. Nomor telepon tidak otomatis menjadi WhatsApp. Brand tetap Zaustory; foto memakai ikon sampai tersedia aset berizin.
 
 # 7. Fold classes used
 

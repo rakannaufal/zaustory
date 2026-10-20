@@ -18,11 +18,12 @@
 - D-14: Pemilik mengganti arah latar menjadi navy/slate tanpa putih. Tema tetap memakai #001233/#33415C dengan permukaan turunan dan teks/batas/fokus terang. Logo, ikon dan kartu sosial memakai turunan terang/navy dari alpha asli. Ini menggantikan pilihan permukaan terang dan penggunaan varian putih pada D-11; aset sumber tetap utuh.
 - D-15: Pemilik meminta layout lebih khas dengan potret transparan di hero, satu foto per pengalaman, serta ikon sementara pada seluruh posisi foto. Indeks album memakai komposisi asimetris, detail memakai contact sheet 20/10/10/10/30 slot. Foto asli menggantikan slot; hanya photos.length yang dihitung tayang atau masuk lightbox.
 - D-16: Pemeriksaan produksi menemukan loading.tsx global membungkus konten statis dalam segmen Suspense tersembunyi, sehingga halaman hanya menampilkan loading tanpa JavaScript. Batas loading global dihapus; seluruh rute memakai data lokal yang sudah diprarender. Navigasi client mempertahankan halaman sebelumnya sampai tujuan tersedia. Ini juga menghindari ketergantungan JavaScript untuk menampilkan HTML album.
+- D-17: Permintaan pemilik menjadikan profil publik @zauustory sebagai sumber copy dan informasi. Bio singkat memakai fakta profil; handle lama dikoreksi, telepon memakai tel, WhatsApp tetap opsional. Album kosong menautkan sorotan yang terlihat pada profil; padel memakai profil umum. Detail unggahan meminta login, sehingga tidak ada caption/foto yang diterbitkan ulang. Provenance di docs/content-sources.md.
 
 ## Pertanyaan terbuka
 
 - Q-01: Foto asli, urutan, caption/alt, izin.
-- Q-02: Bio Uwa dan identitas publik.
+- Q-02: Bio panjang Uwa; identitas publik/bio singkat sudah bersumber dari profil Instagram.
 - Q-03: Makna "Bagian sampai sekarang".
 - Q-04: WhatsApp, domain, hosting.
 - Q-05: Potret fotografer transparan dan satu foto untuk setiap pengalaman.

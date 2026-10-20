@@ -6,7 +6,7 @@ export const albums = defineAlbums([
     name: 'Minsoc',
     category: 'Olahraga',
     description:
-      'Permainan cepat, ruang yang dekat. Cerita dari lapangan minisoccer.',
+      'Aksi pertandingan dan kebersamaan tim di lapangan minisoccer.',
     plannedCount: 20,
     photos: [],
   },
@@ -15,7 +15,7 @@ export const albums = defineAlbums([
     name: 'Lapangan bola',
     category: 'Olahraga',
     description:
-      'Pertandingan, pergerakan, dan cerita yang tumbuh di lapangan sepak bola.',
+      'Duel di lapangan, selebrasi, dan suasana pertandingan sepak bola.',
     plannedCount: 10,
     photos: [],
   },
@@ -23,7 +23,8 @@ export const albums = defineAlbums([
     slug: 'basket',
     name: 'Basket',
     category: 'Olahraga',
-    description: 'Ritme permainan dan momen di antara setiap lemparan.',
+    description:
+      'Perebutan bola, tembakan ke ring, dan ekspresi di tepi lapangan.',
     plannedCount: 10,
     photos: [],
   },
@@ -31,8 +32,7 @@ export const albums = defineAlbums([
     slug: 'padel',
     name: 'Padel',
     category: 'Olahraga',
-    description:
-      'Pertemuan gerak, permainan, dan cerita di dalam lapangan padel.',
+    description: 'Reli, gerak pemain, dan momen bersama di lapangan padel.',
     plannedCount: 10,
     photos: [],
   },
@@ -41,7 +41,7 @@ export const albums = defineAlbums([
     name: 'Event',
     category: 'Event',
     description:
-      'Orang-orang, suasana, dan momen yang membuat sebuah acara berarti.',
+      'Rangkaian acara, suasana, dan orang-orang yang hadir di dalamnya.',
     plannedCount: 30,
     photos: [],
   },

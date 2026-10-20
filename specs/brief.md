@@ -10,7 +10,7 @@ Status: diturunkan dari fixture awal, ditinjau 2026-10-20. Pengguna menyetujui i
 - Rencana album: Minsoc 20 foto, lapangan bola 10, basket 10, padel 10, event 30. Total rencana 80; jumlah tersedia saat mulai 0.
 - Pengalaman: Kampanye Walikota 2024; EPA PSPS 2025; Piala Walikota x ISAC.
 - Teks asal "Bagian sampai sekarang": Pspsstore, Al Azhar, Curva Apparel, Persega FC (nama dikoreksi pemilik 2026-10-20). Jenis dan durasi hubungan belum dikonfirmasi.
-- Instagram: zaustory. Nomor telepon belum diberikan.
+- Brief awal menyebut Instagram zaustory tanpa nomor telepon. Pembaruan pemilik 2026-10-20 menunjuk https://www.instagram.com/zauustory/; profil publik mengonfirmasi @zauustory, Pekanbaru-Riau, kredit @rzzwadzaky, media partner @langkaahsenja_, telepon +62 838-5465-3003. Rincian sumber di docs/content-sources.md.
 
 ## Tujuan dan batas
 
@@ -18,4 +18,4 @@ Calon klien memahami cakupan pekerjaan, menjelajahi album, lalu menghubungi Zaus
 
 ## Pertanyaan tersisa
 
-Materi bio, foto asli beserta izin publikasi, nomor WhatsApp, makna afiliasi, domain, hosting. Menghambat publikasi final, bukan pembangunan alur lokal.
+Bio panjang, foto asli beserta izin publikasi, konfirmasi WhatsApp, makna afiliasi, domain, hosting. Bio singkat dan telepon publik tersedia dari Instagram. Materi final dan izin masih menghambat publikasi final, bukan pembangunan alur lokal.

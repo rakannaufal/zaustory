@@ -13,7 +13,7 @@
 | PhotoGallery     | Photos tervalidasi, sisa plannedCount menjadi slot ikon; pembesaran hanya foto asli                      |
 | PhotoLightbox    | Native modal, fokus awal/kembali, Escape, panah wrap, caption, pesan error                               |
 | PhotoImage       | Next Image, dimensi/alt, fallback kegagalan                                                              |
-| ContactLinks     | Instagram tetap, WhatsApp hanya nomor valid                                                              |
+| ContactLinks     | Instagram dan telepon publik dari site.ts, WhatsApp hanya nomor terkonfigurasi valid                     |
 
 Server components diprioritaskan; client untuk menu/filter/galeri, strip foto dan entrance. Ikon konsisten lucide-react.
 

@@ -2,11 +2,11 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
 const albumRoutes = [
-  ['minsoc', 'Minsoc', 20],
-  ['lapangan-bola', 'Lapangan bola', 10],
-  ['basket', 'Basket', 10],
-  ['padel', 'Padel', 10],
-  ['event', 'Event', 30],
+  ['minsoc', 'Minsoc', 20, '18046316087620940'],
+  ['lapangan-bola', 'Lapangan bola', 10, '17875753182361815'],
+  ['basket', 'Basket', 10, '17963732528941047'],
+  ['padel', 'Padel', 10, null],
+  ['event', 'Event', 30, '17986710449824514'],
 ] as const;
 
 test('shows the requested portfolio and filters the album collection', async ({
@@ -16,7 +16,7 @@ test('shows the requested portfolio and filters the album collection', async ({
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-    'Momen berlalu.Cerita tinggal.',
+    'Di lapangan.Dalam ingatan.',
   );
   await expect(page.getByTestId('album-grid').getByRole('link')).toHaveCount(5);
   await expect(
@@ -27,7 +27,7 @@ test('shows the requested portfolio and filters the album collection', async ({
     page.getByText('Piala Walikota x ISAC', { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByText('80 foto direncanakan', { exact: false }),
+    page.getByText('Foto web sedang disiapkan.', { exact: false }),
   ).toBeVisible();
   await expect(page.getByRole('link', { name: /WhatsApp/ })).toHaveCount(0);
   await expect(
@@ -51,10 +51,51 @@ test('shows the requested portfolio and filters the album collection', async ({
   expect(errors).toEqual([]);
 });
 
+test('shows the public Instagram identity, local contact, and profile credits', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await expect(page).toHaveTitle(
+    'Zaustory | Fotografi olahraga & event Pekanbaru',
+  );
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    'content',
+    /Pekanbaru, Riau/,
+  );
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    'content',
+    await page.title(),
+  );
+  await expect(page.locator('.hero-eyebrow')).toHaveText('Pekanbaru, Riau');
+  const about = page.locator('#tentang');
+  await expect(about.getByText('Zau Story | Agency Media')).toBeVisible();
+  for (const [handle, url] of [
+    ['@rzzwadzaky', 'https://www.instagram.com/rzzwadzaky/'],
+    ['@langkaahsenja_', 'https://www.instagram.com/langkaahsenja_/'],
+  ] as const) {
+    const credit = about.getByRole('link', { name: handle, exact: true });
+    await expect(credit).toHaveAttribute('href', url);
+    await expect(credit).toHaveAttribute('rel', 'noopener noreferrer');
+  }
+  const contact = page.locator('#kontak');
+  await expect(
+    contact.getByRole('link', { name: 'Hubungi via Instagram' }),
+  ).toHaveAttribute('href', 'https://www.instagram.com/zauustory/');
+  await expect(
+    contact.getByRole('link', { name: 'Telepon +62 838-5465-3003' }),
+  ).toHaveAttribute('href', 'tel:+6283854653003');
+  await expect(
+    page.getByRole('contentinfo').getByRole('link', { name: '@zauustory' }),
+  ).toHaveAttribute('href', 'https://www.instagram.com/zauustory/');
+  await expect(
+    page.locator('a[href="https://www.instagram.com/zaustory/"]'),
+  ).toHaveCount(0);
+});
+
 test('serves every planned photo slot with honest counts and unique titles', async ({
   page,
 }) => {
-  for (const [slug, name, count] of albumRoutes) {
+  for (const [slug, name, count, highlight] of albumRoutes) {
     const response = await page.goto(`/album/${slug}`);
     expect(response?.status()).toBe(200);
     await expect(page).toHaveTitle(`Album ${name} | Zaustory`);
@@ -76,6 +117,17 @@ test('serves every planned photo slot with honest counts and unique titles', asy
       count,
     );
     await expect(page.getByText('0 foto', { exact: true })).toBeVisible();
+    await expect(
+      page.getByRole('link', {
+        name: highlight ? `Lihat sorotan ${name}` : 'Lihat Instagram',
+        exact: true,
+      }),
+    ).toHaveAttribute(
+      'href',
+      highlight
+        ? `https://www.instagram.com/stories/highlights/${highlight}/`
+        : 'https://www.instagram.com/zauustory/',
+    );
   }
 });
 

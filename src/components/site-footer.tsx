@@ -7,7 +7,9 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-inner">
         <BrandLogo />
-        <p>&copy; {new Date().getFullYear()} Zaustory</p>
+        <p>
+          &copy; {new Date().getFullYear()} Zaustory &middot; {site.location}
+        </p>
         <a
           href={site.instagram}
           target="_blank"

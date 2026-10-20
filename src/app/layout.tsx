@@ -23,7 +23,7 @@ const bodyFont = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Zaustory | Fotografi olahraga & event',
+    default: site.title,
     template: '%s | Zaustory',
   },
   description: site.description,
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       }
     : {}),
   openGraph: {
-    title: 'Zaustory | Fotografi olahraga & event',
+    title: site.title,
     description: site.description,
     siteName: site.name,
     locale: 'id_ID',
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: site.name,
+    title: site.title,
     description: site.description,
     ...(publicConfig.origin ? { images: [site.socialImage] } : {}),
   },

@@ -225,3 +225,33 @@ Bukti dari screenshot beranda penuh hasil suite produksi lokal yang lulus, dipot
 - [Beranda lengkap](../docs/evidence/home-full-desktop.png)
 
 Fase ini selesai pada lingkup UI lokal dengan placeholder. Potret dan seluruh foto asli tetap belum tersedia; bio final masih menunggu pemilik. Bukti ini tidak mencakup CI GitHub, deployment, perangkat fisik atau Safari/Firefox. Audit dependensi tidak diulang karena tidak ada perubahan dependensi; hasil audit sebelumnya dicatat pada persiapan GitHub.
+
+## Fase 8: Copy dan informasi Instagram, 2026-10-20
+
+T-8.01 diterapkan untuk REQ-10/AC-10/TEST-10 berdasarkan profil publik yang ditunjuk pemilik, https://www.instagram.com/zauustory/. Profil dibaca langsung di browser; rincian provenance dan batas adaptasi di [sumber konten](../docs/content-sources.md).
+
+- Hero menjadi "Di lapangan. Dalam ingatan." dengan Pekanbaru, Riau. Copy Tentang/album/pengalaman/kontak diperbarui; judul/deskripsi dan metadata berbagi memakai cakupan fotografi serta lokasi terverifikasi.
+- Nama profil Zau Story | Agency Media, kredit @rzzwadzaky, media partner @langkaahsenja_, serta telepon +62 838-5465-3003 dimasukkan. Tautan Instagram dikoreksi menjadi @zauustory, memakai dua u; brand tetap Zaustory.
+- Telepon memakai tel:+6283854653003. Tidak menganggapnya nomor WhatsApp; konfigurasi WhatsApp opsional tetap terpisah.
+- Album kosong Minsoc, lapangan bola, basket, dan event menuju sorotan yang terlihat pada profil. Padel tetap menuju profil umum. Jumlah slot/data dan nama Persega FC dipertahankan; beranda tidak menampilkan jumlah foto pada kartu.
+- Detail unggahan meminta login, sehingga tidak ada caption/foto Instagram yang diterbitkan ulang. Semua foto web masih ikon sementara; tidak menambah pengalaman, harga, testimoni, atau klaim klien aktif.
+
+| Pemeriksaan             | Hasil aktual                                                                                                                              |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Perilaku awal           | HTTP preview lokal masih memuat "Momen berlalu. Cerita tinggal." dan URL Instagram lama sebelum perubahan                                 |
+| npm run check           | Exit 0: lint tanpa warning, TypeScript strict, 36 tes pada 4 file, build 10 keluaran statis                                               |
+| npm run test:e2e        | 30/30 lulus, 37.1 detik; Chromium desktop 1440x1000 dan ponsel 390x844                                                                    |
+| Fakta/tautan/metadata   | Lokasi, judul/deskripsi, kredit fotografer/media partner, Instagram dua u, tel publik, empat URL sorotan dan fallback padel sesuai sumber |
+| Regresi                 | Lima album/80 slot, filter, 404, menu/keyboard, animasi/reduced motion, offline, no-JS dan HTTP/SEO lulus                                 |
+| Aksesibilitas/responsif | Axe tanpa pelanggaran pada beranda/detail/404; tanpa overflow 320/390/768/1440px                                                          |
+| Inspeksi visual         | Hero/profil/kontak diperiksa di browser; screenshot produksi desktop/ponsel diperiksa, kredit/telepon terbaca dan CTA utuh                |
+
+Bukti screenshot dari suite produksi lokal yang lulus; crop hanya memilih section, tanpa mengubah isi UI:
+
+- [Profil desktop](../docs/evidence/instagram-profile-desktop.png)
+- [Profil ponsel](../docs/evidence/instagram-profile-mobile.png)
+- [Kontak desktop](../docs/evidence/instagram-contact-desktop.png)
+- [Kontak ponsel](../docs/evidence/instagram-contact-mobile.png)
+- [Beranda lengkap terbaru](../docs/evidence/home-full-desktop.png)
+
+Verifikasi telepon mencakup tujuan tautan, bukan melakukan panggilan. Tautan sorotan terlihat pada profil, tetapi pemutaran/isi penuh di Instagram belum diperiksa. Tidak ada dependensi baru; audit dependensi tidak diulang, hasil sebelumnya ada pada catatan persiapan GitHub. Lingkup copy dan informasi publik selesai secara lokal. Foto berizin, bio panjang, rincian afiliasi/WhatsApp, domain/hosting, CI GitHub dan deployment tetap belum diverifikasi.

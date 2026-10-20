@@ -83,6 +83,7 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
             photos={album.photos}
             albumName={album.name}
             plannedCount={album.plannedCount}
+            instagramHighlight={site.albumHighlights[album.slug]}
           />
         </section>
         {nextAlbum && (

@@ -1,0 +1,157 @@
+{
+  "specVersion": "1.1",
+  "project": {
+    "name": "Zaustory",
+    "slug": "zaustory",
+    "webType": "portfolio"
+  },
+  "readiness": "verified-locally-content-pending",
+  "updatedAt": "2026-10-20",
+  "files": [
+    {
+      "path": "specs/brief.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/prd.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/routes.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/design.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/components.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/content.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/architecture.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/security.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/accessibility.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/performance.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/seo.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/assets.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/testing.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/acceptance.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/implementation-plan.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/deployment.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/decisions.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/progress.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/index.md",
+      "kind": "core"
+    },
+    {
+      "path": "AGENTS.md",
+      "kind": "core"
+    },
+    {
+      "path": "specs/manifest.json",
+      "kind": "manifest"
+    }
+  ],
+  "assumptions": [
+    "MVP lokal berbahasa Indonesia; Next.js/TypeScript/Tailwind; konten lokal; tanpa admin atau backend."
+  ],
+  "blockers": [
+    "Publikasi: foto berizin, bio, kontak, afiliasi, domain/hosting belum tersedia."
+  ],
+  "reviews": [
+    {
+      "code": "CONTENT_PENDING",
+      "message": "Foto, bio, nomor, afiliasi, izin, domain/hosting belum final. Publikasi tertunda.",
+      "severity": "warning",
+      "blocksExport": false
+    }
+  ],
+  "traceability": [
+    {
+      "req": "REQ-01",
+      "ac": ["AC-01"],
+      "test": ["TEST-01"],
+      "task": ["T-2.01"]
+    },
+    {
+      "req": "REQ-02",
+      "ac": ["AC-02"],
+      "test": ["TEST-02"],
+      "task": ["T-3.01"]
+    },
+    {
+      "req": "REQ-03",
+      "ac": ["AC-03"],
+      "test": ["TEST-03"],
+      "task": ["T-3.02"]
+    },
+    {
+      "req": "REQ-04",
+      "ac": ["AC-04"],
+      "test": ["TEST-04"],
+      "task": ["T-3.03"]
+    },
+    {
+      "req": "REQ-05",
+      "ac": ["AC-05"],
+      "test": ["TEST-05"],
+      "task": ["T-4.01"]
+    },
+    {
+      "req": "REQ-06",
+      "ac": ["AC-06"],
+      "test": ["TEST-06"],
+      "task": ["T-4.02"]
+    }
+  ],
+  "verification": {
+    "date": "2026-10-20",
+    "environment": "macOS ARM64 / Node v26.8.2 / npm 11.19.1",
+    "unitAndComponentTests": 31,
+    "browserTests": 22,
+    "auditVulnerabilities": 0,
+    "evidence": "specs/progress.md",
+    "deploymentVerified": false
+  }
+}

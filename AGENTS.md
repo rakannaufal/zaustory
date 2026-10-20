@@ -1,5 +1,17 @@
 # Agents
 
+## Aturan Git aktif
+
+Instruksi pemilik 2026-10-20, berlaku untuk seluruh pekerjaan berikutnya di repositori ini; bukan bagian dari fixture historis.
+
+- Setelah setiap perubahan tugas selesai, jalankan pemeriksaan yang relevan, buat commit kecil dengan pesan conventional commit, lalu langsung push ke origin/main tanpa meminta persetujuan ulang.
+- Gunakan `git push origin HEAD:main` dari branch kerja yang melacak origin/main. Jika tujuan branch diubah oleh pemilik, ikuti tujuan tersebut.
+- Pertahankan setiap checkpoint agar perubahan dapat dikembalikan. Jangan amend, force-push, atau menulis ulang riwayat tanpa instruksi eksplisit. Jika diminta rollback, gunakan commit `git revert`, verifikasi, lalu push.
+- Commit hanya file dalam lingkup tugas. Jangan memasukkan rahasia, .env privat, node_modules, hasil build, atau perubahan pengguna yang tidak terkait.
+- Verifikasi hasil push dan kecocokan commit remote sebelum melaporkan keberhasilan. Jika pemeriksaan atau push gagal, tangani penyebabnya; laporkan blocker yang belum terselesaikan secara jelas.
+
+## Fixture historis
+
 > MODE MOCK. Dokumen fixture untuk menguji alur aplikasi, bukan spesifikasi AI final.
 
 ## Tujuan

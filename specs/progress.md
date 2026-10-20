@@ -255,3 +255,11 @@ Bukti screenshot dari suite produksi lokal yang lulus; crop hanya memilih sectio
 - [Beranda lengkap terbaru](../docs/evidence/home-full-desktop.png)
 
 Verifikasi telepon mencakup tujuan tautan, bukan melakukan panggilan. Tautan sorotan terlihat pada profil, tetapi pemutaran/isi penuh di Instagram belum diperiksa. Tidak ada dependensi baru; audit dependensi tidak diulang, hasil sebelumnya ada pada catatan persiapan GitHub. Lingkup copy dan informasi publik selesai secara lokal. Foto berizin, bio panjang, rincian afiliasi/WhatsApp, domain/hosting, CI GitHub dan deployment tetap belum diverifikasi.
+
+## Kredit footer, 2026-10-20
+
+Permintaan pemilik: tambahkan "Credit by rakandev" ke https://www.instagram.com/rakandevv/. Footer menampilkan kredit bersama tautan Instagram Zaustory, dengan baris yang membungkus pada ponsel; tautan eksternal memakai target blank dan rel noopener noreferrer.
+
+Verifikasi aktual: npm run lint, npm run build (termasuk TypeScript, 10 keluaran statis), npm run format:check dan git diff --check keluar 0. Delapan E2E terarah lulus dalam 14.3 detik pada Chromium desktop/ponsel: identitas/tautan lama tetap ada, tanpa overflow 320/390/768/1440px, axe tanpa pelanggaran pada beranda/detail/404, screenshot. Pemeriksaan HTML hasil build membuktikan satu kredit, URL, target dan rel yang benar pada tujuh halaman memakai layout situs (beranda, lima album, 404). Halaman global error bawaan Next.js tidak memakai footer. Screenshot footer desktop/ponsel diperiksa visual. Unit dan suite E2E penuh tidak diulang untuk perubahan presentasi kecil ini; tidak ada dependensi baru.
+
+Bukti: [footer desktop](../docs/evidence/footer-credit-desktop.png) dan [footer ponsel](../docs/evidence/footer-credit-mobile.png). Tidak ada perubahan deployment.

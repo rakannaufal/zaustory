@@ -1024,7 +1024,10 @@ svg {
   color: var(--text-secondary);
   font-size: 11px;
 }
-.footer-inner > a:last-child {
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-6);
   font-size: 12px;
 }
 

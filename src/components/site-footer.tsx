@@ -10,15 +10,26 @@ export function SiteFooter() {
         <p>
           &copy; {new Date().getFullYear()} Zaustory &middot; {site.location}
         </p>
-        <a
-          href={site.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-link"
-        >
-          {site.instagramHandle}
-          <ArrowUpRight size={16} aria-hidden="true" />
-        </a>
+        <div className="footer-links">
+          <a
+            href={site.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-link"
+          >
+            {site.instagramHandle}
+            <ArrowUpRight size={16} aria-hidden="true" />
+          </a>
+          <a
+            href="https://www.instagram.com/rakandevv/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-link"
+          >
+            Credit by rakandev
+            <ArrowUpRight size={16} aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </footer>
   );

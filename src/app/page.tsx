@@ -88,12 +88,12 @@ export default function HomePage() {
       >
         <ScrollReveal className="container">
           <div className="about-layout">
-            <h2 id="about-title">
+            <h2 id="about-title" data-reveal>
               Di balik
               <br />
               <span>setiap cerita.</span>
             </h2>
-            <figure className="about-portrait">
+            <figure className="about-portrait" data-reveal="media">
               <div className="about-portrait-image">
                 {site.photographerPortrait ? (
                   <PhotoImage
@@ -114,7 +114,7 @@ export default function HomePage() {
                 <span>{site.photographer.handle}</span>
               </figcaption>
             </figure>
-            <div className="about-copy">
+            <div className="about-copy" data-reveal>
               <p className="about-lead">{site.profileName}</p>
               <p>
                 Berbasis di {site.location}, Zaustory mendokumentasikan olahraga
@@ -153,7 +153,7 @@ export default function HomePage() {
               </dl>
             </div>
           </div>
-          <div className="affiliations">
+          <div className="affiliations" data-reveal>
             <div>
               <h3>Koneksi &amp; kolaborasi</h3>
               <p>Beberapa nama dalam perjalanan Zaustory.</p>
@@ -173,7 +173,7 @@ export default function HomePage() {
         aria-labelledby="album-title"
       >
         <ScrollReveal className="container">
-          <div className="section-heading album-heading">
+          <div className="section-heading album-heading" data-reveal>
             <h2 id="album-title">
               Dari lapangan.
               <br />
@@ -200,7 +200,7 @@ export default function HomePage() {
         aria-labelledby="experience-title"
       >
         <ScrollReveal className="container">
-          <div className="section-heading experience-heading">
+          <div className="section-heading experience-heading" data-reveal>
             <h2 id="experience-title">
               Pernah menjadi
               <br />
@@ -213,7 +213,7 @@ export default function HomePage() {
           </div>
           <ol className="experience-list" aria-label="Pengalaman Zaustory">
             {site.experiences.map((experience) => (
-              <li key={experience.name}>
+              <li key={experience.name} data-reveal>
                 {experience.year ? (
                   <time dateTime={experience.year}>{experience.year}</time>
                 ) : (
@@ -252,7 +252,7 @@ export default function HomePage() {
         aria-labelledby="contact-title"
       >
         <ScrollReveal className="container">
-          <div className="contact-layout">
+          <div className="contact-layout" data-reveal>
             <h2 id="contact-title">
               Jadwalkan
               <br />
@@ -260,7 +260,7 @@ export default function HomePage() {
             </h2>
             <ArrowUpRight className="contact-arrow" aria-hidden="true" />
           </div>
-          <div className="contact-bottom">
+          <div className="contact-bottom" data-reveal>
             <p>
               Kirim tanggal, lokasi, dan kebutuhan dokumentasimu. Hubungi
               Zaustory melalui Instagram atau telepon untuk membahas pemotretan.

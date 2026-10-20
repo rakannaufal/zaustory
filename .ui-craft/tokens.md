@@ -26,9 +26,10 @@ Sumber implementasi: src/app/globals.css.
 
 ## Motion and layers
 
-- Hover 150ms; masuk 350ms; hanya opacity/transform/color.
+- Hover 150ms; hero 350ms; reveal scroll 400ms dengan stagger 60ms (maksimal 120ms); hanya opacity/transform/color.
 - Reduced motion meniadakan entrance dan smooth scroll.
-- Entrance section sekali saat masuk viewport: opacity 0-1, translateY 20px-0, 350ms dengan easing token. Web Animations API + IntersectionObserver; HTML selalu terlihat tanpa JavaScript/API. Preferensi reduced motion dan fokus keyboard membatalkan animasi aktif.
+- Kelompok interaktif hanya fade; toolbar filter tetap terlihat. Sampul album bergerak di dalam area tautan yang tetap pada tempatnya.
+- Entrance per elemen sekali saat masuk viewport: opacity 0-1, teks translateY 24px-0, foto/kartu translateY 32px-0 dan scale 0.985-1, 400ms dengan easing token. Web Animations API + IntersectionObserver; HTML selalu terlihat tanpa JavaScript/API. Hanya target di bawah layar disiapkan; konten awal yang terlihat tidak disembunyikan. Reduced motion/fokus meniadakan seluruh entrance aktif maupun tertunda di section.
 - Strip foto memakai dua loop transform linear 56 detik dengan arah berlawanan; tombol jeda dan hover menghentikan gerak. Tanpa JavaScript atau dengan reduced motion, strip statis dan kontrol animasi disembunyikan.
 - Konten 0; header 20; dialog native top layer.
 - Fokus terlihat; target interaktif minimal 44px.

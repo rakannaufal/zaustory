@@ -167,67 +167,175 @@ test('reveals sections once and respects motion preferences and keyboard focus',
   for (const id of ['tentang', 'album', 'pengalaman', 'kontak']) {
     await page.goto('/');
     const content = page.locator(`#${id} > [data-scroll-reveal]`);
+    const title = content.locator('[data-reveal]').first();
     const runningReveal = () =>
-      content.evaluate((element) =>
+      title.evaluate((element) =>
         element
           .getAnimations()
-          .some((animation) => animation.id === 'section-reveal'),
+          .some(
+            (animation) =>
+              animation.id === 'section-reveal' &&
+              animation.playState === 'running',
+          ),
       );
 
     expect(await runningReveal()).toBe(false);
-    const bounds = await content.boundingBox();
+    await expect(title).toHaveCSS('opacity', '0');
+    const bounds = await title.boundingBox();
     expect(bounds).not.toBeNull();
     // Scroll without waiting for the entrance transform to become stable.
     await page.mouse.wheel(0, bounds!.y - 160);
     await expect.poll(runningReveal).toBe(true);
     await expect.poll(runningReveal).toBe(false);
-    await expect(content).toHaveCSS('opacity', '1');
-    await expect(content).toHaveCSS('transform', 'none');
+    await expect(title).toHaveCSS('opacity', '1');
+    await expect(title).toHaveCSS('transform', 'none');
 
     await page.locator('.hero').scrollIntoViewIfNeeded();
-    await content.scrollIntoViewIfNeeded();
+    await title.scrollIntoViewIfNeeded();
     expect(await runningReveal()).toBe(false);
   }
 
   await page.goto('/');
   const aboutContent = page.locator('#tentang > [data-scroll-reveal]');
-  const bounds = await aboutContent.boundingBox();
+  const bounds = await aboutContent
+    .locator('[data-reveal]')
+    .first()
+    .boundingBox();
   expect(bounds).not.toBeNull();
   await page.mouse.wheel(0, bounds!.y - 160);
   await expect
     .poll(() =>
-      aboutContent.evaluate((element) => element.getAnimations().length),
+      aboutContent.evaluate(
+        (element) =>
+          element
+            .getAnimations({ subtree: true })
+            .filter((animation) => animation.playState === 'running').length,
+      ),
     )
-    .toBe(1);
+    .toBeGreaterThan(0);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect
     .poll(() =>
-      aboutContent.evaluate((element) => element.getAnimations().length),
+      aboutContent.evaluate(
+        (element) => element.getAnimations({ subtree: true }).length,
+      ),
     )
     .toBe(0);
   await expect(aboutContent).toHaveCSS('opacity', '1');
   await expect(aboutContent).toHaveCSS('transform', 'none');
+  for (const target of await page.locator('[data-reveal]').all()) {
+    await expect(target).toHaveCSS('opacity', '1');
+    await expect(target).toHaveCSS('transform', 'none');
+  }
 
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/');
   const albumContent = page.locator('#album > [data-scroll-reveal]');
-  const albumBounds = await albumContent.boundingBox();
+  const albumBounds = await albumContent
+    .locator('[data-reveal]')
+    .first()
+    .boundingBox();
   expect(albumBounds).not.toBeNull();
   await page.mouse.wheel(0, albumBounds!.y - 160);
   await expect
     .poll(() =>
-      albumContent.evaluate((element) => element.getAnimations().length),
+      albumContent.evaluate(
+        (element) =>
+          element
+            .getAnimations({ subtree: true })
+            .filter((animation) => animation.playState === 'running').length,
+      ),
     )
-    .toBe(1);
+    .toBeGreaterThan(0);
   const filter = page.getByRole('button', { name: 'Semua', exact: true });
   await filter.focus();
   await expect(filter).toBeFocused();
   await expect
     .poll(() =>
-      albumContent.evaluate((element) => element.getAnimations().length),
+      albumContent.evaluate(
+        (element) => element.getAnimations({ subtree: true }).length,
+      ),
     )
     .toBe(0);
   await expect(albumContent).toHaveCSS('opacity', '1');
+  for (const target of await albumContent.locator('[data-reveal]').all()) {
+    await expect(target).toHaveCSS('opacity', '1');
+    await expect(target).toHaveCSS('transform', 'none');
+  }
+});
+
+test('reveals each album card when it enters the viewport', async ({
+  page,
+}, testInfo) => {
+  await page.goto('/');
+  const cards = page
+    .getByTestId('album-grid')
+    .getByRole('link')
+    .locator('[data-reveal]');
+  const lastCard = cards.last();
+  await expect(lastCard).toHaveCSS('opacity', '0');
+  await cards.first().scrollIntoViewIfNeeded();
+  await expect(cards.first()).toHaveCSS('opacity', '1');
+  await expect(lastCard).toHaveCSS('opacity', '0');
+
+  const bounds = await lastCard.boundingBox();
+  expect(bounds).not.toBeNull();
+  const timing = await lastCard.evaluate((element) => {
+    const animation = element
+      .getAnimations()
+      .find((animation) => animation.id === 'section-reveal')!;
+    return {
+      duration: animation.effect!.getTiming().duration,
+      initialTransform:
+        animation.effect instanceof KeyframeEffect
+          ? animation.effect.getKeyframes()[0]?.transform
+          : null,
+    };
+  });
+  expect(timing.duration).toBe(400);
+  expect(timing.initialTransform).toContain('scale(0.985)');
+  // Subscribe before scrolling so a busy test runner cannot miss a short effect.
+  const finished = lastCard.evaluate((element) => {
+    const animation = element
+      .getAnimations()
+      .find((animation) => animation.id === 'section-reveal')!;
+    return animation.finished.then(() => true);
+  });
+  await page.mouse.wheel(0, bounds!.y - 180);
+  expect(await finished).toBe(true);
+  await expect(lastCard).toHaveCSS('opacity', '1');
+  await expect(lastCard).toHaveCSS('transform', 'none');
+  await page.screenshot({
+    path: testInfo.outputPath('album-revealed.png'),
+    animations: 'disabled',
+  });
+});
+
+test('keeps content and filters available without animation APIs', async ({
+  browser,
+}) => {
+  for (const capability of ['observer', 'animation']) {
+    const context = await browser.newContext();
+    try {
+      await context.addInitScript((missing) => {
+        if (missing === 'observer')
+          Reflect.deleteProperty(window, 'IntersectionObserver');
+        else Reflect.deleteProperty(Element.prototype, 'animate');
+      }, capability);
+      const page = await context.newPage();
+      await page.goto('http://127.0.0.1:3100/');
+      for (const target of await page.locator('[data-reveal]').all()) {
+        await expect(target).toHaveCSS('opacity', '1');
+        await expect(target).toHaveCSS('transform', 'none');
+      }
+      await page.getByRole('button', { name: 'Event', exact: true }).click();
+      await expect(
+        page.getByTestId('album-grid').getByRole('link'),
+      ).toHaveCount(1);
+    } finally {
+      await context.close();
+    }
+  }
 });
 
 test('moves photo rows in opposite directions and supports pause and reduced motion', async ({
@@ -324,7 +432,9 @@ test('provides a keyboard skip link and honors reduced motion', async ({
     await expect(content).toHaveCSS('opacity', '1');
     await expect(content).toHaveCSS('transform', 'none');
     expect(
-      await content.evaluate((element) => element.getAnimations().length),
+      await content.evaluate(
+        (element) => element.getAnimations({ subtree: true }).length,
+      ),
     ).toBe(0);
   }
 });
@@ -351,6 +461,7 @@ test('has no horizontal overflow on small, medium, or large screens', async ({
 test('passes automated accessibility checks on the main route types', async ({
   page,
 }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   for (const route of ['/', '/album/minsoc', '/album/tidak-ada']) {
     await page.goto(route);
     const results = await new AxeBuilder({ page })

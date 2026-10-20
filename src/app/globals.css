@@ -40,6 +40,8 @@
   --shadow-overlay: 0 24px 80px rgb(0 6 20 / 35%), 0 4px 12px rgb(0 6 20 / 20%);
   --duration-fast: 150ms;
   --duration-enter: 350ms;
+  --duration-reveal: 400ms;
+  --reveal-stagger: 60ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --z-header: 20;
 }

@@ -75,7 +75,11 @@ Aset asli di `assets/logo/` dipertahankan. Header/footer memakai turunan transpa
 
 Strip foto setelah hero menggabungkan foto dari seluruh album, mengacak urutan secara stabil, dan memilih maksimal 20 foto untuk dua baris. Koleksi kecil diulang untuk loop; ketika seluruh album kosong, ikon menjadi pengganti. Isi `photos` di `src/content/albums.ts` untuk menggantinya otomatis. Tombol jeda/putar tersedia; reduced motion dan mode tanpa JavaScript menampilkan strip statis.
 
-Setiap section setelah hero mendapat animasi masuk sekali ketika terlihat: opacity dan pergeseran vertikal 20px selama 350ms, tanpa dependensi animasi tambahan. Hero mempertahankan animasi awalnya. Reduced motion menonaktifkan gerak; perubahan preferensi dan fokus keyboard membatalkan animasi yang berjalan. Konten server tetap terlihat tanpa JavaScript atau IntersectionObserver.
+Section setelah hero muncul per elemen: judul/teks naik 24px, potret dan kartu album naik 32px dengan skala 0.985 ke 1. Durasi 400ms; elemen yang masuk bersamaan berjeda 60ms, maksimal 120ms. Setiap kartu dan baris pengalaman menunggu masuk layar sendiri, bukan mengikuti pembungkus section yang sudah jauh di atasnya. Entrance berjalan sekali; hero mempertahankan animasi awalnya.
+
+ScrollReveal membaca penanda `data-reveal`; nilai `media` memakai efek foto, penanda kosong memakai efek teks. Tanpa penanda, pembungkus menjadi target (strip foto). Hanya elemen di bawah layar yang disiapkan oleh JavaScript; konten yang sudah terlihat tidak disembunyikan ulang. Reduced motion atau fokus dalam section menampilkan seluruh kontennya seketika, termasuk animasi tertunda. Filter tidak mengulang entrance. Tanpa JavaScript, IntersectionObserver, atau Web Animations API, seluruh konten tetap terlihat. Tidak ada dependensi animasi tambahan.
+
+Toolbar filter langsung tersedia. Kelompok berisi tautan/tombol hanya memudar tanpa bergeser; sampul album bergerak di dalam tautan yang tetap pada tempatnya agar klik cepat tidak meleset.
 
 ## Pemeriksaan
 

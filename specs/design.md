@@ -18,9 +18,11 @@ Keputusan di ../.ui-craft/tokens.md; implementasi src/app/globals.css. Warna mer
 
 ## Responsif dan gerak
 
-320px ke atas; indeks album satu kolom ponsel, asimetris desktop. Potret hero berada setelah copy/CTA pada ponsel; Tentang berurutan judul, potret, profil. Galeri tiga kolom desktop, dua kolom ponsel. Menu disclosure, Escape dan fokus kembali. Transisi 150-350ms; reduced motion menonaktifkan entrance dan smooth scroll.
+320px ke atas; indeks album satu kolom ponsel, asimetris desktop. Potret hero berada setelah copy/CTA pada ponsel; Tentang berurutan judul, potret, profil. Galeri tiga kolom desktop, dua kolom ponsel. Menu disclosure, Escape dan fokus kembali. Transisi 150-400ms; reduced motion menonaktifkan entrance dan smooth scroll.
 
-Setiap section setelah hero mendapat entrance sekali saat masuk viewport: opacity 0-1 dan translateY 20px-0 selama 350ms. Hero mempertahankan entrance awal. ScrollReveal memakai IntersectionObserver dan Web Animations API; konten server tidak disembunyikan. Tanpa JavaScript/API, konten tetap terlihat. Reduced motion atau fokus keyboard membatalkan entrance aktif.
+Setiap section setelah hero mendapat entrance per elemen: judul/teks naik 24px, potret/kartu naik 32px dengan skala 0.985-1, opacity 0-1 selama 400ms. Elemen yang masuk bersamaan berjeda 60ms, maksimal 120ms. Kartu album dan baris pengalaman menunggu viewport sendiri, sekali per elemen. Hero mempertahankan entrance awal 350ms. ScrollReveal memakai IntersectionObserver dan Web Animations API; hanya konten di bawah layar disiapkan oleh JS, HTML server selalu terlihat. Tanpa JavaScript/API, konten tetap terlihat. Reduced motion atau fokus meniadakan animasi aktif dan tertunda agar interaksi tidak menunggu gerak.
+
+Kelompok interaktif hanya mendapat fade tanpa perpindahan. Toolbar filter tidak dianimasikan; gerak sampul berada di dalam tautan album yang posisinya tetap agar klik/tap tidak meleset.
 
 Strip foto memiliki tombol jeda/putar dan berhenti saat hover. Reduced motion atau JavaScript nonaktif menampilkan strip statis tanpa tombol animasi. Animasi hanya mengubah transform.
 

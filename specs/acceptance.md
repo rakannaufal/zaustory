@@ -14,3 +14,5 @@
 | REQ-10    | AC-10: Pekanbaru/Riau pada hero dan metadata; kredit @rzzwadzaky dan @langkaahsenja_ bertaut; tel:+6283854653003; empat sorotan sesuai album, padel ke profil; foto tetap ikon | TEST-10 | T-8.01 |
 
 Implementasi lokal berbeda dari kesiapan publikasi. Foto, bio, kontak, izin, domain/hosting dan pemeriksaan ulang konten aktual wajib sebelum publikasi. Tidak mengklaim Core Web Vitals/pembaca layar tanpa pengukuran.
+
+Penyempurnaan REQ-09: AC-09b mensyaratkan entrance per judul, potret, sampul album dan baris pengalaman ketika targetnya masuk viewport, sekali per target, 400ms dengan stagger maksimal 120ms. Target kartu pertama tidak membuka kartu terakhir. Kelompok interaktif tidak bergeser, filter tetap dapat diklik, reduced motion/fokus menampilkan target tertunda. Tanpa JS/API konten terlihat. Dipetakan ke TEST-11 dan T-9.01.

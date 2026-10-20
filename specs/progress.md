@@ -275,3 +275,26 @@ Verifikasi aktual: lint dan build termasuk TypeScript lulus, 10 keluaran statis.
 Pemilik menyetujui "© 2026 Zaustory · Website by rakandev" dengan tautan hanya pada nama rakandev. Tahun tetap otomatis; copyright dan Website by menjadi teks biasa, nama pengembang menuju https://www.instagram.com/rakandevv/. Lokasi tidak lagi ditampilkan di footer. Design brief dan kontrak komponen mengikuti redaksi final ini.
 
 Verifikasi aktual: lint dan build termasuk TypeScript lulus (10 keluaran statis). Delapan E2E terarah lulus dalam 18.5 detik pada desktop/ponsel: teks final, tautan bernama tepat rakandev, URL/rel, hanya logo dan nama pengembang sebagai tautan footer, tanpa overflow 320/390/768/1440px, axe dan screenshot. Bukti footer desktop/ponsel diperbarui dari build produksi lokal tersebut dan diperiksa visual. Unit serta suite E2E penuh tidak diulang untuk perubahan presentasi ini. Tidak ada dependensi atau deployment baru.
+
+## Fase 9: Kemunculan elemen saat scroll, 2026-10-20
+
+T-9.01 diterapkan untuk REQ-09/AC-09b/TEST-11 sesuai permintaan pemilik. Judul, profil, potret, sampul album, kolaborasi, baris pengalaman dan kontak masuk per target ketika terlihat. Teks naik 24px; media naik 32px dengan skala 0.985-1; opacity 0-1 selama 400ms. Target yang masuk bersama berjeda 60ms, maksimal 120ms. Entrance berjalan sekali. Kelompok interaktif hanya fade, toolbar filter langsung tersedia, tautan album tetap pada tempatnya sementara sampul di dalamnya bergerak.
+
+ScrollReveal menyiapkan target di bawah layar dengan WAAPI/IntersectionObserver; konten awal yang sudah terlihat tidak disembunyikan. Fokus atau reduced motion membatalkan seluruh efek aktif/tertunda dalam section. Tanpa JavaScript, observer atau API animasi, konten tetap terlihat. Filter tidak memutar ulang entrance. Hero dan dua strip mempertahankan animasinya. Tidak ada dependensi baru.
+
+Uji browser pertama menghasilkan 32/34 lulus. Klik Event ponsel meleset ketika toolbar mulai bergerak setelah scroll; toolbar dikeluarkan dari target animasi dan area interaktif lain tidak lagi bergeser. Uji kartu desktop melewatkan efek 400ms karena evaluasi browser baru kembali setelah animasi selesai; uji berlangganan promise penyelesaian sebelum scroll, lalu memeriksa hasil akhir. Kedua kasus lulus pada suite produksi lokal terakhir.
+
+| Pemeriksaan             | Hasil aktual                                                                                                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| npm run check           | Exit 0: lint tanpa warning, TypeScript strict, 36 tes pada 4 file; build 10 keluaran statis                                                                        |
+| npm run test:e2e        | 34/34 lulus, 55.3 detik; Chromium desktop 1440x1000 dan ponsel 390x844                                                                                             |
+| Animasi                 | Keempat section masuk sekali; kartu pertama tidak membuka kartu terakhir; durasi 400ms dan keyframe skala media diperiksa, animasi selesai setelah scroll          |
+| Interaksi/fallback      | Fokus/reduced motion membatalkan efek; filter, anchor/menu, offline, no-JS serta observer/animate yang dihapus secara terpisah lulus                               |
+| Aksesibilitas/responsif | Axe tanpa pelanggaran pada beranda/detail/404; tanpa overflow 320/390/768/1440px                                                                                   |
+| Inspeksi manual         | Browser desktop 1280px dan ponsel 390px: navigasi Tentang, scroll menuju album, filter Event menampilkan satu kartu; keadaan akhir desktop/ponsel diperiksa visual |
+
+Pemeriksaan fokus diperketat agar memeriksa opacity/transform setiap target di dalam album, bukan pembungkus tautannya; kedua E2E desktop/ponsel tersebut lulus lagi dalam 10.4 detik. npm run format:check dan git diff --check keluar 0. Override viewport dipulihkan dan tab inspeksi sementara ditutup.
+
+Bukti keadaan akhir dari suite produksi lokal yang lulus: [desktop](../docs/evidence/scroll-reveal-desktop.png) dan [ponsel](../docs/evidence/scroll-reveal-mobile.png). Screenshot menunjukkan tampilan setelah entrance; penyelesaian animasi dibuktikan oleh uji browser. Ini bukan rekaman gerak.
+
+Lingkup animasi lokal terverifikasi. Foto asli, perangkat fisik, Safari/Firefox, CI GitHub dan deployment belum diverifikasi pada fase ini. Audit dependensi tidak diulang karena dependensi tidak berubah. Preview port 3001 dipertahankan.

@@ -40,6 +40,7 @@ Pengunjung mengenali lima kategori, membuka detail, dan menemukan Instagram mela
 - 2026-10-20: Copy dan informasi mengikuti profil publik @zauustory: Pekanbaru/Riau, kredit @rzzwadzaky, media partner @langkaahsenja_, telepon. Gunakan bahasa kasual profesional, konkret, tanpa klaim harga/pengalaman baru atau kutipan caption yang tertutup login. Nomor telepon tidak otomatis menjadi WhatsApp. Brand tetap Zaustory; foto memakai ikon sampai tersedia aset berizin.
 
 - 2026-10-20: Footer memakai "© [tahun berjalan] Zaustory · Website by rakandev". Hanya nama rakandev bertaut ke Instagram pengembang; copyright dan Website by berupa teks biasa. Tanpa tautan @zauustory atau kredit terpisah agar footer ringkas; logo tetap menuju beranda.
+- 2026-10-20: Perjelas kemunculan section saat scroll melalui judul/teks, potret/kartu, dan baris pengalaman yang masuk secara mandiri. Gerak vertikal pendek dengan fade, skala foto ringan, stagger 60ms saat masuk bersama; sekali per elemen. Utamakan tiap kartu yang benar-benar masuk layar agar album panjang tetap terasa hidup. Fokus/reduced motion langsung menampilkan semua target tertunda; tanpa JS/API tetap terlihat.
 
 # 7. Fold classes used
 

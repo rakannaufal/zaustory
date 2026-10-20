@@ -49,7 +49,10 @@ export function AlbumCollection({ albums }: { albums: readonly Album[] }) {
               key={album.slug}
               className={`album-card album-card-${album.slug}`}
             >
-              <div className={`album-cover album-cover-${album.slug}`}>
+              <div
+                className={`album-cover album-cover-${album.slug}`}
+                data-reveal="media"
+              >
                 {cover ? (
                   <PhotoImage
                     photo={cover}

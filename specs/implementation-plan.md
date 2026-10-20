@@ -72,3 +72,12 @@ Permintaan pemilik: sesuaikan copy dengan https://www.instagram.com/zauustory/ d
 - File: src/content, src/app/page.tsx dan layout.tsx, globals.css, album/[slug]/page.tsx, components/contact-links.tsx, site-footer.tsx, photo-gallery.tsx; tes dan dokumentasi sumber.
 - Verifikasi: TEST-10, regresi rute/slot/animasi/aksesibilitas; lint/typecheck/unit/build/E2E/format; inspeksi desktop/ponsel; commit dan push sesuai aturan pemilik.
 - Risiko: detail unggahan meminta login. Tidak menyalin caption/foto yang belum tersedia, tidak menambah klaim hubungan klien, tidak mengaktifkan WhatsApp dari nomor telepon saja. Foto tetap ikon; bio panjang dan aset final menunggu pemilik.
+
+## Fase 9: Kemunculan elemen saat scroll
+
+Permintaan pemilik: perjelas animasi ketika berpindah section atau scrolling.
+
+- T-9.01: Ubah reveal pembungkus menjadi target mandiri untuk judul, profil, potret, kartu album, baris pengalaman dan kontak. Opacity/translate/scale ringan, stagger saat masuk bersama, sekali per target. Hero dan strip mempertahankan geraknya.
+- File: src/components/scroll-reveal.tsx dan album-collection.tsx, src/app/page.tsx dan globals.css; tes browser, token dan dokumentasi.
+- Verifikasi: TEST-09/TEST-11 dan regresi lengkap lint/typecheck/unit/build/E2E/format; inspeksi kemunculan desktop/ponsel, durasi/keyframe dan penyelesaian animasi aktual, screenshot keadaan akhir; commit/push.
+- Risiko: target tertunda tidak boleh tetap tersembunyi saat fokus/reduced motion/unmount. HTML tanpa JS/API selalu terlihat. Filter tidak mengulang entrance; target yang sudah terlihat saat hydration tidak disembunyikan. Tanpa dependensi baru.

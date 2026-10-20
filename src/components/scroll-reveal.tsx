@@ -2,6 +2,12 @@
 
 import { useEffect, useRef, type ReactNode } from 'react';
 
+function milliseconds(value: string) {
+  const time = value.trim();
+  // Production CSS can normalize milliseconds to seconds.
+  return parseFloat(time) * (time.endsWith('ms') ? 1 : 1000);
+}
+
 export function ScrollReveal({
   children,
   className,
@@ -18,56 +24,93 @@ export function ScrollReveal({
     if (
       !element ||
       motion.matches ||
-      !('IntersectionObserver' in window) ||
+      element.contains(document.activeElement) ||
+      typeof IntersectionObserver !== 'function' ||
       typeof element.animate !== 'function'
     ) {
       return;
     }
 
-    let animation: Animation | undefined;
+    const styles = getComputedStyle(element);
+    const duration = milliseconds(styles.getPropertyValue('--duration-reveal'));
+    const stagger = milliseconds(styles.getPropertyValue('--reveal-stagger'));
+    const animations = new Map<HTMLElement, Animation>();
     const observer = new IntersectionObserver(
       (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
-        if (motion.matches || element.contains(document.activeElement)) return;
+        let order = 0;
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const target = entry.target as HTMLElement;
+          observer.unobserve(target);
+          const animation = animations.get(target);
+          if (!animation) continue;
 
-        const styles = getComputedStyle(element);
-        const duration = styles.getPropertyValue('--duration-enter').trim();
-
-        // Animate only on entry; server-rendered content stays visible without JS.
-        animation = element.animate(
-          [
-            { opacity: 0, transform: 'translateY(20px)' },
-            { opacity: 1, transform: 'translateY(0)' },
-          ],
-          {
-            // Production CSS can normalize milliseconds to seconds.
-            duration:
-              parseFloat(duration) * (duration.endsWith('ms') ? 1 : 1000),
-            easing: styles.getPropertyValue('--ease-out').trim(),
-          },
-        );
-        animation.id = 'section-reveal';
+          animation.effect?.updateTiming({
+            delay: Math.min(order, 2) * stagger,
+          });
+          animation.play();
+          order += 1;
+        }
       },
-      { rootMargin: '0px 0px -40px 0px' },
+      { rootMargin: '0px 0px -24px 0px', threshold: 0.08 },
     );
 
-    const cancelAnimation = () => animation?.cancel();
+    const showImmediately = () => {
+      observer.disconnect();
+      for (const animation of animations.values()) animation.cancel();
+      animations.clear();
+    };
     const onMotionChange = () => {
-      if (motion.matches) {
-        observer.disconnect();
-        cancelAnimation();
-      }
+      if (motion.matches) showImmediately();
     };
 
-    observer.observe(element);
-    element.addEventListener('focusin', cancelAnimation);
+    const targets = Array.from(
+      element.querySelectorAll<HTMLElement>('[data-reveal]'),
+    );
+    if (!targets.length) targets.push(element);
+
+    for (const target of targets) {
+      // Only prepare content below the fold; never hide content already in view.
+      if (target.getBoundingClientRect().top < window.innerHeight) continue;
+      const media = target.dataset.reveal === 'media';
+      // Keep interactive hit areas still, including when focus ends an entrance.
+      const interactive =
+        target.matches('a, button') || target.querySelector('a, button');
+      const animation = target.animate(
+        [
+          {
+            opacity: 0,
+            transform: interactive
+              ? 'none'
+              : media
+                ? 'translateY(32px) scale(0.985)'
+                : 'translateY(24px)',
+          },
+          { opacity: 1, transform: 'none' },
+        ],
+        {
+          duration,
+          easing: styles.getPropertyValue('--ease-out').trim(),
+          fill: 'both',
+        },
+      );
+      animation.id = 'section-reveal';
+      animation.pause();
+      animation.currentTime = 0;
+      animation.onfinish = () => {
+        animation.cancel();
+        animations.delete(target);
+      };
+      animations.set(target, animation);
+      observer.observe(target);
+    }
+
+    element.addEventListener('focusin', showImmediately);
     motion.addEventListener('change', onMotionChange);
 
     return () => {
-      observer.disconnect();
-      cancelAnimation();
-      element.removeEventListener('focusin', cancelAnimation);
+      showImmediately();
+      element.removeEventListener('focusin', showImmediately);
       motion.removeEventListener('change', onMotionChange);
     };
   }, []);

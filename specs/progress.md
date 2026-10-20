@@ -263,3 +263,9 @@ Permintaan pemilik: tambahkan "Credit by rakandev" ke https://www.instagram.com/
 Verifikasi aktual: npm run lint, npm run build (termasuk TypeScript, 10 keluaran statis), npm run format:check dan git diff --check keluar 0. Delapan E2E terarah lulus dalam 14.3 detik pada Chromium desktop/ponsel: identitas/tautan lama tetap ada, tanpa overflow 320/390/768/1440px, axe tanpa pelanggaran pada beranda/detail/404, screenshot. Pemeriksaan HTML hasil build membuktikan satu kredit, URL, target dan rel yang benar pada tujuh halaman memakai layout situs (beranda, lima album, 404). Halaman global error bawaan Next.js tidak memakai footer. Screenshot footer desktop/ponsel diperiksa visual. Unit dan suite E2E penuh tidak diulang untuk perubahan presentasi kecil ini; tidak ada dependensi baru.
 
 Bukti: [footer desktop](../docs/evidence/footer-credit-desktop.png) dan [footer ponsel](../docs/evidence/footer-credit-mobile.png). Tidak ada perubahan deployment.
+
+## Koreksi penempatan kredit footer, 2026-10-20
+
+Pemilik memperjelas: cukup tautan pada baris copyright. Baris "© [tahun berjalan] Zaustory · Pekanbaru, Riau" kini menautkan https://www.instagram.com/rakandevv/. Tautan @zauustory dan teks "Credit by rakandev" yang terpisah dihapus; logo tetap menuju beranda. Koreksi disimpan di design brief. CSS grup tautan yang tidak terpakai dihapus; target interaktif copyright minimal 44px.
+
+Verifikasi aktual: lint dan build termasuk TypeScript lulus, 10 keluaran statis. Delapan E2E terarah lulus dalam 12.6 detik pada desktop/ponsel, termasuk URL copyright, ketiadaan dua teks lama, jumlah dua tautan footer (logo dan copyright), overflow 320/390/768/1440px, axe dan screenshot. Bukti footer desktop/ponsel pada tautan sebelumnya diperbarui dari suite produksi lokal yang lulus dan diperiksa visual. Unit serta suite E2E penuh tidak diulang untuk perubahan ini. Tidak ada dependensi atau deployment baru.

@@ -7,7 +7,7 @@ Sumber utama: [profil publik @zauustory](https://www.instagram.com/zauustory/), 
 | Informasi         | Isi profil                | Penggunaan web                                                  |
 | ----------------- | ------------------------- | --------------------------------------------------------------- |
 | Nama profil       | Zau Story \| Agency Media | Lead Tentang                                                    |
-| Handle            | @zauustory                | Tautan Instagram hero, kontak, footer, fallback album           |
+| Handle            | @zauustory                | Tautan Instagram hero, kontak, fallback album                   |
 | Lokasi            | Pekanbaru-Riau            | Hero, Tentang, footer, metadata                                 |
 | Jenis akun        | Photography account       | Cakupan fotografi; kategori mengikuti sorotan dan brief pemilik |
 | Kredit fotografer | @rzzwadzaky               | Kredit potret dan tautan fotografer di Tentang                  |

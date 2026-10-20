@@ -1020,15 +1020,10 @@ svg {
 .footer-inner .brand-logo-image {
   width: 160px;
 }
-.footer-inner > p {
+.footer-copyright {
   color: var(--text-secondary);
   font-size: 11px;
-}
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 var(--space-6);
-  font-size: 12px;
+  font-weight: 400;
 }
 
 .album-page {
@@ -1558,8 +1553,7 @@ svg {
   .footer-inner {
     gap: var(--space-4);
   }
-  .footer-inner > p {
-    order: 3;
+  .footer-copyright {
     flex-basis: 100%;
   }
   .album-page {

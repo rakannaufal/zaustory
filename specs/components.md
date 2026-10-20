@@ -4,7 +4,7 @@
 | ---------------- | -------------------------------------------------------------------------------------------------------- |
 | BrandLogo        | Logo transparan asli, proporsi tetap, tautan beranda bernama aksesibel                                   |
 | SiteHeader       | BrandLogo, anchor, disclosure ponsel, fokus dan Escape                                                   |
-| SiteFooter       | Instagram, copyright tahun berjalan                                                                      |
+| SiteFooter       | Logo beranda dan copyright tahun berjalan bertaut ke Instagram rakandev; tanpa tautan sosial terpisah    |
 | AlbumCollection  | Filter Semua/Olahraga/Event, pengumuman jumlah                                                           |
 | AlbumCard        | Tautan detail; kategori, judul, deskripsi di dalam thumbnail; tanpa angka jumlah foto                    |
 | PhotoReel        | Dua baris dekoratif dari foto seluruh album, arah berlawanan, jeda/putar, reduced motion                 |

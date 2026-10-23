@@ -49,9 +49,10 @@ export const site = {
     instagram: 'https://www.instagram.com/langkaahsenja_/',
   },
   phone: {
-    display: '+62 838-5465-3003',
-    href: 'tel:+6283854653003',
+    display: '0877-5205-3779',
+    href: 'tel:+6287752053779',
   },
+  whatsappNumber: '6287752053779',
   albumHighlights,
   photographerPortrait: null as Photo | null,
   socialImage: {

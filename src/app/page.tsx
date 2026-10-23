@@ -7,17 +7,26 @@ import {
 } from 'lucide-react';
 import { AlbumCollection } from '@/components/album-collection';
 import { ContactLinks } from '@/components/contact-links';
+import { HeroBackground } from '@/components/hero-background';
 import { ImagePlaceholder } from '@/components/image-placeholder';
 import { PhotoImage } from '@/components/photo-image';
 import { PhotoReel } from '@/components/photo-reel';
 import { ScrollReveal } from '@/components/scroll-reveal';
 import { albums } from '@/content/albums';
 import { site } from '@/content/site';
+import { publicConfig } from '@/lib/config';
 
 export default function HomePage() {
   return (
     <main id="main" tabIndex={-1}>
       <section className="hero" aria-labelledby="hero-title">
+        <HeroBackground
+          photos={albums
+            .filter((album) =>
+              ['minsoc', 'basket', 'lapangan-bola'].includes(album.slug),
+            )
+            .flatMap((album) => album.photos)}
+        />
         <div className="container hero-inner">
           <p className="eyebrow hero-eyebrow">{site.location}</p>
           <h1 id="hero-title">
@@ -46,13 +55,15 @@ export default function HomePage() {
                 </span>
               </Link>
               <a
-                href={site.instagram}
+                href={publicConfig.whatsappUrl ?? site.instagram}
                 className="text-link photography-social"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <MessageCircle size={18} aria-hidden="true" />
-                Hubungi via Instagram
+                {publicConfig.whatsappUrl
+                  ? 'Hubungi via WhatsApp'
+                  : 'Hubungi via Instagram'}
                 <ArrowUpRight size={17} aria-hidden="true" />
               </a>
             </div>
@@ -263,7 +274,8 @@ export default function HomePage() {
           <div className="contact-bottom" data-reveal>
             <p>
               Kirim tanggal, lokasi, dan kebutuhan dokumentasimu. Hubungi
-              Zaustory melalui Instagram atau telepon untuk membahas pemotretan.
+              Zaustory melalui WhatsApp atau Instagram untuk membahas
+              pemotretan.
             </p>
             <ContactLinks inverse />
           </div>

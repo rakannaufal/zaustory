@@ -26,11 +26,11 @@ Jika port 3000 terpakai, jalankan `npm run dev -- --port 3001`, lalu buka http:/
 
 Konfigurasi opsional: salin `.env.example` menjadi `.env.local`. Tidak ada API key atau database.
 
-| Variabel                    | Default dan kegunaan                                                                               |
-| --------------------------- | -------------------------------------------------------------------------------------------------- |
-| NEXT_PUBLIC_SITE_URL        | Kosong. Origin HTTPS final, tanpa path/query, untuk canonical dan sitemap                          |
-| NEXT_PUBLIC_WHATSAPP_NUMBER | Kosong. 8-15 digit internasional, tanpa `+`/spasi/awalan 0; kosong/invalid menyembunyikan WhatsApp |
-| NEXT_PUBLIC_ALLOW_INDEXING  | false. Aktif hanya dengan nilai true dan origin valid, setelah konten disetujui                    |
+| Variabel                    | Default dan kegunaan                                                                                              |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| NEXT_PUBLIC_SITE_URL        | Kosong. Origin HTTPS final, tanpa path/query, untuk canonical dan sitemap                                         |
+| NEXT_PUBLIC_WHATSAPP_NUMBER | Opsional. Kosong memakai 6287752053779 milik pemilik; override 8-15 digit internasional, tanpa `+`/spasi/awalan 0 |
+| NEXT_PUBLIC_ALLOW_INDEXING  | false. Aktif hanya dengan nilai true dan origin valid, setelah konten disetujui                                   |
 
 Environment public dibaca saat build. Rebuild setelah perubahan. Preview default noindex; sitemap kosong dan robots disallow.
 
@@ -59,9 +59,13 @@ photos: [
 
 Ganti contoh dengan metadata foto sebenarnya. Slug/ID harus unik, alt tidak kosong, dimensi positif, path lokal raster; jumlah foto tidak melebihi rencana. Naikkan plannedCount secara sengaja bila rencana berubah. Sampul menggunakan foto pertama. Jumlah tayang otomatis dari panjang photos. Deskripsi alt hanya untuk aksesibilitas; lightbox menampilkan caption hanya jika caption diisi secara eksplisit. Foto dapat diperbesar dengan klik/Enter, panah kiri/kanan, Escape, serta tombol tutup; kegagalan gambar diberi pesan.
 
-Fakta situs di `src/content/site.ts`. Bio singkat berasal dari profil publik [@zauustory](https://www.instagram.com/zauustory/): Pekanbaru, Riau; fotografer @rzzwadzaky; media partner @langkaahsenja_; telepon +62 838-5465-3003. Telepon memakai tautan `tel:`, bukan asumsi WhatsApp. Sumber dan batas adaptasi di [docs/content-sources.md](docs/content-sources.md). Afiliasi tidak diklaim sebagai klien aktif.
+Fakta situs di `src/content/site.ts`. Bio singkat berasal dari profil publik [@zauustory](https://www.instagram.com/zauustory/): Pekanbaru, Riau; fotografer @rzzwadzaky; media partner @langkaahsenja_; telepon +62 838-5465-3003. Pembaruan pemilik 2026-10-23 mengganti kontak menjadi WhatsApp 0877-5205-3779 (wa.me/6287752053779); CTA hero/kontak menuju WhatsApp dengan pesan awal, telepon memakai nomor yang sama. Instagram tetap tersedia sebagai tautan sekunder. Sumber dan batas adaptasi di [docs/content-sources.md](docs/content-sources.md). Afiliasi tidak diklaim sebagai klien aktif.
 
 Album kosong Minsoc, Football, basket, dan event menautkan sorotan Instagram yang sesuai melalui `site.albumHighlights`. Foto/caption unggahan tidak diambil; aset web tetap diisi melalui manifest lokal.
+
+## Latar hero
+
+Hero menampilkan foto dekoratif dari album Minsoc, Basket, dan Football dengan opacity 24%. Foto berganti acak setiap 3 detik tanpa mengulang foto yang sedang tampil, memakai fade 600ms setelah gambar pengganti selesai dimuat. Maksimal dua gambar berada di DOM. Tanpa tombol kontrol sesuai permintaan pemilik; tab tersembunyi dan reduced motion menghentikan pergantian. Tanpa JavaScript, foto pertama tetap terlihat. Gambar yang gagal diganti mempertahankan foto sebelumnya. Latar tidak mengubah tinggi hero atau posisi strip setelah scroll. Judul memakai warna terang dengan alpha 72% pada baris pertama dan 55% pada baris kedua, garis tepi 0.6px/1px menjaga bentuk huruf.
 
 ## Potret dan pengalaman
 
@@ -99,6 +103,6 @@ E2E menjalankan server production port 3100, dua profil Chromium desktop/ponsel,
 
 ## Sebelum publikasi
 
-Masih diperlukan sisa foto album, potret/foto pengalaman, bio panjang dari Uwa bila diinginkan, konfirmasi hubungan organisasi/WhatsApp, domain/hosting, pemeriksaan ulang memakai konten final. Bio singkat dan telepon publik sudah tersedia dari Instagram. Kartu berbagi logo sudah tersedia. Belum ada deploy, tracking, CMS, login, database, booking, atau pembayaran. Rekomendasi hosting Next.js: Vercel; pemilihan paket/biaya menunggu pemilik.
+Masih diperlukan sisa foto album, potret/foto pengalaman, bio panjang dari Uwa bila diinginkan, konfirmasi hubungan organisasi, domain/hosting, pemeriksaan ulang memakai konten final. Bio singkat dan telepon publik sudah tersedia dari Instagram. Kartu berbagi logo sudah tersedia. Belum ada deploy, tracking, CMS, login, database, booking, atau pembayaran. Rekomendasi hosting Next.js: Vercel; pemilihan paket/biaya menunggu pemilik.
 
 Font Fontsource berlisensi SIL OFL; ikon Lucide ISC. Teks lisensi ada di `public/licenses/`. Foto tetap hak pemilik. Tidak menetapkan lisensi publik untuk kode/aset pemilik.

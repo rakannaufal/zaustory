@@ -46,3 +46,7 @@ Pengunjung mengenali lima kategori, membuka detail, dan menemukan Instagram mela
 
 - 2026-10-20: type-only. Foto asli belum tersedia; hero tipografis dan slot sampul album berstatus kosong. Pemilihan manual karena tool fold_candidates tidak tersedia.
 - 2026-10-20: split. Permintaan potret menggantikan hero type-only: tipografi miring di kiri, bidang diagonal slate dengan potret tanpa latar di kanan. Ikon sementara sampai potret asli tersedia. Variance 8; signature berupa potret yang menyatu dengan bidang hero dan bertumpu pada tepi bawah. Pemilihan manual; tool fold_candidates/check_fold tidak tersedia.
+
+- 2026-10-23: Empat album: Minsoc, Basket, Football, Event; Padel dihapus. Hero memakai carousel latar foto olahraga acak setiap 3 detik, opacity rendah (24%) dan fade 600ms, tanpa tombol kontrol; reduced motion menampilkan foto statis. Strip setelah hero tetap di bawah viewport awal.
+
+- 2026-10-23: Judul hero lebih transparan (72%/55%) dengan garis tepi tipis agar foto tetap terlihat. CTA utama menuju WhatsApp 087752053779, Instagram sekunder.

@@ -1,3 +1,5 @@
+import { site } from '@/content/site';
+
 type PublicEnvironment = Readonly<{
   NEXT_PUBLIC_SITE_URL?: string;
   NEXT_PUBLIC_WHATSAPP_NUMBER?: string;
@@ -39,6 +41,7 @@ export function getPublicConfig(environment: PublicEnvironment) {
 
 export const publicConfig = getPublicConfig({
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
-  NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
+  NEXT_PUBLIC_WHATSAPP_NUMBER:
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || site.whatsappNumber,
   NEXT_PUBLIC_ALLOW_INDEXING: process.env.NEXT_PUBLIC_ALLOW_INDEXING,
 });

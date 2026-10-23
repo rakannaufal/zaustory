@@ -31,3 +31,9 @@ Strip foto memiliki tombol jeda/putar dan berhenti saat hover. Reduced motion at
 Sampul, potret, pengalaman, dan foto album yang belum tersedia memakai ikon gambar dengan nama aksesibel. Detail memiliki tepat 20/10/10/30 slot; foto asli menggantikan slot secara otomatis. Ikon tidak dapat diperbesar, tidak menambah jumlah tayang. Foto rusak diberi pesan; dialog tetap dapat ditutup. Tanpa carousel otomatis atau kursor kustom.
 
 Pembaruan 2026-10-23: empat album (Minsoc, Football, Basket, Event), kartu Event mengisi pasangan baris Basket setelah Padel dihapus. Tinggi minimum hero mengikuti viewport dikurangi tinggi header (88px desktop, 72px ponsel), sehingga strip foto baru terlihat setelah scroll. Deskripsi alt tidak menjadi caption lightbox.
+
+## Carousel latar hero, 2026-10-23
+
+Sesuai permintaan pemilik, bidang di belakang judul memakai foto acak Minsoc/Basket/Football. Opacity 24%, interval 3 detik, fade 600ms; bidang diagonal dan potret tetap pada lapisan di atasnya. Foto sebelumnya tetap terlihat sampai pengganti dimuat; pemilihan tidak mengulang foto aktif. Tanpa tombol kontrol sesuai permintaan pemilik. Reduced motion dan tab tersembunyi menghentikan interval; tanpa JS tetap satu foto statis. Gambar dekoratif memiliki alt kosong dan aria-hidden, tanpa caption.
+
+Judul hero memakai fill terang transparan 72%/55% dengan stroke 0.6px/1px, sehingga foto tetap terlihat melalui huruf. CTA kontak utama kini WhatsApp 0877-5205-3779 sesuai instruksi pemilik; Instagram menjadi sekunder.

@@ -8,6 +8,33 @@ const albumRoutes = [
   ['event', 'Event', 30, '17986710449824514'],
 ] as const;
 
+test('cycles subdued hero photos without controls and respects reduced motion', async ({
+  page,
+}, testInfo) => {
+  await page.goto('/');
+  const background = page.locator('.hero-background');
+  await expect(background).toHaveAttribute('aria-hidden', 'true');
+  await expect(background).toHaveCSS('opacity', '0.24');
+  const current = background.locator('[data-current="true"]');
+  await expect
+    .poll(() => current.evaluate((img: HTMLImageElement) => img.naturalWidth))
+    .toBeGreaterThan(0);
+  const initial = await current.getAttribute('src');
+  await expect(current).not.toHaveAttribute('src', initial!, { timeout: 5000 });
+  await expect(current).toHaveAttribute('data-visible', 'true');
+  await expect(page.locator('.hero').getByRole('button')).toHaveCount(0);
+  await page.screenshot({
+    path: testInfo.outputPath('hero-carousel.png'),
+    animations: 'disabled',
+  });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(page.getByRole('button', { name: /latar foto/ })).toHaveCount(0);
+  const reduced = await current.getAttribute('src');
+  await page.waitForTimeout(3200);
+  await expect(current).toHaveAttribute('src', reduced!);
+  await expect(current).toHaveCSS('transition-duration', '0s');
+});
+
 test('shows the requested portfolio and filters the album collection', async ({
   page,
 }) => {
@@ -28,7 +55,9 @@ test('shows the requested portfolio and filters the album collection', async ({
   await expect(
     page.getByText('Jelajahi foto pertandingan Minsoc', { exact: false }),
   ).toBeVisible();
-  await expect(page.getByRole('link', { name: /WhatsApp/ })).toHaveCount(0);
+  await expect(
+    page.getByRole('link', { name: 'Hubungi via WhatsApp' }),
+  ).toHaveCount(2);
   await expect(
     page.getByRole('img', {
       name: 'Potret fotografer. Foto transparan belum tersedia.',
@@ -78,11 +107,22 @@ test('shows the public Instagram identity, local contact, and profile credits', 
   }
   const contact = page.locator('#kontak');
   await expect(
-    contact.getByRole('link', { name: 'Hubungi via Instagram' }),
+    contact.getByRole('link', { name: 'Lihat Instagram' }),
   ).toHaveAttribute('href', 'https://www.instagram.com/zauustory/');
   await expect(
-    contact.getByRole('link', { name: 'Telepon +62 838-5465-3003' }),
-  ).toHaveAttribute('href', 'tel:+6283854653003');
+    contact.getByRole('link', { name: 'Telepon 0877-5205-3779' }),
+  ).toHaveAttribute('href', 'tel:+6287752053779');
+  for (const link of await page
+    .getByRole('link', { name: 'Hubungi via WhatsApp' })
+    .all()) {
+    const url = new URL((await link.getAttribute('href'))!);
+    expect(url.origin).toBe('https://wa.me');
+    expect(url.pathname).toBe('/6287752053779');
+    expect(url.searchParams.get('text')).toBe(
+      'Halo Zaustory, saya ingin berdiskusi tentang pemotretan.',
+    );
+    await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+  }
   const footer = page.getByRole('contentinfo');
   await expect(footer.locator('.footer-copyright')).toHaveText(
     /^© \d{4} Zaustory · Website by rakandev$/,
@@ -400,8 +440,18 @@ test('moves photo rows in opposite directions and supports pause and reduced mot
     .toBe(true);
   await reel.getByRole('button', { name: 'Jeda animasi' }).click();
   await expect(tracks.first()).toHaveCSS('animation-play-state', 'paused');
-  const paused = await offsets();
   await expect(tracks.last()).toHaveCSS('animation-play-state', 'paused');
+  // Wait for the compositor to apply the paused state before sampling offsets.
+  await tracks.evaluateAll((elements) =>
+    Promise.all(
+      elements.flatMap((element) =>
+        element
+          .getAnimations()
+          .map((animation) => animation.ready.then(() => undefined)),
+      ),
+    ),
+  );
+  const paused = await offsets();
   expect(await offsets()).toEqual(paused);
   await reel.getByRole('button', { name: 'Putar animasi' }).click();
   await expect(tracks.first()).toHaveCSS('animation-play-state', 'running');
@@ -536,6 +586,11 @@ test('renders album links, photos and empty details without JavaScript', async (
   const page = await context.newPage();
   try {
     await page.goto('http://127.0.0.1:3100/');
+    await expect(page.locator('.hero-background img')).toHaveCount(1);
+    await expect(page.locator('.hero-background img')).toHaveAttribute(
+      'data-visible',
+      'true',
+    );
     await expect(page.getByTestId('album-grid').getByRole('link')).toHaveCount(
       4,
     );

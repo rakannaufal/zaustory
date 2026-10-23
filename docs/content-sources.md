@@ -35,3 +35,7 @@ Tautan terlihat pada profil. Isi penuh sorotan belum diperiksa. Padel tetap dari
 - Tidak mengunduh atau menerbitkan ulang foto Instagram. Album, potret, dan pengalaman tetap memakai ikon sampai aset berizin diberikan.
 - Pengalaman dan daftar koneksi tetap bersumber dari brief pemilik. Tidak diklaim sebagai klien aktif atau kontrak berkelanjutan.
 - Jumlah pengikut/unggahan tidak dijadikan klaim situs.
+
+## Pembaruan kontak dari pemilik, 2026-10-23
+
+Pemilik meminta kontak WhatsApp 087752053779 melalui percakapan proyek. Nomor ini menggantikan telepon lama dari bio Instagram sebagai kontak website. Format internasional 6287752053779 dipakai untuk wa.me dan tel:+6287752053779. Tautan hanya membuka percakapan dengan pesan awal; tidak mengirim pesan secara otomatis.

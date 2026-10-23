@@ -44,6 +44,7 @@
   --reveal-stagger: 60ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --z-header: 20;
+  --header-height: 88px;
 }
 
 * {
@@ -288,7 +289,7 @@ svg {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 88px;
+  height: var(--header-height);
 }
 .brand-logo {
   display: inline-flex;
@@ -370,7 +371,7 @@ svg {
 }
 .hero-inner {
   position: relative;
-  min-height: 680px;
+  min-height: max(680px, calc(100dvh - var(--header-height)));
   padding-block: 104px 76px;
 }
 .hero-eyebrow,
@@ -646,12 +647,9 @@ svg {
 .album-card-basket {
   grid-column: 2 / span 4;
 }
-.album-card-padel {
+.album-card-event {
   grid-column: 7 / -1;
   padding-top: 96px;
-}
-.album-card-event {
-  grid-column: 1 / -1;
 }
 .album-cover {
   position: relative;
@@ -666,7 +664,7 @@ svg {
   aspect-ratio: 0.85;
 }
 .album-cover-event {
-  aspect-ratio: 3;
+  aspect-ratio: 1.5;
 }
 .album-cover > .image-placeholder {
   position: absolute;
@@ -1335,6 +1333,9 @@ svg {
 }
 
 @media (max-width: 760px) {
+  :root {
+    --header-height: 72px;
+  }
   html {
     scroll-padding-top: 92px;
   }
@@ -1345,7 +1346,7 @@ svg {
     padding-block: var(--space-16);
   }
   .header-inner {
-    height: 72px;
+    height: var(--header-height);
   }
   .brand-logo-image {
     width: 164px;
@@ -1357,7 +1358,7 @@ svg {
     display: flex;
   }
   .hero-inner {
-    min-height: 0;
+    min-height: calc(100dvh - var(--header-height));
     padding-block: 52px 0;
   }
   .hero h1 {

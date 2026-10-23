@@ -5,7 +5,9 @@ import { testPhotos } from '../fixtures/photos';
 
 describe('photo reel content', () => {
   it('provides two placeholder rows covering every album when no photos exist', () => {
-    const rows = createPhotoReelRows(albums);
+    const rows = createPhotoReelRows(
+      albums.map((album) => ({ ...album, photos: [] })),
+    );
     expect(rows).toHaveLength(2);
     expect(rows.every((row) => row.length >= 6)).toBe(true);
     expect(new Set(rows.flat().map((frame) => frame.albumName))).toEqual(
@@ -26,7 +28,7 @@ describe('photo reel content', () => {
     expect(rows.flat().every((frame) => frame.photo !== null)).toBe(true);
     expect(new Set(rows.flat().map((frame) => frame.id)).size).toBe(4);
     expect(new Set(rows.flat().map((frame) => frame.albumName))).toEqual(
-      new Set(['Minsoc', 'Lapangan bola']),
+      new Set(['Minsoc', 'Football']),
     );
   });
 

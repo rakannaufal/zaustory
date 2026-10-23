@@ -181,12 +181,12 @@ export default function HomePage() {
             </h2>
             <div className="album-intro">
               <p>
-                Minisoccer, sepak bola, basket, padel, dan event. Pilih album
-                untuk menjelajahi setiap kategori.
+                Minisoccer, sepak bola, basket, dan event. Pilih album untuk
+                menjelajahi setiap kategori.
               </p>
               <p>
-                Foto web sedang disiapkan. Sementara itu, lihat karya di
-                Instagram.
+                Jelajahi foto pertandingan Minsoc, sepak bola, dan basket. Karya
+                lainnya tersedia di Instagram.
               </p>
             </div>
           </div>

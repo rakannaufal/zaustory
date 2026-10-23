@@ -13,19 +13,19 @@ const validAlbum: Album = {
 };
 
 describe('portfolio content contract', () => {
-  it('preserves the five requested albums and distinguishes planned work from published work', () => {
+  it('preserves the four requested albums and distinguishes planned work from published work', () => {
     expect(
       albums.map(({ slug, plannedCount }) => [slug, plannedCount]),
     ).toEqual([
       ['minsoc', 20],
       ['lapangan-bola', 10],
       ['basket', 10],
-      ['padel', 10],
       ['event', 30],
     ]);
     expect(
       albums.reduce((count, album) => count + album.photos.length, 0),
-    ).toBe(0);
+    ).toBe(30);
+    expect(albums.map((album) => album.photos.length)).toEqual([10, 10, 10, 0]);
   });
 
   it('accepts real photo metadata with local raster paths', () => {

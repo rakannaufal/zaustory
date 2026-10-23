@@ -8,7 +8,7 @@ Arsip fotografi olahraga: latar navy/slate tanpa bidang putih, Barlow Condensed 
 
 Header navy dengan logo transparan terang; hero dua baris di kiri dan potret besar di kanan tanpa bingkai kartu. Urutan beranda: hero, strip foto, tentang, album, pengalaman, kontak. Tentang memakai potret 4:5 di kiri serta judul/profil di kanan, kolaborasi terpisah di bawahnya. Sumber potret sama dengan hero. Indeks album memakai 12 kolom, ukuran/aspek/offset beragam. Pengalaman berupa baris lebar dengan tahun, nama, dan satu foto per pengalaman. Kontak memakai judul besar dan CTA di bawahnya. Footer navy lebih dalam. Nama organisasi ditampilkan dengan konteks hubungan belum dikonfirmasi, tanpa logo/testimoni rekaan.
 
-Setelah hero, dua strip thumbnail selebar layar bergerak berlawanan arah. Sumber foto digabung dari seluruh album, diacak stabil agar HTML/hidrasi konsisten, dipilih maksimal 20 foto; koleksi kecil diulang untuk loop. Selama belum ada foto, ikon dari lima album menjadi pengganti. Strip bersifat dekoratif; navigasi tetap melalui indeks album.
+Setelah hero, dua strip thumbnail selebar layar bergerak berlawanan arah. Sumber foto digabung dari seluruh album, diacak stabil agar HTML/hidrasi konsisten, dipilih maksimal 20 foto; koleksi kecil diulang untuk loop. Selama belum ada foto, ikon dari empat album menjadi pengganti. Strip bersifat dekoratif; navigasi tetap melalui indeks album.
 
 Kategori, judul, dan deskripsi kartu album berada di dalam sampul pada gradasi navy bawah; tanpa angka jumlah foto. CTA memakai sudut viewfinder, ikon aperture pada album/kontak navigasi, dan panah dengan pemisah. Favicon tetap berlatar putih.
 
@@ -28,4 +28,6 @@ Strip foto memiliki tombol jeda/putar dan berhenti saat hover. Reduced motion at
 
 ## Kondisi
 
-Sampul, potret, pengalaman, dan foto album yang belum tersedia memakai ikon gambar dengan nama aksesibel. Detail memiliki tepat 20/10/10/10/30 slot; foto asli menggantikan slot secara otomatis. Ikon tidak dapat diperbesar, tidak menambah jumlah tayang. Foto rusak diberi pesan; dialog tetap dapat ditutup. Tanpa carousel otomatis atau kursor kustom.
+Sampul, potret, pengalaman, dan foto album yang belum tersedia memakai ikon gambar dengan nama aksesibel. Detail memiliki tepat 20/10/10/30 slot; foto asli menggantikan slot secara otomatis. Ikon tidak dapat diperbesar, tidak menambah jumlah tayang. Foto rusak diberi pesan; dialog tetap dapat ditutup. Tanpa carousel otomatis atau kursor kustom.
+
+Pembaruan 2026-10-23: empat album (Minsoc, Football, Basket, Event), kartu Event mengisi pasangan baris Basket setelah Padel dihapus. Tinggi minimum hero mengikuti viewport dikurangi tinggi header (88px desktop, 72px ponsel), sehingga strip foto baru terlihat setelah scroll. Deskripsi alt tidak menjadi caption lightbox.

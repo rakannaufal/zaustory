@@ -36,7 +36,7 @@ Environment public dibaca saat build. Rebuild setelah perubahan. Preview default
 
 ## Mengisi foto
 
-Lima album ada di `src/content/albums.ts`: Minsoc 20, lapangan bola 10, basket 10, padel 10, event 30. Itu **jumlah rencana**, bukan foto tayang. Semua album awal kosong; tidak ada foto stok atau foto AI yang diklaim karya Zaustory.
+Empat album ada di `src/content/albums.ts`: Minsoc 20, Football 10, basket 10, event 30. Itu **jumlah rencana**, bukan foto tayang. Saat ini 30 foto pemilik tayang: Minsoc 10, Football 10, dan basket 10. Sumber JPEG di `assets/minsoc/`, `assets/football/`, dan `assets/basket/` dipertahankan; turunan WebP tanpa metadata EXIF ada di `public/images/`. Dimensi asli dipertahankan (2048x1365 atau 1365x2048). Event masih kosong; Minsoc menyisakan 10 slot.
 
 Setiap detail menampilkan seluruh slot rencana dengan ikon gambar sementara. Slot bukan tombol dan tidak dapat diperbesar. Setiap foto yang ditambahkan menggantikan satu slot; sisa slot tetap terlihat. Sampul album memakai foto pertama, atau ikon saat kosong.
 
@@ -57,17 +57,17 @@ photos: [
 ],
 ```
 
-Ganti contoh dengan metadata foto sebenarnya. Slug/ID harus unik, alt tidak kosong, dimensi positif, path lokal raster; jumlah foto tidak melebihi rencana. Naikkan plannedCount secara sengaja bila rencana berubah. Sampul menggunakan foto pertama. Jumlah tayang otomatis dari panjang photos. Foto dapat diperbesar dengan klik/Enter, panah kiri/kanan, Escape, serta tombol tutup; kegagalan gambar diberi pesan.
+Ganti contoh dengan metadata foto sebenarnya. Slug/ID harus unik, alt tidak kosong, dimensi positif, path lokal raster; jumlah foto tidak melebihi rencana. Naikkan plannedCount secara sengaja bila rencana berubah. Sampul menggunakan foto pertama. Jumlah tayang otomatis dari panjang photos. Deskripsi alt hanya untuk aksesibilitas; lightbox menampilkan caption hanya jika caption diisi secara eksplisit. Foto dapat diperbesar dengan klik/Enter, panah kiri/kanan, Escape, serta tombol tutup; kegagalan gambar diberi pesan.
 
 Fakta situs di `src/content/site.ts`. Bio singkat berasal dari profil publik [@zauustory](https://www.instagram.com/zauustory/): Pekanbaru, Riau; fotografer @rzzwadzaky; media partner @langkaahsenja_; telepon +62 838-5465-3003. Telepon memakai tautan `tel:`, bukan asumsi WhatsApp. Sumber dan batas adaptasi di [docs/content-sources.md](docs/content-sources.md). Afiliasi tidak diklaim sebagai klien aktif.
 
-Album kosong Minsoc, lapangan bola, basket, dan event menautkan sorotan Instagram yang sesuai melalui `site.albumHighlights`. Padel menautkan profil umum. Foto/caption unggahan tidak diambil; aset web tetap diisi melalui manifest lokal.
+Album kosong Minsoc, Football, basket, dan event menautkan sorotan Instagram yang sesuai melalui `site.albumHighlights`. Foto/caption unggahan tidak diambil; aset web tetap diisi melalui manifest lokal.
 
 ## Potret dan pengalaman
 
 Hero menyediakan potret fotografer transparan yang menyatu dengan bidang diagonal navy/slate. Tentang berada tepat setelah dua baris foto bergerak dan menampilkan potret dari sumber yang sama, di samping profil pada desktop, di antara judul dan teks pada ponsel. Isi `photographerPortrait` di `src/content/site.ts` dengan satu objek `Photo` (id, src, alt, width, height); simpan aset PNG/WebP/AVIF dengan alpha di `public/images/profile/`. Rasio vertikal dianjurkan. Tampilan memakai `contain`, tanpa menambah latar pada gambar.
 
-Setiap entri `experiences` memiliki satu `photo` dengan format metadata yang sama; simpan di `public/images/experiences/`. Foto tampil dengan rasio 1.6 dan `cover`. Nilai `null` pada potret/pengalaman menampilkan ikon sementara. Belum ada foto asli di proyek.
+Setiap entri `experiences` memiliki satu `photo` dengan format metadata yang sama; simpan di `public/images/experiences/`. Foto tampil dengan rasio 1.6 dan `cover`. Nilai `null` pada potret/pengalaman menampilkan ikon sementara. Potret dan foto pengalaman belum tersedia; foto album olahraga sudah tayang.
 
 ## Logo
 
@@ -99,6 +99,6 @@ E2E menjalankan server production port 3100, dua profil Chromium desktop/ponsel,
 
 ## Sebelum publikasi
 
-Masih diperlukan foto asli dan izin, bio panjang dari Uwa bila diinginkan, konfirmasi hubungan organisasi/WhatsApp, domain/hosting, pemeriksaan ulang memakai konten final. Bio singkat dan telepon publik sudah tersedia dari Instagram. Kartu berbagi logo sudah tersedia. Belum ada deploy, tracking, CMS, login, database, booking, atau pembayaran. Rekomendasi hosting Next.js: Vercel; pemilihan paket/biaya menunggu pemilik.
+Masih diperlukan sisa foto album, potret/foto pengalaman, bio panjang dari Uwa bila diinginkan, konfirmasi hubungan organisasi/WhatsApp, domain/hosting, pemeriksaan ulang memakai konten final. Bio singkat dan telepon publik sudah tersedia dari Instagram. Kartu berbagi logo sudah tersedia. Belum ada deploy, tracking, CMS, login, database, booking, atau pembayaran. Rekomendasi hosting Next.js: Vercel; pemilihan paket/biaya menunggu pemilik.
 
 Font Fontsource berlisensi SIL OFL; ikon Lucide ISC. Teks lisensi ada di `public/licenses/`. Foto tetap hak pemilik. Tidak menetapkan lisensi publik untuk kode/aset pemilik.

@@ -298,3 +298,13 @@ Pemeriksaan fokus diperketat agar memeriksa opacity/transform setiap target di d
 Bukti keadaan akhir dari suite produksi lokal yang lulus: [desktop](../docs/evidence/scroll-reveal-desktop.png) dan [ponsel](../docs/evidence/scroll-reveal-mobile.png). Screenshot menunjukkan tampilan setelah entrance; penyelesaian animasi dibuktikan oleh uji browser. Ini bukan rekaman gerak.
 
 Lingkup animasi lokal terverifikasi. Foto asli, perangkat fisik, Safari/Firefox, CI GitHub dan deployment belum diverifikasi pada fase ini. Audit dependensi tidak diulang karena dependensi tidak berubah. Preview port 3001 dipertahankan.
+
+## Foto album dan penyesuaian pemilik, 2026-10-23
+
+- 30 foto pemilik dipasang: 10 Minsoc, 10 Football, 10 Basket. JPEG asli dipertahankan di assets; WebP kualitas 85 tanpa EXIF di public/images berjumlah 10.33 MiB, dimensi asli tetap. Alt disusun berdasarkan inspeksi foto; tidak menambahkan nama/tanggal acara rekaan.
+- Sampul dan strip beranda otomatis memakai foto album. Nama Lapangan bola menjadi Football; URL /album/lapangan-bola dipertahankan. Padel dihapus, rutenya 404. Empat album tersisa memiliki 70 slot rencana dan 30 foto tayang; Event kosong, Minsoc menyisakan 10 slot.
+- Lightbox tidak menampilkan alt sebagai caption; alt tetap tersedia untuk pembaca layar. Caption hanya muncul bila diisi secara eksplisit. Hero mengisi minimal viewport dikurangi tinggi header, sehingga strip baru terlihat setelah scroll. Kartu Event mengisi pasangan baris Basket.
+
+Verifikasi aktual: baseline 36/36 unit lulus sebelum perubahan. npm run check terakhir keluar 0: lint tanpa warning, TypeScript, 36/36 unit, build 9 keluaran statis. npm run test:e2e terakhir 34/34 lulus dalam 46.6 detik pada Chromium desktop 1440x1000 dan ponsel 390x844: foto termuat, jumlah tayang/slot, lightbox, panah wrap, Escape/fokus kembali, tanpa caption otomatis, Padel 404, strip di luar viewport awal dan terlihat setelah scroll, filter, no-JS, offline, axe dan overflow. Seluruh 30 WebP berhasil didekode, dimensi serta ketiadaan EXIF diperiksa. Format dan git diff --check lulus. Screenshot hero desktop, galeri Minsoc dan kartu Event ponsel diperiksa visual.
+
+Uji browser awal 32/34 lulus: selector teks 10 foto ambigu karena Tayang dan Rencana sama-sama bernilai 10; selector diperbaiki dengan label Tayang. Tes unit caption disesuaikan setelah pemilik meminta deskripsi dihapus. Hambatan sandbox pada server lokal diselesaikan melalui eksekusi berizin. Tidak ada dependensi baru. Deployment dan perangkat fisik belum diperiksa; Event serta potret/foto pengalaman belum tersedia.

@@ -86,7 +86,12 @@ describe('photo gallery', () => {
     expect(within(dialog).getByRole('status')).toHaveTextContent(
       'Foto 2 dari 2',
     );
-    expect(within(dialog).getByText('Tim di tepi lapangan')).toBeVisible();
+    expect(
+      within(dialog).getByRole('img', { name: 'Tim di tepi lapangan' }),
+    ).toBeVisible();
+    expect(
+      within(dialog).queryByText('Tim di tepi lapangan'),
+    ).not.toBeInTheDocument();
     await user.keyboard('{ArrowRight}');
     expect(within(dialog).getByText('Caption foto pertama')).toBeVisible();
     await user.click(closeButton);

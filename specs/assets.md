@@ -18,7 +18,7 @@ Teks lisensi disalin dari paket terpasang ke public/licenses/. Screenshot hasil 
 
 ## Menunggu
 
-80 foto album rencana, satu potret fotografer transparan, satu foto untuk masing-masing dari tiga pengalaman, bio, logo organisasi. Kartu berbagi memakai logo sampai foto berizin tersedia. Tidak menggunakan foto stok/AI sebagai karya. Seluruh posisi foto kosong memakai ikon Lucide ImageIcon dengan label aksesibel dan caption sementara.
+40 foto album tersisa (Minsoc 10, event 30), satu potret fotografer transparan, satu foto untuk masing-masing dari tiga pengalaman, bio, logo organisasi. Kartu berbagi memakai logo sampai foto berizin tersedia. Tidak menggunakan foto stok/AI sebagai karya. Seluruh posisi foto kosong memakai ikon Lucide ImageIcon dengan label aksesibel dan caption sementara.
 
 ## Foto
 
@@ -27,3 +27,7 @@ JPEG/PNG/WebP/AVIF berizin di public/images/<album>/. Dianjurkan <=2400px dan su
 Pemilik memastikan izin subjek/publikasi dan nama/logo. Tidak ada upload pengunjung.
 
 Potret: PNG/WebP/AVIF dengan alpha, tanpa latar kotak; dianjurkan komposisi vertikal. Simpan di public/images/profile/ dan isi photographerPortrait di src/content/site.ts dengan metadata Photo. Hero menggunakan contain dan menempatkan kaki/bagian bawah pada tepi hero. Foto pengalaman memakai satu Photo per entri experiences[].photo; rasio tampilan 1.6 dengan cover. Null tetap menampilkan ikon. Belum ada aset asli untuk memverifikasi tampilan cutout aktual.
+
+## Foto album pemilik, 2026-10-23
+
+30 JPEG dari assets/minsoc, assets/football, dan assets/basket dipasang sesuai instruksi pemilik: masing-masing 10 foto ke album minsoc, lapangan-bola, dan basket. Turunan WebP kualitas 85 di public/images/<slug>/ mempertahankan dimensi asli 2048x1365 atau 1365x2048, tanpa metadata EXIF. Total WebP sekitar 10.33 MiB, dibanding sumber sekitar 65 MiB. Alt menjelaskan isi foto berdasarkan inspeksi visual; tidak menambahkan identitas, tanggal, atau nama acara rekaan. Sampul memakai foto pertama; strip otomatis mengambil maksimal 20 foto gabungan.

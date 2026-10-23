@@ -3,9 +3,8 @@ import { expect, test } from '@playwright/test';
 
 const albumRoutes = [
   ['minsoc', 'Minsoc', 20, '18046316087620940'],
-  ['lapangan-bola', 'Lapangan bola', 10, '17875753182361815'],
+  ['lapangan-bola', 'Football', 10, '17875753182361815'],
   ['basket', 'Basket', 10, '17963732528941047'],
-  ['padel', 'Padel', 10, null],
   ['event', 'Event', 30, '17986710449824514'],
 ] as const;
 
@@ -18,7 +17,7 @@ test('shows the requested portfolio and filters the album collection', async ({
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
     'Di lapangan.Dalam ingatan.',
   );
-  await expect(page.getByTestId('album-grid').getByRole('link')).toHaveCount(5);
+  await expect(page.getByTestId('album-grid').getByRole('link')).toHaveCount(4);
   await expect(
     page.getByText('Kampanye Walikota', { exact: true }),
   ).toBeVisible();
@@ -27,7 +26,7 @@ test('shows the requested portfolio and filters the album collection', async ({
     page.getByText('Piala Walikota x ISAC', { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByText('Foto web sedang disiapkan.', { exact: false }),
+    page.getByText('Jelajahi foto pertandingan Minsoc', { exact: false }),
   ).toBeVisible();
   await expect(page.getByRole('link', { name: /WhatsApp/ })).toHaveCount(0);
   await expect(
@@ -45,9 +44,9 @@ test('shows the requested portfolio and filters the album collection', async ({
   await expect(page.getByRole('status')).toHaveText('1 album');
   await page.getByRole('button', { name: 'Olahraga', exact: true }).focus();
   await page.keyboard.press('Enter');
-  await expect(page.getByTestId('album-grid').getByRole('link')).toHaveCount(4);
+  await expect(page.getByTestId('album-grid').getByRole('link')).toHaveCount(3);
   await page.getByRole('button', { name: 'Semua', exact: true }).click();
-  await expect(page.getByTestId('album-grid').getByRole('link')).toHaveCount(5);
+  await expect(page.getByTestId('album-grid').getByRole('link')).toHaveCount(4);
   expect(errors).toEqual([]);
 });
 
@@ -106,6 +105,9 @@ test('serves every planned photo slot with honest counts and unique titles', asy
   page,
 }) => {
   for (const [slug, name, count, highlight] of albumRoutes) {
+    const publishedCount = ['minsoc', 'lapangan-bola', 'basket'].includes(slug)
+      ? 10
+      : 0;
     const response = await page.goto(`/album/${slug}`);
     expect(response?.status()).toBe(200);
     await expect(page).toHaveTitle(`Album ${name} | Zaustory`);
@@ -114,30 +116,60 @@ test('serves every planned photo slot with honest counts and unique titles', asy
     );
     await expect(
       page.getByText('Foto belum tersedia', { exact: true }),
-    ).toBeVisible();
+    ).toHaveCount(publishedCount ? 0 : 1);
     await expect(
       page.getByRole('link', { name: 'Kembali ke album' }),
     ).toHaveAttribute('href', '/#album');
     await expect(
       page.getByRole('button', { name: /Perbesar foto/ }),
-    ).toHaveCount(0);
+    ).toHaveCount(publishedCount);
     const gallery = page.getByRole('list', { name: `Galeri ${name}` });
     await expect(gallery.getByRole('listitem')).toHaveCount(count);
     await expect(gallery.getByRole('img', { name: /^Slot foto/ })).toHaveCount(
-      count,
+      count - publishedCount,
     );
-    await expect(page.getByText('0 foto', { exact: true })).toBeVisible();
     await expect(
-      page.getByRole('link', {
-        name: highlight ? `Lihat sorotan ${name}` : 'Lihat Instagram',
-        exact: true,
-      }),
-    ).toHaveAttribute(
-      'href',
-      highlight
-        ? `https://www.instagram.com/stories/highlights/${highlight}/`
-        : 'https://www.instagram.com/zauustory/',
-    );
+      page
+        .locator('dl > div')
+        .filter({ has: page.getByText('Tayang', { exact: true }) })
+        .getByRole('definition'),
+    ).toHaveText(`${publishedCount} foto`);
+    if (publishedCount) {
+      const firstPhoto = gallery.getByRole('button').first();
+      await firstPhoto.scrollIntoViewIfNeeded();
+      await expect(firstPhoto.locator('img')).toBeVisible();
+      await expect
+        .poll(() =>
+          firstPhoto
+            .locator('img')
+            .evaluate((img: HTMLImageElement) => img.naturalWidth),
+        )
+        .toBeGreaterThan(0);
+      await firstPhoto.click();
+      const dialog = page.getByRole('dialog', { name: 'Pembesaran foto' });
+      await expect(dialog).toBeVisible();
+      await expect(dialog.locator('figcaption')).toHaveCount(0);
+      await expect(dialog.getByRole('status')).toHaveText('Foto 1 dari 10');
+      await page.keyboard.press('ArrowLeft');
+      await expect(dialog.getByRole('status')).toHaveText('Foto 10 dari 10');
+      await page.keyboard.press('ArrowRight');
+      await expect(dialog.getByRole('status')).toHaveText('Foto 1 dari 10');
+      await page.keyboard.press('Escape');
+      await expect(dialog).toHaveCount(0);
+      await expect(firstPhoto).toBeFocused();
+    } else {
+      await expect(
+        page.getByRole('link', {
+          name: highlight ? `Lihat sorotan ${name}` : 'Lihat Instagram',
+          exact: true,
+        }),
+      ).toHaveAttribute(
+        'href',
+        highlight
+          ? `https://www.instagram.com/stories/highlights/${highlight}/`
+          : 'https://www.instagram.com/zauustory/',
+      );
+    }
   }
 });
 
@@ -347,6 +379,12 @@ test('moves photo rows in opposite directions and supports pause and reduced mot
   });
   const tracks = reel.locator('.reel-track');
   await expect(tracks).toHaveCount(2);
+  const reelBounds = await reel.boundingBox();
+  expect(reelBounds!.y).toBeGreaterThanOrEqual(
+    await page.evaluate(() => window.innerHeight),
+  );
+  await reel.scrollIntoViewIfNeeded();
+  await expect(reel).toBeInViewport();
   const offsets = () =>
     tracks.evaluateAll((elements) =>
       elements.map(
@@ -377,6 +415,8 @@ test('returns HTTP 404 for an unknown album and exposes a recovery link', async 
 }) => {
   const response = await page.goto('/album/tidak-ada');
   expect(response?.status()).toBe(404);
+  const removedAlbum = await page.request.get('/album/padel');
+  expect(removedAlbum.status()).toBe(404);
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
     'belum ditemukan.',
   );
@@ -489,7 +529,7 @@ test('keeps filters usable after going offline', async ({ page, context }) => {
   }
 });
 
-test('renders album links and empty details without JavaScript', async ({
+test('renders album links, photos and empty details without JavaScript', async ({
   browser,
 }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
@@ -497,7 +537,7 @@ test('renders album links and empty details without JavaScript', async ({
   try {
     await page.goto('http://127.0.0.1:3100/');
     await expect(page.getByTestId('album-grid').getByRole('link')).toHaveCount(
-      5,
+      4,
     );
     await expect(page.locator('.reel-track').first()).toHaveCSS(
       'animation-name',
@@ -514,11 +554,15 @@ test('renders album links and empty details without JavaScript', async ({
     );
     await page.getByRole('link', { name: /Minsoc/ }).click();
     await expect(
-      page.getByText('Foto belum tersedia', { exact: true }),
-    ).toBeVisible();
+      page.getByRole('list', { name: 'Galeri Minsoc' }).locator('img'),
+    ).toHaveCount(10);
     await expect(
       page.getByRole('list', { name: 'Galeri Minsoc' }).getByRole('listitem'),
     ).toHaveCount(20);
+    await page.goto('http://127.0.0.1:3100/album/event');
+    await expect(
+      page.getByText('Foto belum tersedia', { exact: true }),
+    ).toBeVisible();
   } finally {
     await context.close();
   }

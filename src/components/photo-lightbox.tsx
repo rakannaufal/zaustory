@@ -101,7 +101,7 @@ export function PhotoLightbox({
               priority
             />
           </div>
-          <figcaption>{photo.caption ?? photo.alt}</figcaption>
+          {photo.caption && <figcaption>{photo.caption}</figcaption>}
         </figure>
         <div className="lightbox-navigation">
           <button

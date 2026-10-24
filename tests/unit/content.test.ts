@@ -24,8 +24,8 @@ describe('portfolio content contract', () => {
     ]);
     expect(
       albums.reduce((count, album) => count + album.photos.length, 0),
-    ).toBe(30);
-    expect(albums.map((album) => album.photos.length)).toEqual([10, 10, 10, 0]);
+    ).toBe(38);
+    expect(albums.map((album) => album.photos.length)).toEqual([10, 10, 10, 8]);
   });
 
   it('accepts real photo metadata with local raster paths', () => {

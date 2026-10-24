@@ -36,7 +36,7 @@ Environment public dibaca saat build. Rebuild setelah perubahan. Preview default
 
 ## Mengisi foto
 
-Empat album ada di `src/content/albums.ts`: Minsoc 20, Football 10, basket 10, event 30. Itu **jumlah rencana**, bukan foto tayang. Saat ini 30 foto pemilik tayang: Minsoc 10, Football 10, dan basket 10. Sumber JPEG di `assets/minsoc/`, `assets/football/`, dan `assets/basket/` dipertahankan; turunan WebP tanpa metadata EXIF ada di `public/images/`. Dimensi asli dipertahankan (2048x1365 atau 1365x2048). Event masih kosong; Minsoc menyisakan 10 slot.
+Empat album ada di `src/content/albums.ts`: Minsoc 20, Football 10, basket 10, event 30. Itu **jumlah rencana**, bukan foto tayang. Saat ini 38 foto pemilik tayang: Minsoc 10, Football 10, basket 10, dan Event 8. Sumber JPEG di `assets/minsoc/`, `assets/football/`, dan `assets/basket/` dipertahankan; turunan WebP tanpa metadata EXIF ada di `public/images/`. Dimensi asli dipertahankan (2048x1365 atau 1365x2048). Event menyisakan 22 slot; Minsoc menyisakan 10 slot. Dua file Event duplikat tidak ditayangkan ulang.
 
 Setiap detail menampilkan seluruh slot rencana dengan ikon gambar sementara. Slot bukan tombol dan tidak dapat diperbesar. Setiap foto yang ditambahkan menggantikan satu slot; sisa slot tetap terlihat. Sampul album memakai foto pertama, atau ikon saat kosong.
 
@@ -69,9 +69,11 @@ Hero menampilkan foto dekoratif dari album Minsoc, Basket, dan Football dengan o
 
 ## Potret dan pengalaman
 
-Hero menyediakan potret fotografer transparan yang menyatu dengan bidang diagonal navy/slate. Tentang berada tepat setelah dua baris foto bergerak dan menampilkan potret dari sumber yang sama, di samping profil pada desktop, di antara judul dan teks pada ponsel. Isi `photographerPortrait` di `src/content/site.ts` dengan satu objek `Photo` (id, src, alt, width, height); simpan aset PNG/WebP/AVIF dengan alpha di `public/images/profile/`. Rasio vertikal dianjurkan. Tampilan memakai `contain`, tanpa menambah latar pada gambar.
+Hero menyediakan potret fotografer transparan yang menyatu dengan bidang diagonal navy/slate. Tentang berada tepat setelah dua baris foto bergerak dan menampilkan potret tersendiri dari `assets/about.png`, di samping profil pada desktop, di antara judul dan teks pada ponsel. Hero memakai `assets/section1.png`; turunan WebP menghapus latar hitam yang tersambung ke tepi gambar. Isi `photographerPortrait` (hero) dan `aboutPortrait` (Tentang) di `src/content/site.ts` dengan objek `Photo` (id, src, alt, width, height); simpan aset PNG/WebP/AVIF dengan alpha di `public/images/profile/`. Rasio vertikal dianjurkan. Tampilan memakai `contain`, tanpa menambah latar pada gambar.
 
-Setiap entri `experiences` memiliki satu `photo` dengan format metadata yang sama; simpan di `public/images/experiences/`. Foto tampil dengan rasio 1.6 dan `cover`. Nilai `null` pada potret/pengalaman menampilkan ikon sementara. Potret dan foto pengalaman belum tersedia; foto album olahraga sudah tayang.
+Setiap entri `experiences` memiliki satu `photo` dengan format metadata yang sama; simpan di `public/images/experiences/`. Foto tampil dengan rasio 1.6 dan `cover`. Nilai `null` pada potret/pengalaman menampilkan ikon sementara. Dua potret dan tiga foto pengalaman sudah tayang. Aset `kampanye.jpeg`, `epa.jpeg`, dan `piala walikota.JPEG` dipetakan ke pengalaman masing-masing.
+
+Kolaborasi memakai `site.affiliations`: `al azhar.JPEG`, `curva.PNG`, dan `persega.JPEG` menjadi foto organisasi terkait. `pspsstore.MOV` menjadi MP4 H.264/AAC 540x960, 24 fps, dengan poster WebP, kontrol native, tanpa autoplay, muted awal, dan `preload="none"`. Video hanya dimuat saat pengunjung memutarnya; kegagalan muat menampilkan poster dan pesan. Sumber asli tetap di `assets/`.
 
 ## Logo
 
@@ -103,6 +105,6 @@ E2E menjalankan server production port 3100, dua profil Chromium desktop/ponsel,
 
 ## Sebelum publikasi
 
-Masih diperlukan sisa foto album, potret/foto pengalaman, bio panjang dari Uwa bila diinginkan, konfirmasi hubungan organisasi, domain/hosting, pemeriksaan ulang memakai konten final. Bio singkat dan telepon publik sudah tersedia dari Instagram. Kartu berbagi logo sudah tersedia. Belum ada deploy, tracking, CMS, login, database, booking, atau pembayaran. Rekomendasi hosting Next.js: Vercel; pemilihan paket/biaya menunggu pemilik.
+Masih diperlukan sisa foto album, bio panjang dari Uwa bila diinginkan, konfirmasi hubungan organisasi, domain/hosting, pemeriksaan ulang memakai konten final. Bio singkat dan telepon publik sudah tersedia dari Instagram. Kartu berbagi logo sudah tersedia. Belum ada deploy, tracking, CMS, login, database, booking, atau pembayaran. Rekomendasi hosting Next.js: Vercel; pemilihan paket/biaya menunggu pemilik.
 
 Font Fontsource berlisensi SIL OFL; ikon Lucide ISC. Teks lisensi ada di `public/licenses/`. Foto tetap hak pemilik. Tidak menetapkan lisensi publik untuk kode/aset pemilik.

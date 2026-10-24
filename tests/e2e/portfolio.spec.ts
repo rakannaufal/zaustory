@@ -8,6 +8,66 @@ const albumRoutes = [
   ['event', 'Event', 30, '17986710449824514'],
 ] as const;
 
+test('loads new profile and collaboration media and plays the Pspsstore video', async ({
+  page,
+}, testInfo) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  for (const selector of [
+    '.hero-portrait img',
+    '.about-portrait img',
+    '.experience-photo img',
+    '.collaboration-media img',
+  ]) {
+    for (const photo of await page.locator(selector).all()) {
+      await photo.scrollIntoViewIfNeeded();
+      await expect
+        .poll(() => photo.evaluate((img: HTMLImageElement) => img.naturalWidth))
+        .toBeGreaterThan(0);
+    }
+  }
+  const video = page.getByLabel('Video Pspsstore');
+  await video.scrollIntoViewIfNeeded();
+  await expect(video).toHaveAttribute('preload', 'none');
+  await expect(video).toHaveAttribute('controls', '');
+  expect(await video.evaluate((media: HTMLVideoElement) => media.paused)).toBe(
+    true,
+  );
+  await video.evaluate((media: HTMLVideoElement) => media.play());
+  await expect
+    .poll(() => video.evaluate((media: HTMLVideoElement) => media.currentTime))
+    .toBeGreaterThan(0);
+  await video.evaluate((media: HTMLVideoElement) => media.pause());
+  await page.locator('.affiliations').screenshot({
+    path: testInfo.outputPath('collaborations.png'),
+    animations: 'disabled',
+  });
+  await page.locator('.about-layout').screenshot({
+    path: testInfo.outputPath('about.png'),
+    animations: 'disabled',
+  });
+  await page.locator('.experience-list').screenshot({
+    path: testInfo.outputPath('experiences.png'),
+    animations: 'disabled',
+  });
+});
+
+test('keeps a poster and readable error when the collaboration video fails', async ({
+  page,
+}) => {
+  await page.route('**/videos/pspsstore.mp4', (route) => route.abort());
+  await page.goto('/');
+  const video = page.getByLabel('Video Pspsstore');
+  await video.scrollIntoViewIfNeeded();
+  await video.evaluate((media: HTMLVideoElement) => media.load());
+  await expect(
+    page.getByText('Video tidak dapat dimuat.', { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('img', { name: 'Cuplikan video Pspsstore.' }),
+  ).toBeVisible();
+});
+
 test('cycles subdued hero photos without controls and respects reduced motion', async ({
   page,
 }, testInfo) => {
@@ -60,7 +120,7 @@ test('shows the requested portfolio and filters the album collection', async ({
   ).toHaveCount(2);
   await expect(
     page.getByRole('img', {
-      name: 'Potret fotografer. Foto transparan belum tersedia.',
+      name: 'Fotografer Zaustory membidik melalui kamera.',
     }),
   ).toBeVisible();
   const experiences = page.getByRole('list', { name: 'Pengalaman Zaustory' });
@@ -147,7 +207,7 @@ test('serves every planned photo slot with honest counts and unique titles', asy
   for (const [slug, name, count, highlight] of albumRoutes) {
     const publishedCount = ['minsoc', 'lapangan-bola', 'basket'].includes(slug)
       ? 10
-      : 0;
+      : 8;
     const response = await page.goto(`/album/${slug}`);
     expect(response?.status()).toBe(200);
     await expect(page).toHaveTitle(`Album ${name} | Zaustory`);
@@ -189,11 +249,17 @@ test('serves every planned photo slot with honest counts and unique titles', asy
       const dialog = page.getByRole('dialog', { name: 'Pembesaran foto' });
       await expect(dialog).toBeVisible();
       await expect(dialog.locator('figcaption')).toHaveCount(0);
-      await expect(dialog.getByRole('status')).toHaveText('Foto 1 dari 10');
+      await expect(dialog.getByRole('status')).toHaveText(
+        `Foto 1 dari ${publishedCount}`,
+      );
       await page.keyboard.press('ArrowLeft');
-      await expect(dialog.getByRole('status')).toHaveText('Foto 10 dari 10');
+      await expect(dialog.getByRole('status')).toHaveText(
+        `Foto ${publishedCount} dari ${publishedCount}`,
+      );
       await page.keyboard.press('ArrowRight');
-      await expect(dialog.getByRole('status')).toHaveText('Foto 1 dari 10');
+      await expect(dialog.getByRole('status')).toHaveText(
+        `Foto 1 dari ${publishedCount}`,
+      );
       await page.keyboard.press('Escape');
       await expect(dialog).toHaveCount(0);
       await expect(firstPhoto).toBeFocused();
@@ -219,10 +285,12 @@ test('places the photographer profile directly after the photo rows', async ({
   await page.goto('/');
   await expect(page.locator('.photo-reel + #tentang + #album')).toHaveCount(1);
   const about = page.getByRole('region', { name: /di balik setiap cerita\./i });
-  await expect(about.getByRole('img')).toHaveCount(1);
+  await expect(about.locator('.about-portrait').getByRole('img')).toHaveCount(
+    1,
+  );
   await expect(
     about.getByRole('img', {
-      name: 'Potret fotografer Zaustory. Foto belum tersedia.',
+      name: 'Fotografer Zaustory berdiri membawa kamera.',
     }),
   ).toBeVisible();
   await expect(page.locator('.desktop-navigation a')).toHaveText([
@@ -602,7 +670,9 @@ test('renders album links, photos and empty details without JavaScript', async (
       page.getByRole('button', { name: 'Jeda animasi' }),
     ).toBeHidden();
     await expect(page.locator('.photo-reel + #tentang')).toHaveCount(1);
-    await expect(page.locator('#tentang').getByRole('img')).toBeVisible();
+    await expect(
+      page.locator('#tentang .about-portrait').getByRole('img'),
+    ).toBeVisible();
     await expect(page.locator('#tentang > .container')).toHaveCSS(
       'opacity',
       '1',
@@ -616,8 +686,11 @@ test('renders album links, photos and empty details without JavaScript', async (
     ).toHaveCount(20);
     await page.goto('http://127.0.0.1:3100/album/event');
     await expect(
+      page.getByRole('list', { name: 'Galeri Event' }).locator('img'),
+    ).toHaveCount(8);
+    await expect(
       page.getByText('Foto belum tersedia', { exact: true }),
-    ).toBeVisible();
+    ).toHaveCount(0);
   } finally {
     await context.close();
   }
@@ -645,6 +718,7 @@ test('serves secure headers and keeps unfinished content out of search indexes',
 test('captures the portfolio for visual inspection', async ({
   page,
 }, testInfo) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   await page.evaluate(() => document.fonts.ready);
   await page.screenshot({
@@ -655,6 +729,20 @@ test('captures the portfolio for visual inspection', async ({
   await page.goto('/album/minsoc');
   await page.screenshot({
     path: testInfo.outputPath('album.png'),
+    fullPage: true,
+    animations: 'disabled',
+  });
+  await page.goto('/album/event');
+  const gallery = page.getByRole('list', { name: 'Galeri Event' });
+  for (const photo of await gallery.locator('img').all()) {
+    await photo.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => photo.evaluate((img: HTMLImageElement) => img.naturalWidth))
+      .toBeGreaterThan(0);
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({
+    path: testInfo.outputPath('event.png'),
     fullPage: true,
     animations: 'disabled',
   });

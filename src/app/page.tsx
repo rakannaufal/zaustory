@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { AlbumCollection } from '@/components/album-collection';
 import { ContactLinks } from '@/components/contact-links';
+import { CollaborationMedia } from '@/components/collaboration-media';
 import { HeroBackground } from '@/components/hero-background';
 import { ImagePlaceholder } from '@/components/image-placeholder';
 import { PhotoImage } from '@/components/photo-image';
@@ -74,6 +75,7 @@ export default function HomePage() {
                 photo={site.photographerPortrait}
                 sizes="(max-width: 760px) 100vw, 45vw"
                 mode="contain"
+                priority
               />
             ) : (
               <ImagePlaceholder
@@ -106,9 +108,9 @@ export default function HomePage() {
             </h2>
             <figure className="about-portrait" data-reveal="media">
               <div className="about-portrait-image">
-                {site.photographerPortrait ? (
+                {site.aboutPortrait ? (
                   <PhotoImage
-                    photo={site.photographerPortrait}
+                    photo={site.aboutPortrait}
                     sizes="(max-width: 760px) 100vw, 40vw"
                     mode="contain"
                   />
@@ -169,9 +171,14 @@ export default function HomePage() {
               <h3>Koneksi &amp; kolaborasi</h3>
               <p>Beberapa nama dalam perjalanan Zaustory.</p>
             </div>
-            <ul>
-              {site.affiliations.map((name) => (
-                <li key={name}>{name}</li>
+            <ul aria-label="Koneksi dan kolaborasi Zaustory">
+              {site.affiliations.map((item) => (
+                <li key={item.name}>
+                  <div className="collaboration-media">
+                    <CollaborationMedia item={item} />
+                  </div>
+                  <span>{item.name}</span>
+                </li>
               ))}
             </ul>
           </div>

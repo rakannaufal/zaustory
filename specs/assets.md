@@ -18,7 +18,7 @@ Teks lisensi disalin dari paket terpasang ke public/licenses/. Screenshot hasil 
 
 ## Menunggu
 
-40 foto album tersisa (Minsoc 10, event 30), satu potret fotografer transparan, satu foto untuk masing-masing dari tiga pengalaman, bio, logo organisasi. Kartu berbagi memakai logo sampai foto berizin tersedia. Tidak menggunakan foto stok/AI sebagai karya. Seluruh posisi foto kosong memakai ikon Lucide ImageIcon dengan label aksesibel dan caption sementara.
+32 foto album tersisa (Minsoc 10, Event 22), bio panjang, logo organisasi bila dibutuhkan. Kartu berbagi memakai logo sampai foto berizin tersedia. Tidak menggunakan foto stok/AI sebagai karya. Seluruh posisi foto kosong memakai ikon Lucide ImageIcon dengan label aksesibel dan caption sementara.
 
 ## Foto
 
@@ -26,8 +26,17 @@ JPEG/PNG/WebP/AVIF berizin di public/images/<album>/. Dianjurkan <=2400px dan su
 
 Pemilik memastikan izin subjek/publikasi dan nama/logo. Tidak ada upload pengunjung.
 
-Potret: PNG/WebP/AVIF dengan alpha, tanpa latar kotak; dianjurkan komposisi vertikal. Simpan di public/images/profile/ dan isi photographerPortrait di src/content/site.ts dengan metadata Photo. Hero menggunakan contain dan menempatkan kaki/bagian bawah pada tepi hero. Foto pengalaman memakai satu Photo per entri experiences[].photo; rasio tampilan 1.6 dengan cover. Null tetap menampilkan ikon. Belum ada aset asli untuk memverifikasi tampilan cutout aktual.
+Potret: PNG/WebP/AVIF dengan alpha, tanpa latar kotak; dianjurkan komposisi vertikal. Simpan di public/images/profile/ dan isi photographerPortrait di src/content/site.ts dengan metadata Photo. Hero menggunakan contain dan menempatkan kaki/bagian bawah pada tepi hero. Foto pengalaman memakai satu Photo per entri experiences[].photo; rasio tampilan 1.6 dengan cover. Null tetap menampilkan ikon. Potret aktual tersedia sejak 2026-10-24; hero dan Tentang memakai dua sumber terpisah.
 
 ## Foto album pemilik, 2026-10-23
 
 30 JPEG dari assets/minsoc, assets/football, dan assets/basket dipasang sesuai instruksi pemilik: masing-masing 10 foto ke album minsoc, lapangan-bola, dan basket. Turunan WebP kualitas 85 di public/images/<slug>/ mempertahankan dimensi asli 2048x1365 atau 1365x2048, tanpa metadata EXIF. Total WebP sekitar 10.33 MiB, dibanding sumber sekitar 65 MiB. Alt menjelaskan isi foto berdasarkan inspeksi visual; tidak menambahkan identitas, tanggal, atau nama acara rekaan. Sampul memakai foto pertama; strip otomatis mengambil maksimal 20 foto gabungan.
+
+## Aset baru pemilik, 2026-10-24
+
+- section1.png: hero, turunan profile/hero.webp 981x1602; latar hitam tersambung ke tepi (RGB maksimal 4) diubah menjadi alpha, isi subjek dipertahankan. about.png: Tentang, profile/about.webp 382x653, alpha asli dipertahankan.
+- kampanye.jpeg, epa.jpeg, piala walikota.JPEG: public/images/experiences/ untuk tiga pengalaman sesuai nama.
+- al azhar.JPEG, curva.PNG, persega.JPEG: public/images/collaborations/ untuk Al Azhar, Curva Apparel, Persega FC.
+- assets/event/: 10 file, 8 foto unik. IMG_6998 (1).JPEG dan IMG_6999 (1).JPEG identik byte dengan versi tanpa (1); sumber dipertahankan, turunan hanya satu per foto. public/images/event/ memakai delapan WebP, maksimum sisi 2400px.
+- Semua turunan foto WebP kualitas 85, orientasi dinormalisasi, metadata EXIF dibuang. Sumber asli tidak diubah.
+- pspsstore.MOV: sumber HEVC 1080x1920, sekitar 42.77 detik. Turunan public/videos/pspsstore.mp4 H.264/AAC, 540x960, 24 fps, CRF 26, audio 96 kbit/s, faststart, tanpa metadata sumber; sekitar 6.80 MiB dibanding sumber sekitar 64 MiB. Poster public/images/collaborations/pspsstore.webp dari detik pertama. Kontrol native, playsInline, muted awal, preload none, tanpa autoplay. Gagal muat menampilkan poster dan pesan.

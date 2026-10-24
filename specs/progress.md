@@ -320,3 +320,19 @@ Verifikasi aktual: baseline 36/36 unit lulus. npm run check akhir keluar 0: lint
 Satu uji strip pada suite awal gagal karena sampling posisi sebelum compositor menyelesaikan pause; tes kini menunggu animation.ready sebelum membandingkan posisi. Suite penuh sesudahnya lulus. Tidak ada perubahan dependensi. Screenshot akhir desktop/ponsel diperiksa visual: foto terlihat, teks serta CTA terbaca, tanpa tombol carousel. Tautan WhatsApp diperiksa tanpa mengirim pesan. Deployment/perangkat fisik belum diverifikasi.
 
 Bukti: [hero desktop](../docs/evidence/hero-carousel-desktop.png), [hero ponsel](../docs/evidence/hero-carousel-mobile.png). Screenshot menunjukkan satu frame; pergantian dibuktikan oleh tes browser.
+
+## Aset profil, pengalaman, kolaborasi, dan Event, 2026-10-24
+
+Pemilik meminta aset baru di assets dipasang menurut namanya. section1.png menjadi potret hero, about.png menjadi potret Tentang. Tiga foto pengalaman terhubung ke Kampanye Walikota, EPA PSPS, dan Piala Walikota x ISAC. Kolaborasi menampilkan foto Al Azhar, Curva Apparel, Persega FC serta video Pspsstore dengan kontrol native, muted awal, tanpa autoplay, preload none, poster, dan fallback saat gagal muat.
+
+Event memuat 8 foto unik dari 10 file sumber. Versi IMG_6998 (1).JPEG dan IMG_6999 (1).JPEG identik byte dengan versi tanpa (1), sehingga tidak ditayangkan dua kali. Total album kini 38 foto dari 70 slot rencana; Minsoc menyisakan 10 dan Event 22 slot. Carousel hero tetap hanya dari tiga album olahraga, strip otomatis mencampur Event juga.
+
+Semua sumber asli dipertahankan. Turunan WebP kualitas 85 maksimal 2400px dinormalisasi orientasinya dan tanpa EXIF. Latar hitam potret hero yang tersambung ke tepi diubah menjadi alpha pada turunan saja. Video HEVC 64 MiB dikonversi ke MP4 H.264/AAC 540x960, 24 fps, sekitar 6.80 MiB, 42.77 detik, faststart. Foto pengalaman memakai crop dari atas agar kepala pada sumber vertikal tetap terlihat.
+
+Verifikasi aktual menggunakan Node 26.8.2: baseline 39/39 unit lulus. npm run check keluar 0 (lint tanpa warning, TypeScript, 39/39 unit, build 9 keluaran statis). Seluruh 47 referensi gambar didekode dan diperiksa dimensi serta ketiadaan EXIF; total sekitar 14.36 MiB, termasuk 30 foto olahraga sebelumnya.
+
+Suite browser pertama terhenti karena ENOSPC pada penyimpanan sementara dan satu pengamatan animasi singkat melewati batas waktunya. Pengulangan tanpa mengubah implementasi, memakai satu worker tanpa trace, lulus 40/40 dalam 1.1 menit. Cakupan: Chromium desktop/ponsel, seluruh album termasuk Event dan lightbox, keyboard/fokus, filter/offline/no-JS, carousel, reduced motion, axe tanpa pelanggaran, overflow 320/390/768/1440px, gambar benar-benar dimuat, video benar-benar diputar dan dihentikan, poster/pesan saat request video sengaja digagalkan.
+
+Setelah inspeksi visual, crop foto pengalaman diperbaiki menjadi center top. Build ulang lulus; empat E2E terarah desktop/ponsel lulus dalam 10.6 detik untuk media dan screenshot. Pengambilan bukti Event diperbaiki agar scroll kembali ke atas sebelum screenshot. Format dan diff diperiksa sebelum commit. Tidak ada dependensi baru. Deployment, Safari, dan perangkat fisik belum diuji.
+
+Bukti screenshot produksi lokal: [hero desktop](../docs/evidence/new-assets-home-desktop.png), [hero ponsel](../docs/evidence/new-assets-home-mobile.png), [kolaborasi desktop](../docs/evidence/new-assets-collaborations-desktop.png), [kolaborasi ponsel](../docs/evidence/new-assets-collaborations-mobile.png), [Event desktop](../docs/evidence/new-assets-event-desktop.png), [Event ponsel](../docs/evidence/new-assets-event-mobile.png). Bukti hero/Event berupa potongan bagian atas screenshot halaman penuh; kolaborasi berupa screenshot elemen. Gerak carousel dan pemutaran video dibuktikan oleh tes browser.

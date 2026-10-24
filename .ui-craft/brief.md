@@ -50,3 +50,5 @@ Pengunjung mengenali lima kategori, membuka detail, dan menemukan Instagram mela
 - 2026-10-23: Empat album: Minsoc, Basket, Football, Event; Padel dihapus. Hero memakai carousel latar foto olahraga acak setiap 3 detik, opacity rendah (24%) dan fade 600ms, tanpa tombol kontrol; reduced motion menampilkan foto statis. Strip setelah hero tetap di bawah viewport awal.
 
 - 2026-10-23: Judul hero lebih transparan (72%/55%) dengan garis tepi tipis agar foto tetap terlihat. CTA utama menuju WhatsApp 087752053779, Instagram sekunder.
+
+- 2026-10-24: Aset baru dipetakan menurut nama: section1 untuk hero, about untuk Tentang, tiga pengalaman, tiga foto kolaborasi dan satu video Pspsstore. Potret hero dan Tentang kini sumber terpisah. Kolaborasi menjadi grid media empat kolom desktop/dua kolom ponsel dengan label nama. Video native diputar manual; hero tetap tanpa tombol carousel. Event berisi delapan foto unik, sumber duplikat tidak ditayangkan ulang.

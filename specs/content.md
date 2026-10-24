@@ -18,12 +18,14 @@ src/content/site.ts: identitas, lokasi, kontak, kredit profil, sorotan, pengalam
 
 ## Editorial tertunda
 
-Bio panjang Uwa, sisa foto album/potret/pengalaman, konfirmasi WhatsApp, rincian afiliasi. Bio singkat dan telepon sudah bersumber dari profil publik. Jangan mengganti materi tertunda dengan data contoh atau caption yang belum terbaca.
+Bio panjang Uwa, sisa foto album, rincian afiliasi. Bio singkat dan telepon sudah bersumber dari profil publik. Jangan mengganti materi tertunda dengan data contoh atau caption yang belum terbaca.
 
 ## Pembaruan
 
 Simpan foto berizin di public/images/<album>/. Isi src, alt, width, height, caption opsional pada manifest. Validasi saat build; format lengkap ada di README.
 
-Potret hero: photographerPortrait pada site.ts, null sampai potret transparan asli tersedia. Pengalaman: satu photo per entri experiences, null sampai aset tersedia. Slot bukan foto tayang; album minsoc, lapangan-bola, dan basket masing-masing berisi 10 foto pemilik sejak 2026-10-23. Event tetap kosong. Padel dihapus sesuai instruksi pemilik. Nama album lapangan-bola menjadi Football; URL lama dipertahankan. Lightbox tidak menampilkan alt sebagai caption. Alt berdasarkan isi foto; caption opsional belum diisi.
+Potret hero: photographerPortrait dari section1.png. Tentang: aboutPortrait dari about.png. Pengalaman: satu photo per entri experiences dari kampanye.jpeg, epa.jpeg, dan piala walikota.JPEG. Slot bukan foto tayang; album minsoc, lapangan-bola, dan basket masing-masing berisi 10 foto pemilik sejak 2026-10-23. Event berisi 8 foto unik sejak 2026-10-24; dua file duplikat di sumber tidak ditayangkan ulang. Padel dihapus sesuai instruksi pemilik. Nama album lapangan-bola menjadi Football; URL lama dipertahankan. Lightbox tidak menampilkan alt sebagai caption. Alt berdasarkan isi foto; caption opsional belum diisi.
 
 Pembaruan pemilik 2026-10-23: nomor kontak kini 0877-5205-3779. CTA hero/kontak memakai WhatsApp https://wa.me/6287752053779 dengan pesan awal. Tautan telepon tel:+6287752053779; Instagram tetap tautan sekunder. Environment WhatsApp opsional mengganti nomor default; kosong memakai nomor pemilik.
+
+Pembaruan aset 2026-10-24: kolaborasi memakai foto Al Azhar, Curva Apparel, Persega FC dan video Pspsstore berdasarkan nama file sumber. Video diputar manual, muted awal, dengan poster dan pesan jika gagal dimuat. Alt tetap untuk aksesibilitas; tidak menjadi caption terlihat. Total foto album tayang 38 dari 70 slot rencana.

@@ -248,7 +248,64 @@ export const albums = defineAlbums([
     description:
       'Rangkaian acara, suasana, dan orang-orang yang hadir di dalamnya.',
     plannedCount: 30,
-    photos: [],
+    photos: [
+      {
+        id: 'event-6463',
+        src: '/images/event/img_6463.webp',
+        alt: 'Pembicara berpeci berdiri di podium acara.',
+        width: 2400,
+        height: 1597,
+      },
+      {
+        id: 'event-6707',
+        src: '/images/event/img_6707.webp',
+        alt: 'Peserta berbaju merah di tengah keramaian acara.',
+        width: 2400,
+        height: 1597,
+      },
+      {
+        id: 'event-6997',
+        src: '/images/event/img_6997.webp',
+        alt: 'Peserta berbaju ungu dan berpeci menunjukkan gestur tangan.',
+        width: 2400,
+        height: 1742,
+      },
+      {
+        id: 'event-6998',
+        src: '/images/event/img_6998.webp',
+        alt: 'Tiga peserta berbincang dengan mikrofon pada acara.',
+        width: 2400,
+        height: 1597,
+      },
+      {
+        id: 'event-6999',
+        src: '/images/event/img_6999.webp',
+        alt: 'Peserta berkumpul dalam rangkaian acara.',
+        width: 2400,
+        height: 1597,
+      },
+      {
+        id: 'event-7001',
+        src: '/images/event/img_7001.webp',
+        alt: 'Para peserta duduk menyaksikan acara.',
+        width: 2400,
+        height: 1600,
+      },
+      {
+        id: 'event-7002',
+        src: '/images/event/img_7002.webp',
+        alt: 'Peserta berbaju abu-abu di lokasi acara.',
+        width: 2400,
+        height: 1597,
+      },
+      {
+        id: 'event-7004',
+        src: '/images/event/img_7004.webp',
+        alt: 'Para peserta berhijab mengikuti acara.',
+        width: 2400,
+        height: 1594,
+      },
+    ],
   },
 ]);
 

@@ -29,27 +29,21 @@ describe('photo gallery', () => {
     ).toHaveAttribute('href', 'https://www.instagram.com/zauustory/');
   });
 
-  it('shows every planned slot without making placeholders interactive', () => {
-    render(<PhotoGallery photos={[]} albumName="Minsoc" plannedCount={20} />);
-    const gallery = screen.getByRole('list', { name: 'Galeri Minsoc' });
-    expect(within(gallery).getAllByRole('listitem')).toHaveLength(20);
-    expect(
-      within(gallery).getAllByRole('img', { name: /^Slot foto/ }),
-    ).toHaveLength(20);
-    expect(within(gallery).queryByRole('button')).not.toBeInTheDocument();
+  it('does not invent photo slots for an empty album', () => {
+    render(<PhotoGallery photos={[]} albumName="Minsoc" />);
+    expect(screen.queryByRole('list')).not.toBeInTheDocument();
+    expect(screen.queryByText('Foto sementara')).not.toBeInTheDocument();
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
-  it('replaces slots with real photos and excludes remaining slots from the lightbox', async () => {
+  it('renders only available photos and navigates those photos in the lightbox', async () => {
     const user = userEvent.setup();
-    render(
-      <PhotoGallery photos={testPhotos} albumName="Test" plannedCount={4} />,
-    );
+    render(<PhotoGallery photos={testPhotos} albumName="Test" />);
     const gallery = screen.getByRole('list', { name: 'Galeri Test' });
-    expect(within(gallery).getAllByRole('listitem')).toHaveLength(4);
+    expect(within(gallery).getAllByRole('listitem')).toHaveLength(2);
     expect(
-      within(gallery).getAllByRole('img', { name: /^Slot foto/ }),
-    ).toHaveLength(2);
+      within(gallery).queryByRole('img', { name: /^Slot foto/ }),
+    ).not.toBeInTheDocument();
     expect(within(gallery).getAllByRole('button')).toHaveLength(2);
     await user.click(
       within(gallery).getByRole('button', {

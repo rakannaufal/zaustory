@@ -1112,21 +1112,6 @@ svg {
   font-size: 15px;
   color: var(--text-secondary);
 }
-.album-page-description dl {
-  display: flex;
-  gap: var(--space-12);
-  margin: var(--space-6) 0 0;
-}
-.album-page-description dt {
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-.album-page-description dd {
-  margin: 4px 0 0;
-  font-size: 14px;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
 .album-gallery-section {
   border-top: 1px solid var(--border-default);
   padding-block: var(--space-12);
@@ -1183,14 +1168,6 @@ svg {
 }
 .photo-grid > li {
   min-width: 0;
-}
-.gallery-placeholder {
-  aspect-ratio: 1.5;
-  height: auto;
-  min-height: 0;
-}
-.photo-grid > li:nth-child(3n + 2) .gallery-placeholder {
-  background: var(--surface-raised);
 }
 .photo-open-button {
   position: relative;
@@ -1716,22 +1693,6 @@ svg {
   .photo-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-3);
-  }
-  .gallery-placeholder .image-placeholder-icon {
-    width: 32px;
-    height: 32px;
-  }
-  .gallery-placeholder .image-placeholder-marker {
-    top: 8px;
-    left: 10px;
-    font-size: 10px;
-  }
-  .gallery-placeholder .image-placeholder-caption {
-    margin-top: var(--space-2);
-    font-size: 10px;
-  }
-  .gallery-placeholder {
-    aspect-ratio: 1;
   }
   .lightbox-shell {
     width: calc(100% - 32px);

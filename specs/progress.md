@@ -348,3 +348,9 @@ Verifikasi aktual: baseline 39/39 unit lulus. npm run check lulus: lint tanpa wa
 Suite awal 42/44 lulus karena tes baru menganggap Shift+Tab dari tombol tutup langsung menuju tombol terakhir. Reproduksi menunjukkan Chromium memfokuskan elemen dialog sendiri, tetap di dalam modal. Tes diperbaiki untuk memeriksa containment sesuai perilaku native, tanpa mengganti implementasi fokus. Dua tes terarah lulus dalam 6.8 detik sebelum suite penuh terakhir.
 
 Inspeksi visual screenshot produksi lokal: [kolaborasi desktop](../docs/evidence/collaboration-reveal-desktop.png), [kolaborasi ponsel](../docs/evidence/collaboration-reveal-mobile.png), [lightbox desktop](../docs/evidence/photo-lightbox-desktop.png), [lightbox ponsel](../docs/evidence/photo-lightbox-mobile.png). Gambar akhir statis; durasi, stagger dan gerak dibuktikan oleh tes browser. Tidak ada dependensi baru; perangkat fisik, Safari dan deploy belum diperiksa.
+
+## Galeri hanya foto tersedia, 2026-10-24
+
+Seluruh detail album, termasuk Event, tidak lagi membuat slot "Foto sementara". Label "Tayang" dan "Rencana" dihapus. Event menampilkan 8 foto; Minsoc, Football dan Basket masing-masing 10. plannedCount tetap menjadi batas internal validasi. Animasi dan lightbox dipertahankan; album kosong tetap menyediakan pesan dan tautan Instagram.
+
+Verifikasi: npm run check lulus (lint, TypeScript, 39 unit, build). Sepuluh E2E terarah lulus pada Chromium desktop/ponsel: jumlah foto, ketiadaan placeholder/label, lightbox, no-JS, axe dan overflow. Screenshot Event desktop/ponsel diperiksa: galeri berakhir setelah delapan foto. Tidak ada dependensi baru; deployment dan perangkat fisik belum diperiksa.

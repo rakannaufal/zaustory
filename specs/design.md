@@ -28,7 +28,7 @@ Strip foto memiliki tombol jeda/putar dan berhenti saat hover. Reduced motion at
 
 ## Kondisi
 
-Sampul, potret, pengalaman, dan foto album yang belum tersedia memakai ikon gambar dengan nama aksesibel. Detail memiliki tepat 20/10/10/30 slot; foto asli menggantikan slot secara otomatis. Ikon tidak dapat diperbesar, tidak menambah jumlah tayang. Foto rusak diberi pesan; dialog tetap dapat ditutup. Tanpa carousel otomatis atau kursor kustom.
+Sampul, potret, dan pengalaman yang belum tersedia memakai ikon gambar dengan nama aksesibel. Detail album hanya menampilkan foto tersedia, tanpa slot "Foto sementara" atau label "Tayang" dan "Rencana". Album kosong menampilkan pesan dan tautan Instagram. Foto rusak diberi pesan; dialog tetap dapat ditutup. Tanpa kursor kustom.
 
 Pembaruan 2026-10-23: empat album (Minsoc, Football, Basket, Event), kartu Event mengisi pasangan baris Basket setelah Padel dihapus. Tinggi minimum hero mengikuti viewport dikurangi tinggi header (88px desktop, 72px ponsel), sehingga strip foto baru terlihat setelah scroll. Deskripsi alt tidak menjadi caption lightbox.
 

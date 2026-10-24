@@ -36,9 +36,9 @@ Environment public dibaca saat build. Rebuild setelah perubahan. Preview default
 
 ## Mengisi foto
 
-Empat album ada di `src/content/albums.ts`: Minsoc 20, Football 10, basket 10, event 30. Itu **jumlah rencana**, bukan foto tayang. Saat ini 38 foto pemilik tayang: Minsoc 10, Football 10, basket 10, dan Event 8. Sumber JPEG di `assets/minsoc/`, `assets/football/`, dan `assets/basket/` dipertahankan; turunan WebP tanpa metadata EXIF ada di `public/images/`. Dimensi asli dipertahankan (2048x1365 atau 1365x2048). Event menyisakan 22 slot; Minsoc menyisakan 10 slot. Dua file Event duplikat tidak ditayangkan ulang.
+Empat album di `src/content/albums.ts` berisi 38 foto pemilik: Minsoc 10, Football 10, Basket 10, dan Event 8. Sumber asli dipertahankan; turunan WebP tanpa metadata EXIF ada di `public/images/`. Dua file Event duplikat tidak ditayangkan ulang.
 
-Setiap detail menampilkan seluruh slot rencana dengan ikon gambar sementara. Slot bukan tombol dan tidak dapat diperbesar. Setiap foto yang ditambahkan menggantikan satu slot; sisa slot tetap terlihat. Sampul album memakai foto pertama, atau ikon saat kosong.
+Detail album hanya menampilkan foto tersedia, tanpa slot "Foto sementara" atau label "Tayang" dan "Rencana". Album kosong menampilkan pesan dan tautan Instagram. Sampul memakai foto pertama, atau ikon saat kosong.
 
 1. Siapkan foto berizin JPEG/PNG/WebP/AVIF, dianjurkan <=2400px dan terkompres.
 2. Simpan di `public/images/<slug>/`.
@@ -57,7 +57,7 @@ photos: [
 ],
 ```
 
-Ganti contoh dengan metadata foto sebenarnya. Slug/ID harus unik, alt tidak kosong, dimensi positif, path lokal raster; jumlah foto tidak melebihi rencana. Naikkan plannedCount secara sengaja bila rencana berubah. Sampul menggunakan foto pertama. Jumlah tayang otomatis dari panjang photos. Deskripsi alt hanya untuk aksesibilitas; lightbox menampilkan caption hanya jika caption diisi secara eksplisit. Foto dapat diperbesar dengan klik/Enter, panah kiri/kanan, Escape, serta tombol tutup; kegagalan gambar diberi pesan.
+Ganti contoh dengan metadata foto sebenarnya. Slug/ID harus unik, alt tidak kosong, dimensi positif, path lokal raster; jumlah foto tidak melebihi rencana. plannedCount hanya batas internal validasi, tidak ditampilkan di web; naikkan bila kapasitas berubah. Sampul menggunakan foto pertama. Deskripsi alt hanya untuk aksesibilitas; lightbox menampilkan caption hanya jika caption diisi secara eksplisit. Foto dapat diperbesar dengan klik/Enter, panah kiri/kanan, Escape, serta tombol tutup; kegagalan gambar diberi pesan.
 
 Fakta situs di `src/content/site.ts`. Bio singkat berasal dari profil publik [@zauustory](https://www.instagram.com/zauustory/): Pekanbaru, Riau; fotografer @rzzwadzaky; media partner @langkaahsenja_; telepon +62 838-5465-3003. Pembaruan pemilik 2026-10-23 mengganti kontak menjadi WhatsApp 0877-5205-3779 (wa.me/6287752053779); CTA hero/kontak menuju WhatsApp dengan pesan awal, telepon memakai nomor yang sama. Instagram tetap tersedia sebagai tautan sekunder. Sumber dan batas adaptasi di [docs/content-sources.md](docs/content-sources.md). Afiliasi tidak diklaim sebagai klien aktif.
 

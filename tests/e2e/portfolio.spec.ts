@@ -332,10 +332,10 @@ test('shows the public Instagram identity, local contact, and profile credits', 
   ).toHaveCount(0);
 });
 
-test('serves every planned photo slot with honest counts and unique titles', async ({
+test('shows only available photos without placeholders or planning labels', async ({
   page,
 }) => {
-  for (const [slug, name, count, highlight] of albumRoutes) {
+  for (const [slug, name, , highlight] of albumRoutes) {
     const publishedCount = ['minsoc', 'lapangan-bola', 'basket'].includes(slug)
       ? 10
       : 8;
@@ -355,16 +355,15 @@ test('serves every planned photo slot with honest counts and unique titles', asy
       page.getByRole('button', { name: /Perbesar foto/ }),
     ).toHaveCount(publishedCount);
     const gallery = page.getByRole('list', { name: `Galeri ${name}` });
-    await expect(gallery.getByRole('listitem')).toHaveCount(count);
+    await expect(gallery.getByRole('listitem')).toHaveCount(publishedCount);
     await expect(gallery.getByRole('img', { name: /^Slot foto/ })).toHaveCount(
-      count - publishedCount,
+      0,
     );
-    await expect(
-      page
-        .locator('dl > div')
-        .filter({ has: page.getByText('Tayang', { exact: true }) })
-        .getByRole('definition'),
-    ).toHaveText(`${publishedCount} foto`);
+    await expect(page.getByText('Foto sementara', { exact: true })).toHaveCount(
+      0,
+    );
+    await expect(page.getByText('Tayang', { exact: true })).toHaveCount(0);
+    await expect(page.getByText('Rencana', { exact: true })).toHaveCount(0);
     if (publishedCount) {
       const firstPhoto = gallery.getByRole('button').first();
       await firstPhoto.scrollIntoViewIfNeeded();
@@ -786,7 +785,7 @@ test('keeps filters usable after going offline', async ({ page, context }) => {
   }
 });
 
-test('renders album links, photos and empty details without JavaScript', async ({
+test('renders album links and available photos without JavaScript', async ({
   browser,
 }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
@@ -822,7 +821,7 @@ test('renders album links, photos and empty details without JavaScript', async (
     ).toHaveCount(10);
     await expect(
       page.getByRole('list', { name: 'Galeri Minsoc' }).getByRole('listitem'),
-    ).toHaveCount(20);
+    ).toHaveCount(10);
     await page.goto('http://127.0.0.1:3100/album/event');
     await expect(
       page.getByRole('list', { name: 'Galeri Event' }).locator('img'),

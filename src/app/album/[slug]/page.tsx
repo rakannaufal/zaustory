@@ -64,16 +64,6 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
           </div>
           <div className="album-page-description">
             <p>{album.description}</p>
-            <dl>
-              <div>
-                <dt>Tayang</dt>
-                <dd>{album.photos.length} foto</dd>
-              </div>
-              <div>
-                <dt>Rencana</dt>
-                <dd>{album.plannedCount} foto</dd>
-              </div>
-            </dl>
           </div>
         </header>
         <section
@@ -84,7 +74,6 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
             <PhotoGallery
               photos={album.photos}
               albumName={album.name}
-              plannedCount={album.plannedCount}
               instagramHighlight={site.albumHighlights[album.slug]}
             />
           </ScrollReveal>

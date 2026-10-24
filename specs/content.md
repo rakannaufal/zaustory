@@ -9,8 +9,8 @@ src/content/site.ts: identitas, lokasi, kontak, kredit profil, sorotan, pengalam
 - Hero: "Di lapangan. Dalam ingatan." dengan lokasi Pekanbaru, Riau.
 - Deskripsi: "Fotografi olahraga dan event. Menangkap aksi pertandingan, suasana acara, dan momen di antaranya."
 - CTA: "Jelajahi album" dan "Hubungi via Instagram".
-- Album kosong: "Foto belum tersedia" disertai jumlah slot dan keterangan ikon akan diganti foto asli. Setiap slot bernomor dan memakai caption "Foto sementara".
-- Rencana jumlah selalu berlabel; jumlah tayang dari photos.length.
+- Album kosong: "Foto belum tersedia" disertai tautan Instagram, tanpa slot foto sementara.
+- Galeri hanya menampilkan foto tersedia, tanpa label "Tayang" dan "Rencana". plannedCount hanya batas internal validasi.
 - Tentang: nama profil Zau Story | Agency Media, fotografi dari Pekanbaru, kredit @rzzwadzaky dan media partner @langkaahsenja_. Tautan menuju profil masing-masing.
 - Kontak: WhatsApp 0877-5205-3779 dikonfirmasi pemilik 2026-10-23; CTA utama menuju wa.me/6287752053779. Telepon memakai nomor yang sama; @zauustory tetap tautan sekunder.
 - Album kosong Minsoc/Football/basket/event menautkan sorotan terkait. Tidak menganggap isi sorotan sudah disalin ke web.

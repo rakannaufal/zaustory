@@ -41,7 +41,9 @@
   --duration-fast: 150ms;
   --duration-enter: 350ms;
   --duration-reveal: 400ms;
-  --reveal-stagger: 60ms;
+  --duration-reveal-media: 600ms;
+  --duration-dialog: 240ms;
+  --reveal-stagger: 80ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --z-header: 20;
   --header-height: 88px;
@@ -995,6 +997,9 @@ svg {
   background: var(--surface-raised);
   margin-bottom: var(--space-4);
 }
+.collaboration-name {
+  display: block;
+}
 .collaboration-media video {
   display: block;
   width: 100%;
@@ -1093,6 +1098,7 @@ svg {
   gap: var(--space-16);
   align-items: end;
   padding-block: var(--space-12) var(--space-16);
+  animation: enter var(--duration-enter) var(--ease-out) both;
 }
 .album-page-heading h1 {
   font-size: clamp(5rem, 10vw, 9rem);
@@ -1194,6 +1200,49 @@ svg {
   border: 0;
   padding: 0;
   background: var(--surface-raised);
+  cursor: zoom-in;
+}
+.photo-preview,
+.photo-preview-visual {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.about-portrait-image .photo-preview {
+  background: transparent;
+}
+.photo-open-button .photo-image {
+  transition: transform var(--duration-enter) var(--ease-out);
+}
+.photo-open-button:focus-visible {
+  outline-offset: -4px;
+}
+.photo-open-button:focus-visible .photo-expand {
+  opacity: 1;
+  transform: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .photo-open-button .photo-expand {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
+  }
+  .photo-open-button:hover .photo-image {
+    transform: scale(1.035);
+  }
+  .photo-open-button:hover .photo-expand,
+  .photo-open-button:focus-visible .photo-expand {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .photo-open-button:hover .photo-image,
+  .photo-open-button .photo-expand {
+    transform: none;
+  }
 }
 .photo-image {
   display: block;
@@ -1249,6 +1298,33 @@ svg {
 }
 .photo-dialog::backdrop {
   background: var(--navy-950);
+}
+.photo-dialog[open] {
+  animation: lightbox-fade var(--duration-dialog) var(--ease-out) both;
+}
+.photo-dialog[open] .lightbox-shell {
+  animation: lightbox-enter var(--duration-enter) var(--ease-out) both;
+}
+.lightbox-image-container .photo-image {
+  animation: lightbox-fade var(--duration-dialog) var(--ease-out) both;
+}
+@keyframes lightbox-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes lightbox-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 .photo-dialog :focus-visible {
   outline-color: var(--focus-ring);

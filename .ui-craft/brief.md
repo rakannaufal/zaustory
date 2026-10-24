@@ -52,3 +52,5 @@ Pengunjung mengenali lima kategori, membuka detail, dan menemukan Instagram mela
 - 2026-10-23: Judul hero lebih transparan (72%/55%) dengan garis tepi tipis agar foto tetap terlihat. CTA utama menuju WhatsApp 087752053779, Instagram sekunder.
 
 - 2026-10-24: Aset baru dipetakan menurut nama: section1 untuk hero, about untuk Tentang, tiga pengalaman, tiga foto kolaborasi dan satu video Pspsstore. Potret hero dan Tentang kini sumber terpisah. Kolaborasi menjadi grid media empat kolom desktop/dua kolom ponsel dengan label nama. Video native diputar manual; hero tetap tanpa tombol carousel. Event berisi delapan foto unik, sumber duplikat tidak ditayangkan ulang.
+
+- 2026-10-24: Pemilik meminta animasi saat memasuki semua section, hover, dan pembesaran foto. Pertahankan arah navy/fotografi. Reveal per media: fade/naik 24px/skala 0.96 selama 600ms, teks 400ms, stagger 80ms. Foto Tentang, pengalaman, kolaborasi memakai lightbox dan hover zoom 1.035; video memakai fullscreen native. Area klik tetap stabil, reduced motion/no-JS tetap didukung.

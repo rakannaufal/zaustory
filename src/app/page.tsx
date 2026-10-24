@@ -12,12 +12,19 @@ import { HeroBackground } from '@/components/hero-background';
 import { ImagePlaceholder } from '@/components/image-placeholder';
 import { PhotoImage } from '@/components/photo-image';
 import { PhotoReel } from '@/components/photo-reel';
+import { PhotoPreview } from '@/components/photo-preview';
 import { ScrollReveal } from '@/components/scroll-reveal';
 import { albums } from '@/content/albums';
 import { site } from '@/content/site';
 import { publicConfig } from '@/lib/config';
 
 export default function HomePage() {
+  const experiencePhotos = site.experiences.flatMap(({ photo }) =>
+    photo ? [photo] : [],
+  );
+  const collaborationPhotos = site.affiliations
+    .filter(({ video }) => !video)
+    .map(({ photo }) => photo);
   return (
     <main id="main" tabIndex={-1}>
       <section className="hero" aria-labelledby="hero-title">
@@ -106,10 +113,10 @@ export default function HomePage() {
               <br />
               <span>setiap cerita.</span>
             </h2>
-            <figure className="about-portrait" data-reveal="media">
+            <figure className="about-portrait">
               <div className="about-portrait-image">
                 {site.aboutPortrait ? (
-                  <PhotoImage
+                  <PhotoPreview
                     photo={site.aboutPortrait}
                     sizes="(max-width: 760px) 100vw, 40vw"
                     mode="contain"
@@ -122,7 +129,7 @@ export default function HomePage() {
                   />
                 )}
               </div>
-              <figcaption>
+              <figcaption data-reveal="fade">
                 <span>Di balik kamera</span>
                 <span>{site.photographer.handle}</span>
               </figcaption>
@@ -166,8 +173,8 @@ export default function HomePage() {
               </dl>
             </div>
           </div>
-          <div className="affiliations" data-reveal>
-            <div>
+          <div className="affiliations">
+            <div data-reveal>
               <h3>Koneksi &amp; kolaborasi</h3>
               <p>Beberapa nama dalam perjalanan Zaustory.</p>
             </div>
@@ -175,9 +182,14 @@ export default function HomePage() {
               {site.affiliations.map((item) => (
                 <li key={item.name}>
                   <div className="collaboration-media">
-                    <CollaborationMedia item={item} />
+                    <CollaborationMedia
+                      item={item}
+                      photos={collaborationPhotos}
+                    />
                   </div>
-                  <span>{item.name}</span>
+                  <span className="collaboration-name" data-reveal="fade">
+                    {item.name}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -231,25 +243,29 @@ export default function HomePage() {
           </div>
           <ol className="experience-list" aria-label="Pengalaman Zaustory">
             {site.experiences.map((experience) => (
-              <li key={experience.name} data-reveal>
+              <li key={experience.name}>
                 {experience.year ? (
-                  <time dateTime={experience.year}>{experience.year}</time>
+                  <time dateTime={experience.year} data-reveal>
+                    {experience.year}
+                  </time>
                 ) : (
                   <span
                     className="experience-year-empty"
                     aria-label="Tahun belum dicantumkan"
+                    data-reveal
                   >
                     &mdash;
                   </span>
                 )}
-                <div className="experience-copy">
+                <div className="experience-copy" data-reveal>
                   <p className="experience-category">{experience.category}</p>
                   <h3>{experience.name}</h3>
                 </div>
                 <div className="experience-photo">
                   {experience.photo ? (
-                    <PhotoImage
+                    <PhotoPreview
                       photo={experience.photo}
+                      photos={experiencePhotos}
                       sizes="(max-width: 760px) 100vw, 30vw"
                     />
                   ) : (

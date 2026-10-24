@@ -2,15 +2,26 @@
 
 import { useState } from 'react';
 import type { Affiliation } from '@/content/site';
-import { PhotoImage } from '@/components/photo-image';
+import type { Photo } from '@/lib/content';
+import { PhotoPreview } from '@/components/photo-preview';
 
-export function CollaborationMedia({ item }: { item: Affiliation }) {
+export function CollaborationMedia({
+  item,
+  photos,
+}: {
+  item: Affiliation;
+  photos: readonly Photo[];
+}) {
   const [failed, setFailed] = useState(false);
 
   if (!item.video || failed) {
     return (
       <>
-        <PhotoImage photo={item.photo} sizes="(max-width: 1040px) 45vw, 23vw" />
+        <PhotoPreview
+          photo={item.photo}
+          photos={failed ? [item.photo] : photos}
+          sizes="(max-width: 1040px) 45vw, 23vw"
+        />
         {failed && (
           <p className="collaboration-error">Video tidak dapat dimuat.</p>
         )}
@@ -20,6 +31,7 @@ export function CollaborationMedia({ item }: { item: Affiliation }) {
 
   return (
     <video
+      data-reveal="fade"
       aria-label={`Video ${item.name}`}
       src={item.video}
       poster={item.photo.src}

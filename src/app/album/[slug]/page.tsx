@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { PhotoGallery } from '@/components/photo-gallery';
+import { ScrollReveal } from '@/components/scroll-reveal';
 import { albums, getAlbumBySlug } from '@/content/albums';
 import { site } from '@/content/site';
 import { publicConfig } from '@/lib/config';
@@ -79,21 +80,29 @@ export default async function AlbumPage({ params }: AlbumPageProps) {
           className="album-gallery-section"
           aria-label={`Foto album ${album.name}`}
         >
-          <PhotoGallery
-            photos={album.photos}
-            albumName={album.name}
-            plannedCount={album.plannedCount}
-            instagramHighlight={site.albumHighlights[album.slug]}
-          />
+          <ScrollReveal>
+            <PhotoGallery
+              photos={album.photos}
+              albumName={album.name}
+              plannedCount={album.plannedCount}
+              instagramHighlight={site.albumHighlights[album.slug]}
+            />
+          </ScrollReveal>
         </section>
         {nextAlbum && (
-          <Link href={`/album/${nextAlbum.slug}`} className="next-album-link">
-            <div>
-              <p>Album berikutnya</p>
-              <span>{nextAlbum.name}</span>
-            </div>
-            <ArrowUpRight size={42} aria-hidden="true" />
-          </Link>
+          <ScrollReveal>
+            <Link
+              href={`/album/${nextAlbum.slug}`}
+              className="next-album-link"
+              data-reveal
+            >
+              <div>
+                <p>Album berikutnya</p>
+                <span>{nextAlbum.name}</span>
+              </div>
+              <ArrowUpRight size={42} aria-hidden="true" />
+            </Link>
+          </ScrollReveal>
         )}
       </div>
     </main>

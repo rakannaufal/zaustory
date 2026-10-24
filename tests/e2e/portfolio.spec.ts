@@ -8,6 +8,137 @@ const albumRoutes = [
   ['event', 'Event', 30, '17986710449824514'],
 ] as const;
 
+test('reveals collaboration media independently with a short stagger', async ({
+  page,
+}, testInfo) => {
+  await page.goto('/');
+  const media = page.locator('.collaboration-media [data-reveal]');
+  await expect(media).toHaveCount(4);
+  for (const item of await media.all()) {
+    await expect(item).toHaveCSS('opacity', '0');
+  }
+  const bounds = await media.first().boundingBox();
+  const finished = media.evaluateAll((elements) =>
+    Promise.all(
+      elements.map((element) => {
+        const animation = element
+          .getAnimations()
+          .find(({ id }) => id === 'section-reveal')!;
+        return animation.finished.then(() => ({
+          delay: animation.effect!.getTiming().delay,
+          duration: animation.effect!.getTiming().duration,
+        }));
+      }),
+    ),
+  );
+  await page.mouse.wheel(0, bounds!.y - 140);
+  const timings = await finished;
+  expect(timings.map(({ duration }) => duration)).toEqual([400, 600, 600, 600]);
+  if (testInfo.project.name === 'desktop-chromium') {
+    expect(timings.map(({ delay }) => delay)).toEqual([0, 80, 160, 240]);
+  }
+  for (const item of await media.all()) {
+    await expect(item).toHaveCSS('opacity', '1');
+    await expect(item).toHaveCSS('transform', 'none');
+  }
+  await page.locator('.affiliations').screenshot({
+    path: testInfo.outputPath('collaboration-reveal.png'),
+    animations: 'disabled',
+  });
+  await page.locator('.hero').scrollIntoViewIfNeeded();
+  await media.first().scrollIntoViewIfNeeded();
+  expect(
+    await media.evaluateAll(
+      (elements) =>
+        elements.flatMap((element) => element.getAnimations()).length,
+    ),
+  ).toBe(0);
+});
+
+test('zooms home photos on hover and opens their collections by keyboard', async ({
+  page,
+}, testInfo) => {
+  await page.goto('/');
+  const thumbnails = page
+    .locator('.affiliations')
+    .getByRole('button', { name: /^Perbesar foto:/ });
+  await expect(thumbnails).toHaveCount(3);
+  const trigger = thumbnails.first();
+  await trigger.focus();
+  await expect(trigger.locator('.photo-expand')).toHaveCSS('opacity', '1');
+  if (testInfo.project.name === 'desktop-chromium') {
+    await trigger.hover();
+    await expect
+      .poll(() =>
+        trigger
+          .locator('img')
+          .evaluate(
+            (img) => new DOMMatrix(getComputedStyle(img).transform).m11,
+          ),
+      )
+      .toBeGreaterThan(1.03);
+    await page.screenshot({
+      path: testInfo.outputPath('photo-hover.png'),
+      animations: 'disabled',
+    });
+  }
+  await page.keyboard.press('Enter');
+  const dialog = page.getByRole('dialog', { name: 'Pembesaran foto' });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator('.lightbox-shell')).toHaveCSS(
+    'animation-name',
+    'lightbox-enter',
+  );
+  await expect(dialog.getByRole('status')).toHaveText('Foto 1 dari 3');
+  await expect(dialog.locator('figcaption')).toHaveCount(0);
+  await expect
+    .poll(() =>
+      dialog
+        .locator('img')
+        .evaluate((img: HTMLImageElement) => img.naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  await expect(
+    dialog.getByRole('button', { name: 'Tutup foto' }),
+  ).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  // Native dialogs can focus the dialog itself at the reverse tab boundary.
+  expect(
+    await dialog.evaluate((element) =>
+      element.contains(document.activeElement),
+    ),
+  ).toBe(true);
+  await page.keyboard.press('ArrowLeft');
+  await expect(dialog.getByRole('status')).toHaveText('Foto 3 dari 3');
+  await page.keyboard.press('ArrowRight');
+  await expect(dialog.getByRole('status')).toHaveText('Foto 1 dari 3');
+  await page.screenshot({
+    path: testInfo.outputPath('photo-lightbox.png'),
+    animations: 'disabled',
+  });
+  await page.keyboard.press('Escape');
+  await expect(dialog).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+  await expect(page.locator('body')).not.toHaveCSS('overflow', 'hidden');
+
+  const portrait = page
+    .locator('.about-portrait')
+    .getByRole('button', { name: /^Perbesar foto:/ });
+  await portrait.click();
+  await expect(dialog.getByRole('status')).toHaveText('Foto 1 dari 1');
+  await page.keyboard.press('Escape');
+  await expect(portrait).toBeFocused();
+
+  const experience = page
+    .locator('.experience-list')
+    .getByRole('button', { name: /^Perbesar foto:/ })
+    .nth(1);
+  await experience.click();
+  await expect(dialog.getByRole('status')).toHaveText('Foto 2 dari 3');
+  await dialog.getByRole('button', { name: 'Tutup foto' }).click();
+  await expect(experience).toBeFocused();
+});
+
 test('loads new profile and collaboration media and plays the Pspsstore video', async ({
   page,
 }, testInfo) => {
@@ -432,8 +563,8 @@ test('reveals each album card when it enters the viewport', async ({
           : null,
     };
   });
-  expect(timing.duration).toBe(400);
-  expect(timing.initialTransform).toContain('scale(0.985)');
+  expect(timing.duration).toBe(600);
+  expect(timing.initialTransform).toContain('scale(0.96)');
   // Subscribe before scrolling so a busy test runner cannot miss a short effect.
   const finished = lastCard.evaluate((element) => {
     const animation = element
@@ -595,6 +726,14 @@ test('provides a keyboard skip link and honors reduced motion', async ({
       ),
     ).toBe(0);
   }
+  await page.locator('.about-portrait').getByRole('button').click();
+  const dialog = page.getByRole('dialog', { name: 'Pembesaran foto' });
+  await expect(dialog).toHaveCSS('animation-name', 'none');
+  await expect(dialog.locator('.lightbox-shell')).toHaveCSS(
+    'animation-name',
+    'none',
+  );
+  await page.keyboard.press('Escape');
 });
 
 test('has no horizontal overflow on small, medium, or large screens', async ({

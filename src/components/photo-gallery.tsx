@@ -59,12 +59,14 @@ export function PhotoGallery({
                 aria-label={`Perbesar foto: ${photo.alt}`}
                 onClick={() => setSelectedIndex(index)}
               >
-                <PhotoImage
-                  photo={photo}
-                  sizes="(max-width: 760px) 50vw, 33vw"
-                />
-                <span className="photo-expand" aria-hidden="true">
-                  <Expand size={21} />
+                <span className="photo-preview-visual" data-reveal="media">
+                  <PhotoImage
+                    photo={photo}
+                    sizes="(max-width: 760px) 50vw, 33vw"
+                  />
+                  <span className="photo-expand" aria-hidden="true">
+                    <Expand size={21} />
+                  </span>
                 </span>
               </button>
             </li>

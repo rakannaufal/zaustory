@@ -33,23 +33,29 @@ export function ScrollReveal({
 
     const styles = getComputedStyle(element);
     const duration = milliseconds(styles.getPropertyValue('--duration-reveal'));
+    const mediaDuration = milliseconds(
+      styles.getPropertyValue('--duration-reveal-media'),
+    );
     const stagger = milliseconds(styles.getPropertyValue('--reveal-stagger'));
     const animations = new Map<HTMLElement, Animation>();
     const observer = new IntersectionObserver(
       (entries) => {
-        let order = 0;
+        let mediaOrder = 0;
+        let textOrder = 0;
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
           const target = entry.target as HTMLElement;
           observer.unobserve(target);
           const animation = animations.get(target);
           if (!animation) continue;
+          const media =
+            target.dataset.reveal === 'media' || target.matches('video');
+          const order = media ? mediaOrder++ : textOrder++;
 
           animation.effect?.updateTiming({
-            delay: Math.min(order, 2) * stagger,
+            delay: Math.min(order, 3) * stagger,
           });
           animation.play();
-          order += 1;
         }
       },
       { rootMargin: '0px 0px -24px 0px', threshold: 0.08 },
@@ -73,23 +79,26 @@ export function ScrollReveal({
       // Only prepare content below the fold; never hide content already in view.
       if (target.getBoundingClientRect().top < window.innerHeight) continue;
       const media = target.dataset.reveal === 'media';
+      const fadeOnly = target.dataset.reveal === 'fade';
       // Keep interactive hit areas still, including when focus ends an entrance.
       const interactive =
-        target.matches('a, button') || target.querySelector('a, button');
+        target.matches('a, button, video[controls]') ||
+        target.querySelector('a, button, video[controls]');
       const animation = target.animate(
         [
           {
             opacity: 0,
-            transform: interactive
-              ? 'none'
-              : media
-                ? 'translateY(32px) scale(0.985)'
-                : 'translateY(24px)',
+            transform:
+              interactive || fadeOnly
+                ? 'none'
+                : media
+                  ? 'translateY(24px) scale(0.96)'
+                  : 'translateY(24px)',
           },
           { opacity: 1, transform: 'none' },
         ],
         {
-          duration,
+          duration: media ? mediaDuration : duration,
           easing: styles.getPropertyValue('--ease-out').trim(),
           fill: 'both',
         },

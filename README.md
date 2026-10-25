@@ -105,8 +105,12 @@ E2E menjalankan server production port 3100, dua profil Chromium desktop/ponsel,
 
 `src/app` halaman/metadata; `src/components` UI; `src/content` konten; `src/lib` validasi; `tests` unit/komponen/E2E. Mulai dari `AGENTS.md` lalu `specs/index.md`. Status terbaru hanya di `specs/progress.md`; fixture historis pada AGENTS bukan status implementasi saat ini.
 
+## Analytics dan performa
+
+Root layout memuat Vercel Web Analytics dan Speed Insights untuk seluruh rute. Aktifkan kedua fitur di dashboard proyek Vercel, deploy commit terbaru, lalu kunjungi situs production agar data mulai terkumpul. Instalasi paket saja tidak mengirim data. Endpoint production memakai `/_vercel/insights/` dan `/_vercel/speed-insights/` pada origin yang sama; localhost tidak menyediakan endpoint pengumpulan Vercel. Pemblokir konten dapat mencegah pengiriman data.
+
 ## Sebelum publikasi
 
-Masih diperlukan sisa foto album, bio panjang dari Uwa bila diinginkan, konfirmasi hubungan organisasi, domain/hosting, pemeriksaan ulang memakai konten final. Bio singkat dan telepon publik sudah tersedia dari Instagram. Kartu berbagi logo sudah tersedia. Belum ada deploy, tracking, CMS, login, database, booking, atau pembayaran. Rekomendasi hosting Next.js: Vercel; pemilihan paket/biaya menunggu pemilik.
+Masih diperlukan sisa foto album, bio panjang dari Uwa bila diinginkan, konfirmasi hubungan organisasi, domain/hosting, pemeriksaan ulang memakai konten final. Bio singkat dan telepon publik sudah tersedia dari Instagram. Kartu berbagi logo sudah tersedia. Integrasi tracking Vercel sudah dipasang; penerimaan data production belum diverifikasi. Belum ada CMS, login, database, booking, atau pembayaran. Hosting Next.js memakai Vercel; biaya mengikuti paket proyek.
 
 Font Fontsource berlisensi SIL OFL; ikon Lucide ISC. Teks lisensi ada di `public/licenses/`. Foto tetap hak pemilik. Tidak menetapkan lisensi publik untuk kode/aset pemilik.
